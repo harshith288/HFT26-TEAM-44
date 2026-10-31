@@ -1,0 +1,10 @@
+{
+ "command": "scripts\\run_detection.py",
+ "timestamp": "2026-10-30T22:30:35.122398",
+ "n_real_images": 1004,
+ "hardware": "NVIDIA GeForce RTX 4050 Laptop GPU",
+ "model": "models/MDV6-yolov9-e-1280.pt",
+ "image_size": 1280,
+ "ms_per_image_including_load": 238.4,
+ "unreadable": 0
+}

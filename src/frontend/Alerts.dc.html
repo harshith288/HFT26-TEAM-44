@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>WildWatch alerts</title>
+<script src="wildwatch-api.js"></script>
+<script src="wildwatch-runtime.js"></script>
+</head>
+<body>
+<template data-dc><x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#07110D}
+a{color:#F2A93B}a:hover{color:#FFC56B}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,107,91,.6)}70%{box-shadow:0 0 0 14px rgba(255,107,91,0)}100%{box-shadow:0 0 0 0 rgba(255,107,91,0)}}
+@keyframes live{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes drift{0%{transform:translate(0,0);opacity:0}15%{opacity:.95}50%{transform:translate(26px,-38px);opacity:.45}85%{opacity:.9}100%{transform:translate(-14px,-76px);opacity:0}}
+@keyframes aurora{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(140px,50px) scale(1.2)}}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@keyframes moon{0%,100%{box-shadow:0 0 50px 14px rgba(244,239,216,.22)}50%{box-shadow:0 0 80px 26px rgba(244,239,216,.32)}}
+@keyframes scan{0%{top:0}100%{top:100%}}
+button{transition:transform .15s ease,box-shadow .15s ease,filter .15s ease}
+button:hover{transform:translateY(-2px);filter:brightness(1.1);box-shadow:0 8px 18px rgba(0,0,0,.4)}
+button:active{transform:translateY(0) scale(.96)}
+button:focus-visible,a:focus-visible{outline:2px solid #F2A93B;outline-offset:2px}
+nav a{transition:background .2s ease,color .2s ease,padding-left .2s ease}
+nav a:hover{background:#1A2B25;color:#E8EFEA;padding-left:18px}
+.row{transition:background .2s ease,border-color .2s ease,transform .2s ease}
+.row:hover{transform:translateX(4px);border-color:#3F6B5A}
+.fly{position:absolute;border-radius:50%;background:#F7E27A;box-shadow:0 0 10px 3px rgba(247,226,122,.55);opacity:.75}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.3}
+.shine{background:linear-gradient(90deg,#E8EFEA 40%,#FFD58A 50%,#E8EFEA 60%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
+@media (prefers-reduced-motion:no-preference){
+.fly{animation:drift var(--d,9s) ease-in-out infinite}
+.blob{animation:aurora 20s ease-in-out infinite}
+.shine{animation:shimmer 7s linear infinite}
+.moon{animation:moon 5s ease-in-out infinite}
+.pulse{animation:pulse 1.8s ease-out infinite}
+.live{animation:live 1.6s ease-in-out infinite}
+.grow{transform-origin:left center;animation:grow 1s cubic-bezier(.2,.8,.2,1) both}
+.rise{animation:rise .6s ease both}
+.scan{animation:scan 2.6s linear infinite}
+}
+.skel{background:linear-gradient(90deg,#1F332B 25%,#2C463B 50%,#1F332B 75%);background-size:200% 100%;animation:shimmer 1.4s linear infinite}
+</style>
+</helmet>
+<div style="position: relative; overflow: hidden; min-height: 100vh; background: #07110D; color: #E8EFEA; font-family: Inter, system-ui, sans-serif; display: flex; flex-wrap: wrap; align-items: stretch">
+
+<div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden">
+<div style="position: absolute; left: 0; top: 0; width: 100%; height: 300px; background: linear-gradient(180deg, #14302A 0%, #0C1F19 60%, #07110D 100%)"></div>
+<div class="blob" style="left: 10%; top: -120px; width: 520px; height: 320px; background: #2BB48A"></div>
+<div class="blob" style="left: 55%; top: -80px; width: 460px; height: 280px; background: #5B6CFF; animation-delay: -8s"></div>
+<div class="moon" style="position: absolute; right: 8%; top: 46px; width: 64px; height: 64px; border-radius: 50%; background: #F4EFD8; box-shadow: 0 0 60px 18px rgba(244,239,216,.25)"></div>
+<svg viewBox="0 0 1440 300" preserveAspectRatio="none" style="position: absolute; left: 0; top: 0; width: 100%; height: 300px">
+<path d="{{treesFar}}" fill="#0E241C"></path>
+<path d="{{treesNear}}" fill="#07110D"></path>
+</svg>
+<sc-for list="{{flies}}" as="f" hint-placeholder-count="0">
+<div class="fly" style="left: {{f.x}}; top: {{f.y}}; width: {{f.s}}; height: {{f.s}}; --d: {{f.d}}; animation-delay: {{f.delay}}"></div>
+</sc-for>
+</div>
+
+<nav aria-label="Main" style="position: relative; z-index: 1; flex: 1 1 220px; max-width: 100%; background: rgba(8,19,15,0.72); backdrop-filter: blur(12px); border-right: 1px solid #22342D; padding: 24px 16px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; align-items: center; gap: 10px; padding: 0 8px">
+<div style="width: 36px; height: 36px; border-radius: 10px; background: #F2A93B; display: flex; align-items: center; justify-content: center">
+<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E1814" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"></path></svg>
+</div>
+<div style="display: flex; flex-direction: column">
+<span style="font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 600; letter-spacing: -0.01em">WildWatch</span>
+<span style="font-size: 12px; color: #9DB0A6">Forest division console</span>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<a href="Main.dc.html" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #B9C8C0; text-decoration: none; font-size: 14px">Home</a>
+<a href="Upload.dc.html" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #B9C8C0; text-decoration: none; font-size: 14px">Upload</a>
+<a href="Alerts.dc.html" aria-current="page" style="display: flex; align-items: center; justify-content: space-between; min-height: 44px; padding: 0 12px; border-radius: 8px; background: #1D2F28; color: #E8EFEA; text-decoration: none; font-size: 14px; font-weight: 500">Alerts <span style="background: #FF6B5B; color: #2A0D09; font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 10px">{{openCount}}</span></a>
+<a href="Analytics.dc.html" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #B9C8C0; text-decoration: none; font-size: 14px">Analytics</a>
+<a href="Accuracy.dc.html" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #B9C8C0; text-decoration: none; font-size: 14px">Ranger's Brief</a>
+</div>
+<div style="margin-top: auto; background: #172822; border: 1px solid #22342D; border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; color: #9DB0A6">Pipeline</span>
+<span style="display: flex; align-items: center; gap: 8px; font-size: 13px"><span class="live" style="width: 8px; height: 8px; border-radius: 4px; background: {{pipeDot}}"></span>{{pipeText}}</span>
+<span style="font-size: 12px; color: #9DB0A6">{{lastImage}}</span>
+</div>
+</nav>
+
+<main style="position: relative; z-index: 1; flex: 999 1 560px; min-width: 0; padding: 28px 32px 48px; box-sizing: border-box; display: flex; flex-direction: column; gap: 22px">
+<sc-if value="{{apiError}}"><div role="alert" style="background: rgba(52,18,14,0.9); border: 1px solid #7A3329; border-radius: 12px; padding: 14px 18px; font-size: 14px; color: #FBE3DE">{{apiError}}</div></sc-if>
+
+<header style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 13px; color: #B9C8C0">Intrusion alerts · {{headerText}}</span>
+<h1 class="shine" style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 40px; font-weight: 600; letter-spacing: -0.02em">Alerts</h1>
+</div>
+<div role="group" aria-label="Filter by risk" style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{filters}}" as="fl" hint-placeholder-count="6">
+<button type="button" onClick="{{fl.pick}}" aria-pressed="{{fl.pressed}}" style="min-height: 40px; padding: 0 14px; border-radius: 20px; border: 1px solid {{fl.border}}; background: {{fl.bg}}; color: {{fl.fg}}; font: 500 13px Inter, sans-serif; cursor: pointer">{{fl.label}} · {{fl.n}}</button>
+</sc-for>
+</div>
+</header>
+
+<div style="display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-start">
+
+<section class="rise" aria-label="Alert list" style="flex: 1 1 460px; min-width: 0; background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 8px; max-height: 760px; overflow-y: auto">
+<sc-if value="{{loading}}"><div class="skel" style="height: 64px; width: 100%; border-radius: 6px"></div></sc-if>
+<sc-if value="{{loading}}"><div class="skel" style="height: 64px; width: 100%; border-radius: 6px"></div></sc-if>
+<sc-if value="{{loading}}"><div class="skel" style="height: 64px; width: 100%; border-radius: 6px"></div></sc-if>
+<sc-for list="{{rows}}" as="a" hint-placeholder-count="6">
+<button type="button" class="row" onClick="{{a.pick}}" style="display: grid; grid-template-columns: 92px minmax(0, 1fr) 70px; gap: 12px; align-items: center; text-align: left; width: 100%; min-height: 64px; padding: 10px 12px; border-radius: 10px; border: 1px solid {{a.rowBorder}}; background: {{a.rowBg}}; color: #E8EFEA; font-family: Inter, sans-serif; cursor: pointer">
+<span style="text-align: center; font-size: 11px; font-weight: 600; padding: 4px 0; border-radius: 6px; background: {{a.bg}}; color: {{a.fg}}">{{a.levelLabel}}</span>
+<span style="display: flex; flex-direction: column; gap: 3px; min-width: 0">
+<span style="font-size: 14px; font-weight: 500">{{a.title}}</span>
+<span style="font-size: 12px; color: #9DB0A6">{{a.camText}} · {{a.village}} · {{a.statusText}}</span>
+</span>
+<span style="display: flex; flex-direction: column; align-items: flex-end; gap: 3px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px">{{a.time}}</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9DB0A6">{{a.scoreText}}</span>
+</span>
+</button>
+</sc-for>
+<sc-if value="{{empty}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 12px 4px; font-size: 14px; color: #9DB0A6">No alerts at this level right now.</p>
+</sc-if>
+<sc-if value="{{moreText}}"><p style="margin: 8px 4px 0; font-size: 12px; color: #9DB0A6">{{moreText}}</p></sc-if>
+</section>
+
+<sc-if value="{{hasSel}}">
+<section class="rise" aria-label="Alert detail" style="flex: 1 1 420px; min-width: 0; background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 12px; color: #9DB0A6">{{sel.camText}} · {{sel.village}} · {{sel.time}} · {{sel.light}}</span>
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 600">{{sel.title}}</h2>
+<span style="font-size: 13px; color: #C9D6CF">{{sel.namedBy}}</span>
+</div>
+<span class="{{sel.pulseCls}}" style="font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 8px; background: {{sel.bg}}; color: {{sel.fg}}">{{sel.levelLabel}}</span>
+</div>
+
+<div style="position: relative; height: 220px; border-radius: 12px; background: #0B1612; border: 1px solid #24392F; overflow: hidden">
+<div style="position: absolute; left: 50%; top: 0; height: 100%; max-width: 100%; aspect-ratio: {{sel.ratio}}; transform: translateX(-50%)">
+<sc-if value="{{sel.photo}}"><img x-src="{{sel.photo}}" alt="{{sel.photoAlt}}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill"></sc-if>
+<sc-for list="{{sel.boxes}}" as="b" hint-placeholder-count="1">
+<div style="position: absolute; left: {{b.left}}; top: {{b.top}}; width: {{b.width}}; height: {{b.height}}; box-sizing: border-box; border: 2px dashed #F2A93B; border-radius: 4px">
+<span style="position: absolute; left: -2px; top: -20px; font-size: 11px; font-weight: 600; white-space: nowrap; background: #F2A93B; color: #1E1405; padding: 2px 6px; border-radius: 4px">{{b.label}}</span>
+</div>
+</sc-for>
+</div>
+<div class="scan" aria-hidden="true" style="position: absolute; left: 0; width: 100%; height: 2px; background: rgba(95,211,154,0.45); box-shadow: 0 0 12px rgba(95,211,154,0.6)"></div>
+<span style="position: absolute; left: 12px; top: 10px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8FBFA6">{{sel.camCaps}} · {{sel.light}}</span>
+<span style="position: absolute; right: 12px; top: 10px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8FBFA6">{{sel.time}}</span>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; color: #9DB0A6">Danger score</span>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 14px">
+<span style="background: #1A2B25; padding: 6px 10px; border-radius: 8px">{{sel.weight}} <span style="font-family: Inter, sans-serif; font-size: 11px; color: #9DB0A6">species</span></span>×
+<span style="background: #1A2B25; padding: 6px 10px; border-radius: 8px">{{sel.count}} <span style="font-family: Inter, sans-serif; font-size: 11px; color: #9DB0A6">count</span></span>×
+<span style="background: #1A2B25; padding: 6px 10px; border-radius: 8px">{{sel.nightF}} <span style="font-family: Inter, sans-serif; font-size: 11px; color: #9DB0A6">night</span></span>×
+<span style="background: #1A2B25; padding: 6px 10px; border-radius: 8px">{{sel.zone}} <span style="font-family: Inter, sans-serif; font-size: 11px; color: #9DB0A6">zone</span></span>=
+<span style="background: {{sel.bg}}; color: {{sel.fg}}; padding: 6px 12px; border-radius: 8px; font-weight: 500">{{sel.scoreText}}</span>
+</div>
+<div style="height: 8px; border-radius: 4px; background: #1F332B">
+<div class="grow" style="height: 8px; border-radius: 4px; width: {{sel.scoreW}}; background: {{sel.bg}}"></div>
+</div>
+<div style="display: flex; justify-content: space-between; font-size: 11px; color: #8A9E94"><span>Low</span><span>Medium {{scale.medium}}</span><span>High {{scale.high}}</span><span>Critical {{scale.critical}}</span></div>
+</div>
+
+<div style="background: #1A2B25; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; color: #9DB0A6">Recommended response</span>
+<span style="font-size: 16px; font-weight: 500">{{sel.response}}</span>
+</div>
+
+<div style="border: 1px solid #2E453C; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px">
+<span style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #9DB0A6"><span style="width: 8px; height: 8px; border-radius: 4px; background: {{sel.msgDot}}"></span>Alert message · {{sel.msgSource}}</span>
+<p style="margin: 0; font-size: 14px; line-height: 1.6; color: #D7E2DC">{{sel.msg}}</p>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center">
+<button type="button" onClick="{{dispatch}}" style="min-height: 44px; padding: 0 18px; border-radius: 8px; border: none; background: #FF6B5B; color: #2A0D09; font: 600 14px Inter, sans-serif; cursor: pointer">Dispatch team</button>
+<button type="button" onClick="{{falseAlarm}}" style="min-height: 44px; padding: 0 16px; border-radius: 8px; border: 1px solid #2E453C; background: transparent; color: #E8EFEA; font: 500 14px Inter, sans-serif; cursor: pointer">False alarm</button>
+<button type="button" onClick="{{reopen}}" style="min-height: 44px; padding: 0 16px; border-radius: 8px; border: 1px solid #2E453C; background: transparent; color: #B9C8C0; font: 500 14px Inter, sans-serif; cursor: pointer">Reopen</button>
+<span style="font-size: 13px; color: {{sel.statusColor}}">{{sel.statusText}}</span>
+</div>
+</section>
+</sc-if>
+</div>
+
+<section class="rise" aria-label="Needs review" style="background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 8px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600">Needs review</h2>
+<span style="font-size: 13px; color: #9DB0A6">Too doubtful to keep or discard, so a person decides. Most likely animals first.</span>
+</div>
+<span style="font-size: 12px; color: #9DB0A6">{{reviewLabel}}</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px">
+<sc-for list="{{review}}" as="r" hint-placeholder-count="6">
+<div style="background: #1A2B25; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column">
+<img x-src="{{r.url}}" alt="Camera {{r.camera_id}} photo needing review" style="width: 100%; height: 120px; object-fit: cover; display: block">
+<span style="padding: 8px 10px; font-size: 12px; color: #9DB0A6">Cam {{r.camera_id}} · {{r.place}} · best score {{r.score}}</span>
+</div>
+</sc-for>
+</div>
+</section>
+</main>
+</div>
+</x-dc></template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1180}}'>
+var MAX_ROWS = 60;
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    var wanted = new URLSearchParams(window.location.search).get('alert');
+    this.state = { filter: 'ALL', selected: wanted ? Number(wanted) : null };
+  }
+  componentDidMount() {
+    WW.keepLoaded(this, function () {
+      return Promise.all([WW.get('/api/alerts'), WW.get('/api/summary'), WW.get('/api/review')]).then(function (r) {
+        return { list: r[0].alerts, levels: r[0].levels, summary: r[1], review: r[2] };
+      });
+    }, 10000);
+  }
+  componentWillUnmount() { clearInterval(this.poll); }
+  setStatus(alert, status) {
+    var self = this;
+    WW.post('/api/alerts/' + alert.alert_id + '/status', { status: status }).then(function () { return self.reload(); })
+      .catch(function (e) { self.setState({ apiError: WW.problem(e) }); });
+  }
+  renderVals() {
+    var self = this, st = this.state;
+    var levels = st.levels || {};
+    var fullScale = (levels.critical_min || 2) * 2;
+    var all = (st.list || []).map(function (a) {
+      var key = a.possible_poacher ? 'POACHER' : a.level, time = WW.clock(a.start_time, a.hour);
+      return Object.assign({}, a, WW.LV[key], { id: a.alert_id, levelLabel: key, cam: a.camera_id, camText: WW.camera(a.camera_id), camCaps: WW.camera(a.camera_id).toUpperCase(), village: a.village || 'No village', time: time,
+        title: WW.title(a), statusText: WW.statusText(a.status), statusColor: WW.statusColor(a.status), scoreText: a.danger_score.toFixed(2),
+        weight: a.species_weight.toFixed(1), count: a.min_observed_count, nightF: a.night_factor.toFixed(1), zone: a.zone_factor.toFixed(1),
+        response: a.rangers + ' ranger(s), ' + (a.vehicle ? 'with a vehicle' : 'no vehicle') + '. ' + a.action,
+        scoreW: Math.min(100, Math.round(a.danger_score / fullScale * 100)) + '%', msg: a.message || 'No message has been written.',
+        msgSource: a.message_source === 'llm' ? 'written by LLM' : 'from the template, not the LLM', msgDot: a.message_source === 'llm' ? '#B9A3FF' : '#9DB0A6',
+        person: a.possible_poacher });
+    });
+    var f = st.filter;
+    function test(a, k) { return k === 'ALL' || (k === 'UPLOADS' ? a.uploaded : k === 'POACHER' ? a.person : a.level === k && !a.person); }
+    var filters = ['ALL', 'UPLOADS', 'CRITICAL', 'HIGH', 'MEDIUM', 'LOW', 'POACHER'].map(function (k) {
+      var on = k === f;
+      return { label: k === 'ALL' ? 'All' : WW.capital(k.toLowerCase()), n: all.filter(function (a) { return test(a, k); }).length, pressed: on ? 'true' : 'false',
+        bg: on ? '#F2A93B' : 'rgba(20,38,31,0.7)', fg: on ? '#1E1405' : '#C9D6CF', border: on ? '#F2A93B' : '#2E453C',
+        pick: function () { self.setState({ filter: k }); } };
+    });
+    var matching = all.filter(function (a) { return test(a, f); });
+    var sel = all.filter(function (a) { return a.id === st.selected; })[0] || matching[0] || null;
+    var rows = matching.slice(0, MAX_ROWS).map(function (a) {
+      var on = sel && a.id === sel.id;
+      return Object.assign({}, a, { rowBg: on ? '#21382F' : '#1A2B25', rowBorder: on ? '#F2A93B' : 'transparent',
+        pick: function () { self.setState({ selected: a.id }); } });
+    });
+    if (sel) {
+      sel = Object.assign({}, sel, { pulseCls: sel.status === 'new' && (sel.level === 'HIGH' || sel.level === 'CRITICAL') ? 'pulse' : '',
+        photo: sel.image_id ? '/api/images/' + sel.image_id : '', photoAlt: 'Camera ' + sel.cam + ' photo, ' + sel.title,
+        namedBy: WW.namedBy(sel.species, sel.label_confidence, sel.identified_by),
+        ratio: sel.width && sel.height ? sel.width + ' / ' + sel.height : '4 / 3',
+        boxes: sel.boxes.map(function (b) {
+          function pct(v) { return (v * 100).toFixed(2) + '%'; }
+          return { left: pct(b.x), top: pct(b.y), width: pct(b.w), height: pct(b.h), label: b.label.replace(/_/g, ' ') };
+        }) });
+    }
+    var S = st.summary, R = st.review;
+    return Object.assign({}, WW.scene(11, 26, 1100), WW.nav(S), { apiError: st.apiError, loading: st.loading, filters: filters, rows: rows,
+      empty: !st.loading && rows.length === 0, sel: sel || {}, hasSel: !!sel,
+      moreText: matching.length > MAX_ROWS ? 'Showing the first ' + MAX_ROWS + ' of ' + WW.fmt(matching.length) + '.' : '',
+      headerText: S ? WW.fmt(all.length) + ' in total · ' + S.open_alerts + ' open at MEDIUM or above' : 'Loading',
+      scale: { medium: WW.num(levels.medium_min, 1), high: WW.num(levels.high_min, 1), critical: WW.num(levels.critical_min, 1) },
+      review: (R ? R.bursts : []).slice(0, 12).map(function (r) {
+        return { url: '/api/images/' + r.image_id, camera_id: r.camera_id, place: r.village || 'Unmapped', score: r.top_confidence.toFixed(3) };
+      }),
+      reviewLabel: R ? 'Showing ' + Math.min(12, R.total) + ' of ' + R.total + ' bursts' : '',
+      dispatch: function () { if (sel) self.setStatus(sel, 'dispatched'); },
+      falseAlarm: function () { if (sel) self.setStatus(sel, 'false_alarm'); },
+      reopen: function () { if (sel) self.setStatus(sel, 'new'); } });
+  }
+}
+</script>
+</body>
+</html>

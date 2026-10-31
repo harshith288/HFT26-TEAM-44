@@ -1,0 +1,9 @@
+{
+ "command": "scripts\\run_speciesnet.py",
+ "timestamp": "2026-10-30T22:43:31.577425",
+ "n_real_images": 277,
+ "hardware": "NVIDIA GeForce RTX 4050 Laptop GPU",
+ "model": "kaggle:google/speciesnet/pyTorch/v4.0.3a/1",
+ "failures": 0,
+ "ms_per_crop_classifier_only": 67.4
+}

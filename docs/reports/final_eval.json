@@ -1,0 +1,404 @@
+{
+ "command": "scripts\\final_eval.py",
+ "timestamp": "2026-10-31T01:28:49.212565",
+ "n_real_images": 502,
+ "hardware": "NVIDIA GeForce RTX 4050 Laptop GPU",
+ "frozen_at_commit": "2bbcf7e",
+ "splits": [
+  "cis_test",
+  "trans_test"
+ ],
+ "n_bursts": 194,
+ "n_scored": 308,
+ "groups": {
+  "all": {
+   "species": {
+    "n": 308,
+    "n_bursts": 120,
+    "n_classes": 14,
+    "accuracy": 88.31168831168831,
+    "accuracy_95_range": [
+     81.8,
+     94.0
+    ],
+    "macro_precision": 95.42701767395873,
+    "macro_f1": 91.55561396032103,
+    "missed": 21,
+    "wrong_species": 15
+   },
+   "triage": {
+    "n_bursts": 194,
+    "n_animal_bursts": 132,
+    "n_empty_bursts": 62,
+    "auto_discarded": 3,
+    "needs_review": 44,
+    "kept": 147,
+    "pct_auto_discarded": 1.5463917525773196,
+    "pct_needs_review": 22.68041237113402,
+    "pct_kept": 75.77319587628865,
+    "animal_bursts_lost": 1,
+    "pct_animal_bursts_lost": 0.7575757575757576,
+    "confirmed_animal_bursts_lost": 0,
+    "n_confirmed_animal_bursts": 120,
+    "discard_precision": 0.6666666666666666,
+    "pct_empty_bursts_discarded": 3.225806451612903
+   },
+   "count": {
+    "n_bursts": 85,
+    "mae": 0.058823529411764705,
+    "pct_exact": 95.29411764705883
+   },
+   "boxes": {
+    "tp": 241,
+    "fp": 25,
+    "fn": 23,
+    "precision_iou50": 0.9060150375939849,
+    "recall_iou50": 0.9128787878787878
+   },
+   "species_confirmed_by_box": {
+    "n": 272,
+    "n_bursts": 108,
+    "n_classes": 14,
+    "accuracy": 96.69117647058823,
+    "accuracy_95_range": [
+     93.1,
+     99.6
+    ],
+    "macro_precision": 97.77955019890504,
+    "macro_f1": 96.77695984053999,
+    "missed": 0,
+    "wrong_species": 9
+   },
+   "species_no_box_in_burst": {
+    "n": 36,
+    "n_bursts": 12,
+    "n_classes": 6,
+    "accuracy": 25.0,
+    "accuracy_95_range": [
+     0.0,
+     50.0
+    ],
+    "macro_precision": 50.0,
+    "macro_f1": 33.33333333333333,
+    "missed": 21,
+    "wrong_species": 6
+   }
+  },
+  "cis_test": {
+   "species": {
+    "n": 150,
+    "n_bursts": 62,
+    "n_classes": 14,
+    "accuracy": 90.0,
+    "accuracy_95_range": [
+     80.7,
+     97.9
+    ],
+    "macro_precision": 96.78571428571429,
+    "macro_f1": 91.0973030800617,
+    "missed": 9,
+    "wrong_species": 6
+   },
+   "triage": {
+    "n_bursts": 101,
+    "n_animal_bursts": 68,
+    "n_empty_bursts": 33,
+    "auto_discarded": 3,
+    "needs_review": 20,
+    "kept": 78,
+    "pct_auto_discarded": 2.9702970297029703,
+    "pct_needs_review": 19.801980198019802,
+    "pct_kept": 77.22772277227723,
+    "animal_bursts_lost": 1,
+    "pct_animal_bursts_lost": 1.4705882352941178,
+    "confirmed_animal_bursts_lost": 0,
+    "n_confirmed_animal_bursts": 64,
+    "discard_precision": 0.6666666666666666,
+    "pct_empty_bursts_discarded": 6.0606060606060606
+   },
+   "count": {
+    "n_bursts": 47,
+    "mae": 0.06382978723404255,
+    "pct_exact": 95.74468085106383
+   },
+   "boxes": {
+    "tp": 127,
+    "fp": 7,
+    "fn": 7,
+    "precision_iou50": 0.9477611940298507,
+    "recall_iou50": 0.9477611940298507
+   }
+  },
+  "trans_test": {
+   "species": {
+    "n": 158,
+    "n_bursts": 58,
+    "n_classes": 13,
+    "accuracy": 86.70886075949367,
+    "accuracy_95_range": [
+     77.2,
+     95.0
+    ],
+    "macro_precision": 98.70951417004049,
+    "macro_f1": 89.48710917036709,
+    "missed": 12,
+    "wrong_species": 9
+   },
+   "triage": {
+    "n_bursts": 93,
+    "n_animal_bursts": 64,
+    "n_empty_bursts": 29,
+    "auto_discarded": 0,
+    "needs_review": 24,
+    "kept": 69,
+    "pct_auto_discarded": 0.0,
+    "pct_needs_review": 25.806451612903224,
+    "pct_kept": 74.19354838709677,
+    "animal_bursts_lost": 0,
+    "pct_animal_bursts_lost": 0.0,
+    "confirmed_animal_bursts_lost": 0,
+    "n_confirmed_animal_bursts": 56,
+    "discard_precision": null,
+    "pct_empty_bursts_discarded": 0.0
+   },
+   "count": {
+    "n_bursts": 38,
+    "mae": 0.05263157894736842,
+    "pct_exact": 94.73684210526316
+   },
+   "boxes": {
+    "tp": 114,
+    "fp": 18,
+    "fn": 16,
+    "precision_iou50": 0.8636363636363636,
+    "recall_iou50": 0.8769230769230769
+   }
+  },
+  "day": {
+   "species": {
+    "n": 114,
+    "n_bursts": 44,
+    "n_classes": 9,
+    "accuracy": 85.96491228070175,
+    "accuracy_95_range": [
+     73.7,
+     96.4
+    ],
+    "macro_precision": 85.47008547008548,
+    "macro_f1": 81.65331716056353,
+    "missed": 12,
+    "wrong_species": 4
+   },
+   "triage": {
+    "n_bursts": 85,
+    "n_animal_bursts": 56,
+    "n_empty_bursts": 29,
+    "auto_discarded": 1,
+    "needs_review": 22,
+    "kept": 62,
+    "pct_auto_discarded": 1.1764705882352942,
+    "pct_needs_review": 25.88235294117647,
+    "pct_kept": 72.94117647058823,
+    "animal_bursts_lost": 0,
+    "pct_animal_bursts_lost": 0.0,
+    "confirmed_animal_bursts_lost": 0,
+    "n_confirmed_animal_bursts": 50,
+    "discard_precision": 1.0,
+    "pct_empty_bursts_discarded": 3.4482758620689653
+   },
+   "count": {
+    "n_bursts": 30,
+    "mae": 0.1,
+    "pct_exact": 93.33333333333333
+   },
+   "boxes": {
+    "tp": 88,
+    "fp": 17,
+    "fn": 18,
+    "precision_iou50": 0.8380952380952381,
+    "recall_iou50": 0.8301886792452831
+   }
+  },
+  "ir_night": {
+   "species": {
+    "n": 183,
+    "n_bursts": 65,
+    "n_classes": 13,
+    "accuracy": 89.07103825136612,
+    "accuracy_95_range": [
+     80.9,
+     96.6
+    ],
+    "macro_precision": 97.90460435621728,
+    "macro_f1": 92.48726386735437,
+    "missed": 9,
+    "wrong_species": 11
+   },
+   "triage": {
+    "n_bursts": 98,
+    "n_animal_bursts": 65,
+    "n_empty_bursts": 33,
+    "auto_discarded": 2,
+    "needs_review": 22,
+    "kept": 74,
+    "pct_auto_discarded": 2.0408163265306123,
+    "pct_needs_review": 22.448979591836736,
+    "pct_kept": 75.51020408163265,
+    "animal_bursts_lost": 1,
+    "pct_animal_bursts_lost": 1.5384615384615385,
+    "confirmed_animal_bursts_lost": 0,
+    "n_confirmed_animal_bursts": 59,
+    "discard_precision": 0.5,
+    "pct_empty_bursts_discarded": 3.0303030303030303
+   },
+   "count": {
+    "n_bursts": 44,
+    "mae": 0.045454545454545456,
+    "pct_exact": 95.45454545454545
+   },
+   "boxes": {
+    "tp": 142,
+    "fp": 8,
+    "fn": 5,
+    "precision_iou50": 0.9466666666666667,
+    "recall_iou50": 0.9659863945578231
+   }
+  },
+  "color_night": {
+   "species": {
+    "n": 11,
+    "n_bursts": 11,
+    "n_classes": 6,
+    "accuracy": 100.0,
+    "accuracy_95_range": [
+     100.0,
+     100.0
+    ],
+    "macro_precision": 100.0,
+    "macro_f1": 100.0,
+    "missed": 0,
+    "wrong_species": 0
+   },
+   "triage": {
+    "n_bursts": 11,
+    "n_animal_bursts": 11,
+    "n_empty_bursts": 0,
+    "auto_discarded": 0,
+    "needs_review": 0,
+    "kept": 11,
+    "pct_auto_discarded": 0.0,
+    "pct_needs_review": 0.0,
+    "pct_kept": 100.0,
+    "animal_bursts_lost": 0,
+    "pct_animal_bursts_lost": 0.0,
+    "confirmed_animal_bursts_lost": 0,
+    "n_confirmed_animal_bursts": 11,
+    "discard_precision": null,
+    "pct_empty_bursts_discarded": null
+   },
+   "count": {
+    "n_bursts": 11,
+    "mae": 0.0,
+    "pct_exact": 100.0
+   },
+   "boxes": {
+    "tp": 11,
+    "fp": 0,
+    "fn": 0,
+    "precision_iou50": 1.0,
+    "recall_iou50": 1.0
+   }
+  }
+ },
+ "per_class": {
+  "badger": {
+   "precision": 1.0,
+   "recall": 0.75,
+   "f1": 0.8571428571428571,
+   "n": 8
+  },
+  "bird": {
+   "precision": 1.0,
+   "recall": 0.7352941176470589,
+   "f1": 0.847457627118644,
+   "n": 34
+  },
+  "bobcat": {
+   "precision": 0.9655172413793104,
+   "recall": 0.8235294117647058,
+   "f1": 0.8888888888888888,
+   "n": 34
+  },
+  "cat": {
+   "precision": 1.0,
+   "recall": 0.8333333333333334,
+   "f1": 0.9090909090909091,
+   "n": 36
+  },
+  "coyote": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 24
+  },
+  "deer": {
+   "precision": 0.6666666666666666,
+   "recall": 1.0,
+   "f1": 0.8,
+   "n": 12
+  },
+  "dog": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 28
+  },
+  "fox": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 3
+  },
+  "opossum": {
+   "precision": 0.8387096774193549,
+   "recall": 0.896551724137931,
+   "f1": 0.8666666666666667,
+   "n": 29
+  },
+  "rabbit": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 24
+  },
+  "raccoon": {
+   "precision": 0.8888888888888888,
+   "recall": 1.0,
+   "f1": 0.9411764705882353,
+   "n": 24
+  },
+  "rodent": {
+   "precision": 1.0,
+   "recall": 0.6818181818181818,
+   "f1": 0.8108108108108109,
+   "n": 22
+  },
+  "skunk": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 14
+  },
+  "squirrel": {
+   "precision": 1.0,
+   "recall": 0.8125,
+   "f1": 0.896551724137931,
+   "n": 16
+  }
+ },
+ "cis_minus_trans_accuracy_points": 3.2911392405063253,
+ "generalization_flag": false,
+ "missed_images": 21,
+ "missed_with_a_ground_truth_box": 0,
+ "note": "Empty bursts are oversampled and classes are balanced in this sample, so triage shares are not natural rates."
+}

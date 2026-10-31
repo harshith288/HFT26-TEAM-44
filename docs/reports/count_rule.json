@@ -1,0 +1,42 @@
+{
+ "command": "scripts\\measure_count_rule.py",
+ "timestamp": "2026-10-31T00:30:11.757773",
+ "hardware": "not applicable (computed from stored boxes)",
+ "rule": "if a burst has a species vote, count = max(1, boxes at or above count_threshold)",
+ "sample_train_val": {
+  "n_real_images": 1004,
+  "n_bursts": 390,
+  "bursts_changed": 2,
+  "species_rows_added": 2,
+  "counts_raised_from_zero": 0,
+  "new_alerts": 2,
+  "new_alerts_by_level": {
+   "LOW": 2
+  },
+  "new_alert_species": {
+   "skunk": 1,
+   "bird": 1
+  },
+  "total_alerts_with_rule": 338
+ },
+ "fresh_val": {
+  "n_real_images": 1502,
+  "n_bursts": 528,
+  "bursts_changed": 11,
+  "species_rows_added": 12,
+  "counts_raised_from_zero": 0,
+  "new_alerts": 12,
+  "new_alerts_by_level": {
+   "MEDIUM": 2,
+   "LOW": 10
+  },
+  "new_alert_species": {
+   "deer": 6,
+   "bird": 3,
+   "rabbit": 2,
+   "squirrel": 1
+  },
+  "total_alerts_with_rule": 421
+ },
+ "n_real_images": 2506
+}

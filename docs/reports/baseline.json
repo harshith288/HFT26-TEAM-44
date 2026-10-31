@@ -1,0 +1,12 @@
+{
+ "n_images": 30,
+ "empty_accuracy": 1.0,
+ "animal_found_rate": 1.0,
+ "species_accuracy": 1.0,
+ "person_found_rate": 1.0,
+ "count_mae": 0.045454545454545456,
+ "command": "scripts\\regression.py --update-baseline",
+ "timestamp": "2026-10-30T23:08:10.846050",
+ "n_real_images": 30,
+ "hardware": "NVIDIA GeForce RTX 4050 Laptop GPU"
+}

@@ -1,0 +1,313 @@
+{
+ "command": "scripts\\eval_species.py",
+ "timestamp": "2026-10-30T22:45:42.666474",
+ "n_real_images_val": 274,
+ "n_real_crops_train": 505,
+ "hardware": "NVIDIA GeForce RTX 4050 Laptop GPU",
+ "split": "val only (cis_val + trans_val)",
+ "excluded_val_labels": {
+  "car": 4,
+  "empty": 113,
+  "bobcat|rabbit": 10,
+  "coyote|rabbit": 2
+ },
+ "val_images_without_detection": 44,
+ "classes_scored": [
+  "badger",
+  "bird",
+  "bobcat",
+  "cat",
+  "coyote",
+  "dog",
+  "opossum",
+  "rabbit",
+  "raccoon",
+  "rodent",
+  "skunk",
+  "squirrel"
+ ],
+ "candidates": {
+  "speciesnet_processed": {
+   "all": {
+    "n": 274,
+    "top1_accuracy": 67.51824817518248,
+    "macro_f1": 79.64482895749741
+   },
+   "day": {
+    "n": 66,
+    "top1_accuracy": 83.33333333333334,
+    "macro_f1": 93.96825396825396
+   },
+   "night": {
+    "n": 208,
+    "top1_accuracy": 62.5,
+    "macro_f1": 70.46575563183926
+   },
+   "cis_val": {
+    "n": 126,
+    "top1_accuracy": 62.698412698412696,
+    "macro_f1": 76.16680590364801
+   },
+   "trans_val": {
+    "n": 148,
+    "top1_accuracy": 71.62162162162163,
+    "macro_f1": 82.05671640526366
+   },
+   "confirmed_boxed": {
+    "n": 211,
+    "top1_accuracy": 86.7298578199052,
+    "macro_f1": 93.58269578443301
+   }
+  },
+  "speciesnet_top_mapped": {
+   "all": {
+    "n": 274,
+    "top1_accuracy": 73.72262773722628,
+    "macro_f1": 80.05479173477808
+   },
+   "day": {
+    "n": 66,
+    "top1_accuracy": 86.36363636363636,
+    "macro_f1": 92.69827394827395
+   },
+   "night": {
+    "n": 208,
+    "top1_accuracy": 69.71153846153845,
+    "macro_f1": 75.44165897320863
+   },
+   "cis_val": {
+    "n": 126,
+    "top1_accuracy": 68.25396825396825,
+    "macro_f1": 79.02032227032228
+   },
+   "trans_val": {
+    "n": 148,
+    "top1_accuracy": 78.37837837837837,
+    "macro_f1": 82.50317734057572
+   },
+   "confirmed_boxed": {
+    "n": 211,
+    "top1_accuracy": 93.8388625592417,
+    "macro_f1": 95.49359806137005
+   }
+  },
+  "bioclip_zero_shot": {
+   "all": {
+    "n": 274,
+    "top1_accuracy": 20.802919708029197,
+    "macro_f1": 21.625735902562816
+   },
+   "day": {
+    "n": 66,
+    "top1_accuracy": 56.060606060606055,
+    "macro_f1": 51.602299016772704
+   },
+   "night": {
+    "n": 208,
+    "top1_accuracy": 9.615384615384617,
+    "macro_f1": 9.876199590485305
+   },
+   "cis_val": {
+    "n": 126,
+    "top1_accuracy": 19.047619047619047,
+    "macro_f1": 21.781347307663093
+   },
+   "trans_val": {
+    "n": 148,
+    "top1_accuracy": 22.2972972972973,
+    "macro_f1": 27.106800559485983
+   },
+   "confirmed_boxed": {
+    "n": 211,
+    "top1_accuracy": 25.118483412322274,
+    "macro_f1": 23.3953595774248
+   }
+  },
+  "probe_bioclip": {
+   "all": {
+    "n": 274,
+    "top1_accuracy": 35.03649635036496,
+    "macro_f1": 35.559926847314934
+   },
+   "day": {
+    "n": 66,
+    "top1_accuracy": 63.63636363636363,
+    "macro_f1": 61.40873015873015
+   },
+   "night": {
+    "n": 208,
+    "top1_accuracy": 25.961538461538463,
+    "macro_f1": 28.159570158904458
+   },
+   "cis_val": {
+    "n": 126,
+    "top1_accuracy": 42.06349206349206,
+    "macro_f1": 45.322190881014414
+   },
+   "trans_val": {
+    "n": 148,
+    "top1_accuracy": 29.054054054054053,
+    "macro_f1": 31.818233316112426
+   },
+   "confirmed_boxed": {
+    "n": 211,
+    "top1_accuracy": 43.60189573459716,
+    "macro_f1": 41.12337603690854
+   }
+  },
+  "probe_dinov2": {
+   "all": {
+    "n": 274,
+    "top1_accuracy": 44.16058394160584,
+    "macro_f1": 43.460798594764846
+   },
+   "day": {
+    "n": 66,
+    "top1_accuracy": 69.6969696969697,
+    "macro_f1": 67.11546217444584
+   },
+   "night": {
+    "n": 208,
+    "top1_accuracy": 36.05769230769231,
+    "macro_f1": 35.662207109170794
+   },
+   "cis_val": {
+    "n": 126,
+    "top1_accuracy": 46.82539682539682,
+    "macro_f1": 48.81400909032489
+   },
+   "trans_val": {
+    "n": 148,
+    "top1_accuracy": 41.891891891891895,
+    "macro_f1": 45.75147532668103
+   },
+   "confirmed_boxed": {
+    "n": 211,
+    "top1_accuracy": 55.45023696682464,
+    "macro_f1": 49.51723698303533
+   }
+  }
+ },
+ "best_by_val_macro_f1": "speciesnet_top_mapped",
+ "per_class_best": {
+  "badger": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 1
+  },
+  "bird": {
+   "precision": 1.0,
+   "recall": 0.6842105263157895,
+   "f1": 0.8125,
+   "n": 19
+  },
+  "bobcat": {
+   "precision": 1.0,
+   "recall": 0.8292682926829268,
+   "f1": 0.9066666666666666,
+   "n": 41
+  },
+  "cat": {
+   "precision": 0.875,
+   "recall": 0.8484848484848485,
+   "f1": 0.8615384615384616,
+   "n": 33
+  },
+  "coyote": {
+   "precision": 0.7692307692307693,
+   "recall": 0.7142857142857143,
+   "f1": 0.7407407407407407,
+   "n": 28
+  },
+  "dog": {
+   "precision": 0.9583333333333334,
+   "recall": 0.7666666666666667,
+   "f1": 0.8518518518518519,
+   "n": 30
+  },
+  "opossum": {
+   "precision": 1.0,
+   "recall": 0.8,
+   "f1": 0.8888888888888888,
+   "n": 30
+  },
+  "rabbit": {
+   "precision": 0.8333333333333334,
+   "recall": 0.8333333333333334,
+   "f1": 0.8333333333333334,
+   "n": 18
+  },
+  "raccoon": {
+   "precision": 0.7096774193548387,
+   "recall": 0.7333333333333333,
+   "f1": 0.7213114754098361,
+   "n": 30
+  },
+  "rodent": {
+   "precision": 1.0,
+   "recall": 0.25,
+   "f1": 0.4,
+   "n": 12
+  },
+  "skunk": {
+   "precision": 1.0,
+   "recall": 0.5,
+   "f1": 0.6666666666666666,
+   "n": 26
+  },
+  "squirrel": {
+   "precision": 0.8571428571428571,
+   "recall": 1.0,
+   "f1": 0.9230769230769231,
+   "n": 6
+  }
+ },
+ "probe_info": {
+  "bioclip": {
+   "best_C": 100,
+   "train_cv_macro_f1_by_C": {
+    "0.1": 0.14209130425819522,
+    "1": 0.20742732735087652,
+    "10": 0.19994343221108304,
+    "100": 0.21418019044381995,
+    "1000": 0.19368358412146325
+   }
+  },
+  "dinov2": {
+   "best_C": 1000,
+   "train_cv_macro_f1_by_C": {
+    "0.1": 0.30788381369753265,
+    "1": 0.3470386659792845,
+    "10": 0.37217256716035096,
+    "100": 0.3724935666580872,
+    "1000": 0.37423021566910586
+   }
+  }
+ },
+ "overfitting": {
+  "bioclip": {
+   "train_accuracy": 100.0,
+   "train_macro_f1": 100.0,
+   "val_accuracy": 35.03649635036496,
+   "val_macro_f1": 35.559926847314934,
+   "accuracy_gap_points": 64.96350364963504,
+   "macro_f1_gap_points": 64.44007315268507,
+   "overfit_flag": true
+  },
+  "dinov2": {
+   "train_accuracy": 100.0,
+   "train_macro_f1": 100.0,
+   "val_accuracy": 44.16058394160584,
+   "val_macro_f1": 43.460798594764846,
+   "accuracy_gap_points": 55.83941605839416,
+   "macro_f1_gap_points": 56.539201405235154,
+   "overfit_flag": true
+  }
+ },
+ "ms_per_crop_embedding": {
+  "bioclip": 15.614268695650894,
+  "dinov2": 41.39044260870002
+ },
+ "day_night_source": "IR signal (night = IR image)"
+}

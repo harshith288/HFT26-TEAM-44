@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>WildWatch analytics</title>
+<script src="wildwatch-api.js"></script>
+<script src="wildwatch-runtime.js"></script>
+</head>
+<body>
+<template data-dc><x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#07110D}
+a{color:#F2A93B}a:hover{color:#FFC56B}
+@keyframes live{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes draw{from{stroke-dashoffset:1600}to{stroke-dashoffset:0}}
+@keyframes spin{from{transform:rotate(-90deg) scale(.6);opacity:0}to{transform:rotate(0) scale(1);opacity:1}}
+@keyframes drift{0%{transform:translate(0,0);opacity:0}15%{opacity:.95}50%{transform:translate(26px,-38px);opacity:.45}85%{opacity:.9}100%{transform:translate(-14px,-76px);opacity:0}}
+@keyframes aurora{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(140px,50px) scale(1.2)}}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@keyframes moon{0%,100%{box-shadow:0 0 50px 14px rgba(244,239,216,.22)}50%{box-shadow:0 0 80px 26px rgba(244,239,216,.32)}}
+button{transition:transform .15s ease,box-shadow .15s ease,filter .15s ease}
+button:hover{transform:translateY(-2px);filter:brightness(1.1);box-shadow:0 8px 18px rgba(0,0,0,.4)}
+button:active{transform:translateY(0) scale(.96)}
+button:focus-visible,a:focus-visible{outline:2px solid #F2A93B;outline-offset:2px}
+nav a{transition:background .2s ease,color .2s ease,padding-left .2s ease}
+nav a:hover{background:#1A2B25;color:#E8EFEA;padding-left:18px}
+main section{transition:border-color .25s ease}
+main section:hover{border-color:#3A564B}
+.lift{transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+.lift:hover{transform:translateY(-5px);border-color:#3F6B5A;box-shadow:0 14px 30px rgba(0,0,0,.5)}
+.trow{transition:background .2s ease}
+.trow:hover{background:#1D3029}
+.cell{transition:transform .15s ease}
+.cell:hover{transform:scale(1.35)}
+.fly{position:absolute;border-radius:50%;background:#F7E27A;box-shadow:0 0 10px 3px rgba(247,226,122,.55);opacity:.75}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.3}
+.shine{background:linear-gradient(90deg,#E8EFEA 40%,#FFD58A 50%,#E8EFEA 60%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
+.line{stroke-dasharray:1600}
+@media (prefers-reduced-motion:no-preference){
+.fly{animation:drift var(--d,9s) ease-in-out infinite}
+.blob{animation:aurora 20s ease-in-out infinite}
+.shine{animation:shimmer 7s linear infinite}
+.moon{animation:moon 5s ease-in-out infinite}
+.live{animation:live 1.6s ease-in-out infinite}
+.grow{transform-origin:left center;animation:grow 1s cubic-bezier(.2,.8,.2,1) both}
+.rise{animation:rise .6s ease both}
+.fade{animation:fade .9s ease both}
+.line{animation:draw 2s ease both}
+.donut{animation:spin 1.1s cubic-bezier(.2,.8,.2,1) both}
+}
+.skel{background:linear-gradient(90deg,#1F332B 25%,#2C463B 50%,#1F332B 75%);background-size:200% 100%;animation:shimmer 1.4s linear infinite}
+</style>
+</helmet>
+<div style="position: relative; overflow: hidden; min-height: 100vh; background: #07110D; color: #E8EFEA; font-family: Inter, system-ui, sans-serif; display: flex; flex-wrap: wrap; align-items: stretch">
+
+<div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden">
+<div style="position: absolute; left: 0; top: 0; width: 100%; height: 300px; background: linear-gradient(180deg, #14302A 0%, #0C1F19 60%, #07110D 100%)"></div>
+<div class="blob" style="left: 10%; top: -120px; width: 520px; height: 320px; background: #2BB48A"></div>
+<div class="blob" style="left: 55%; top: -80px; width: 460px; height: 280px; background: #5B6CFF; animation-delay: -8s"></div>
+<div class="blob" style="left: 30%; top: 1000px; width: 600px; height: 400px; background: #1E7A5C; animation-delay: -4s"></div>
+<div class="moon" style="position: absolute; right: 8%; top: 46px; width: 64px; height: 64px; border-radius: 50%; background: #F4EFD8; box-shadow: 0 0 60px 18px rgba(244,239,216,.25)"></div>
+<svg viewBox="0 0 1440 300" preserveAspectRatio="none" style="position: absolute; left: 0; top: 0; width: 100%; height: 300px">
+<path d="{{treesFar}}" fill="#0E241C"></path>
+<path d="{{treesNear}}" fill="#07110D"></path>
+</svg>
+<sc-for list="{{flies}}" as="f" hint-placeholder-count="0">
+<div class="fly" style="left: {{f.x}}; top: {{f.y}}; width: {{f.s}}; height: {{f.s}}; --d: {{f.d}}; animation-delay: {{f.delay}}"></div>
+</sc-for>
+</div>
+
+<nav aria-label="Main" style="position: relative; z-index: 1; flex: 1 1 220px; max-width: 100%; background: rgba(8,19,15,0.72); backdrop-filter: blur(12px); border-right: 1px solid #22342D; padding: 24px 16px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; align-items: center; gap: 10px; padding: 0 8px">
+<div style="width: 36px; height: 36px; border-radius: 10px; background: #F2A93B; display: flex; align-items: center; justify-content: center">
+<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E1814" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"></path></svg>
+</div>
+<div style="display: flex; flex-direction: column">
+<span style="font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 600; letter-spacing: -0.01em">WildWatch</span>
+<span style="font-size: 12px; color: #9DB0A6">Forest division console</span>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<a href="Main.dc.html" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #B9C8C0; text-decoration: none; font-size: 14px">Home</a>
+<a href="Upload.dc.html" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #B9C8C0; text-decoration: none; font-size: 14px">Upload</a>
+<a href="Alerts.dc.html" style="display: flex; align-items: center; justify-content: space-between; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #B9C8C0; text-decoration: none; font-size: 14px">Alerts <span style="background: #FF6B5B; color: #2A0D09; font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 10px">{{openCount}}</span></a>
+<a href="Analytics.dc.html" aria-current="page" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 8px; background: #1D2F28; color: #E8EFEA; text-decoration: none; font-size: 14px; font-weight: 500">Analytics</a>
+<a href="Accuracy.dc.html" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #B9C8C0; text-decoration: none; font-size: 14px">Ranger's Brief</a>
+</div>
+<div style="margin-top: auto; background: #172822; border: 1px solid #22342D; border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; color: #9DB0A6">Pipeline</span>
+<span style="display: flex; align-items: center; gap: 8px; font-size: 13px"><span class="live" style="width: 8px; height: 8px; border-radius: 4px; background: {{pipeDot}}"></span>{{pipeText}}</span>
+<span style="font-size: 12px; color: #9DB0A6">{{lastImage}}</span>
+</div>
+</nav>
+
+<main style="position: relative; z-index: 1; flex: 999 1 560px; min-width: 0; padding: 28px 32px 48px; box-sizing: border-box; display: flex; flex-direction: column; gap: 22px">
+<sc-if value="{{apiError}}"><div role="alert" style="background: rgba(52,18,14,0.9); border: 1px solid #7A3329; border-radius: 12px; padding: 14px 18px; font-size: 14px; color: #FBE3DE">{{apiError}}</div></sc-if>
+
+<header style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 13px; color: #B9C8C0">Camera-trap analytics · Real data from the database</span>
+<h1 class="shine" style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 40px; font-weight: 600; letter-spacing: -0.02em">Analytics</h1>
+</div>
+<div role="group" aria-label="Time range" style="display: flex; gap: 6px; background: rgba(20,38,31,0.7); border: 1px solid #24392F; border-radius: 24px; padding: 4px">
+<sc-for list="{{ranges}}" as="r" hint-placeholder-count="3">
+<button type="button" onClick="{{r.pick}}" aria-pressed="{{r.pressed}}" style="min-height: 40px; padding: 0 16px; border-radius: 20px; border: none; background: {{r.bg}}; color: {{r.fg}}; font: 500 13px Inter, sans-serif; cursor: pointer">{{r.label}}</button>
+</sc-for>
+</div>
+</header>
+
+<section class="rise" aria-label="Dataset summary" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; border: none">
+<div class="lift" style="background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; color: #9DB0A6">Images in sample</span>
+<sc-if value="{{loading}}"><div class="skel" style="height: 34px; width: 60%; border-radius: 6px"></div></sc-if>
+<sc-if value="{{loaded}}"><span style="font-family: 'JetBrains Mono', monospace; font-size: 30px; font-weight: 500">{{kImages}}</span></sc-if>
+<span style="font-size: 12px; color: #9DB0A6">Caltech Camera Traps</span>
+</div>
+<div class="lift" style="background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; color: #9DB0A6">Bursts kept</span>
+<sc-if value="{{loading}}"><div class="skel" style="height: 34px; width: 60%; border-radius: 6px"></div></sc-if>
+<sc-if value="{{loaded}}"><span style="font-family: 'JetBrains Mono', monospace; font-size: 30px; font-weight: 500">{{kKept}}</span></sc-if>
+<span style="font-size: 12px; color: #9DB0A6">{{kOthers}}</span>
+</div>
+<div class="lift" style="background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; color: #9DB0A6">Camera bursts</span>
+<sc-if value="{{loading}}"><div class="skel" style="height: 34px; width: 60%; border-radius: 6px"></div></sc-if>
+<sc-if value="{{loaded}}"><span style="font-family: 'JetBrains Mono', monospace; font-size: 30px; font-weight: 500">{{kBursts}}</span></sc-if>
+<span style="font-size: 12px; color: #9DB0A6">Counted as one event each</span>
+</div>
+<div class="lift" style="background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; color: #9DB0A6">Night share of sightings</span>
+<sc-if value="{{loading}}"><div class="skel" style="height: 34px; width: 60%; border-radius: 6px"></div></sc-if>
+<sc-if value="{{loaded}}"><span style="font-family: 'JetBrains Mono', monospace; font-size: 30px; font-weight: 500; color: #8C9CFF">{{kNight}}</span></sc-if>
+<span style="font-size: 12px; color: #9DB0A6">Sample balanced by day and night</span>
+</div>
+</section>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<section class="rise" aria-label="Sightings over time" style="flex: 2 1 520px; min-width: 0; background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; justify-content: space-between; align-items: center">
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600">Animal sightings over time</h2>
+<span style="font-size: 12px; color: #9DB0A6">{{rangeLabel}}</span>
+</div>
+<div style="position: relative; height: 220px">
+<svg role="img" aria-label="Line chart of daily animal sightings" viewBox="0 0 640 220" preserveAspectRatio="none" style="position: absolute; inset: 0; width: 100%; height: 100%">
+<line x1="0" y1="55" x2="640" y2="55" stroke="#22342D" stroke-width="1"></line>
+<line x1="0" y1="110" x2="640" y2="110" stroke="#22342D" stroke-width="1"></line>
+<line x1="0" y1="165" x2="640" y2="165" stroke="#22342D" stroke-width="1"></line>
+<path d="{{areaNight}}" fill="rgba(140,156,255,0.16)"></path>
+<path d="{{areaDay}}" fill="rgba(242,169,59,0.14)"></path>
+<path class="line" d="{{lineNight}}" fill="none" stroke="#8C9CFF" stroke-width="2.5" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
+<path class="line" d="{{lineDay}}" fill="none" stroke="#F2A93B" stroke-width="2.5" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
+</svg>
+</div>
+<div style="display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9DB0A6">
+<sc-for list="{{xTicks}}" as="x" hint-placeholder-count="5"><span>{{x}}</span></sc-for>
+</div>
+<div style="display: flex; gap: 16px; font-size: 12px; color: #9DB0A6">
+<span style="display: flex; align-items: center; gap: 6px"><span style="width: 14px; height: 3px; border-radius: 2px; background: #8C9CFF"></span>Night</span>
+<span style="display: flex; align-items: center; gap: 6px"><span style="width: 14px; height: 3px; border-radius: 2px; background: #F2A93B"></span>Day</span>
+</div>
+</section>
+
+<section class="rise" aria-label="Empty frame savings" style="flex: 1 1 280px; min-width: 0; background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 16px; align-items: center; justify-content: center">
+<h2 style="margin: 0; align-self: flex-start; font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600">3-tier triage</h2>
+<div class="donut" style="width: 170px; height: 170px; border-radius: 50%; background: {{donut}}; display: flex; align-items: center; justify-content: center">
+<div style="width: 124px; height: 124px; border-radius: 50%; background: #10201A; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 28px; font-weight: 500; color: #5FD39A">{{donutPct}}</span>
+<span style="font-size: 11px; color: #9DB0A6">of bursts kept</span>
+</div>
+</div>
+<span style="font-size: 13px; color: #B9C8C0; text-align: center; line-height: 1.5">{{donutText}}</span>
+</section>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<section class="rise" aria-label="Species distribution" style="flex: 1 1 380px; min-width: 0; background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; justify-content: space-between; align-items: center">
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600">Species and day vs night</h2>
+<span style="font-size: 12px; color: #9DB0A6">{{sampleNote}}</span>
+</div>
+<sc-if value="{{loading}}"><div class="skel" style="height: 120px; width: 100%; border-radius: 6px"></div></sc-if>
+<sc-for list="{{species}}" as="s" hint-placeholder-count="8">
+<div style="display: grid; grid-template-columns: 96px minmax(0, 1fr) 44px; gap: 12px; align-items: center">
+<span style="font-size: 14px">{{s.name}}</span>
+<div style="height: 12px; border-radius: 6px; background: #1F332B; overflow: hidden">
+<div class="grow" style="display: flex; height: 12px; width: {{s.w}}">
+<div style="height: 12px; width: {{s.dayW}}; background: #F2A93B"></div>
+<div style="height: 12px; width: {{s.nightW}}; background: #8C9CFF"></div>
+</div>
+</div>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; text-align: right; color: #C9D6CF">{{s.n}}</span>
+</div>
+</sc-for>
+<div style="display: flex; gap: 16px; font-size: 12px; color: #9DB0A6">
+<span style="display: flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 2px; background: #F2A93B"></span>Day</span>
+<span style="display: flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 2px; background: #8C9CFF"></span>Night</span>
+</div>
+</section>
+
+<section class="rise" aria-label="Activity by hour" style="flex: 1 1 420px; min-width: 0; background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; justify-content: space-between; align-items: center">
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600">Activity by hour</h2>
+<span style="font-size: 12px; color: #9DB0A6">{{hourNote}}</span>
+</div>
+<sc-if value="{{loading}}"><div class="skel" style="height: 120px; width: 100%; border-radius: 6px"></div></sc-if>
+<sc-for list="{{heat}}" as="row" hint-placeholder-count="8">
+<div style="display: grid; grid-template-columns: 80px minmax(0, 1fr); gap: 10px; align-items: center">
+<span style="font-size: 13px">{{row.name}}</span>
+<div style="display: grid; grid-template-columns: repeat(24, minmax(0, 1fr)); gap: 2px">
+<sc-for list="{{row.cells}}" as="cell" hint-placeholder-count="24">
+<div class="cell fade" style="height: 20px; border-radius: 3px; background: {{cell.color}}"></div>
+</sc-for>
+</div>
+</div>
+</sc-for>
+<div style="display: grid; grid-template-columns: 80px minmax(0, 1fr); gap: 10px">
+<span></span>
+<div style="display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9DB0A6"><span>00</span><span>06</span><span>12</span><span>18</span><span>23</span></div>
+</div>
+</section>
+</div>
+
+<section class="rise" aria-label="Per-camera stats" style="background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; justify-content: space-between; align-items: center">
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600">Cameras</h2>
+<span style="font-size: 12px; color: #9DB0A6">Real counts · fictional villages</span>
+</div>
+<div style="overflow-x: auto">
+<div role="table" aria-label="Per-camera stats" style="min-width: 720px; font-size: 14px">
+<div role="row" style="display: grid; grid-template-columns: 90px minmax(0,1.3fr) 80px 80px minmax(0,1.4fr) minmax(0,1fr) 100px; color: #9DB0A6; font-size: 12px">
+<span role="columnheader" style="padding: 10px 12px">Camera</span>
+<span role="columnheader" style="padding: 10px 12px">Village zone</span>
+<span role="columnheader" style="padding: 10px 12px; text-align: right">Images</span>
+<span role="columnheader" style="padding: 10px 12px; text-align: right">Animals</span>
+<span role="columnheader" style="padding: 10px 12px">Empty share</span>
+<span role="columnheader" style="padding: 10px 12px">Top species</span>
+<span role="columnheader" style="padding: 10px 12px">Top risk</span>
+</div>
+<sc-for list="{{cams}}" as="c" hint-placeholder-count="6">
+<div role="row" class="trow" style="display: grid; grid-template-columns: 90px minmax(0,1.3fr) 80px 80px minmax(0,1.4fr) minmax(0,1fr) 100px; align-items: center; border-top: 1px solid #22342D">
+<span role="cell" style="padding: 12px; font-family: 'JetBrains Mono', monospace">{{c.name}}</span>
+<span role="cell" style="padding: 12px">{{c.village}}</span>
+<span role="cell" style="padding: 12px; text-align: right; font-family: 'JetBrains Mono', monospace">{{c.images}}</span>
+<span role="cell" style="padding: 12px; text-align: right; font-family: 'JetBrains Mono', monospace">{{c.animals}}</span>
+<span role="cell" style="padding: 12px"><span style="display: flex; align-items: center; gap: 8px"><span style="display: block; width: 90px; height: 6px; border-radius: 3px; background: #1F332B"><span class="grow" style="display: block; height: 6px; border-radius: 3px; width: {{c.emptyW}}; background: #5FD39A"></span></span><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B9C8C0">{{c.emptyW}}</span></span></span>
+<span role="cell" style="padding: 12px">{{c.top}}</span>
+<span role="cell" style="padding: 12px"><span style="font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 6px; background: {{c.bg}}; color: {{c.fg}}">{{c.risk}}</span></span>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+
+</main>
+</div>
+</x-dc></template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1760}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { range: 'all' };
+  }
+  componentDidMount() {
+    var self = this;
+    WW.keepLoaded(this, function () {
+      return Promise.all([WW.get('/api/analytics?range=' + self.state.range), WW.get('/api/summary')]).then(function (r) {
+        return { data: r[0], summary: r[1] };
+      });
+    }, 10000);
+  }
+  componentWillUnmount() { clearInterval(this.poll); }
+  renderVals() {
+    var self = this, st = this.state, D = st.data, S = st.summary;
+    var ranges = ['24h', '14d', '30d', 'all'].map(function (k) {
+      var on = k === st.range;
+      return { label: k === 'all' ? 'All' : k, pressed: on ? 'true' : 'false', bg: on ? '#F2A93B' : 'transparent', fg: on ? '#1E1405' : '#C9D6CF',
+        pick: function () { self.setState({ range: k }); setTimeout(self.reload, 0); } };
+    });
+    var buckets = D ? D.sightings.buckets : [];
+    var top = Math.max.apply(null, [1].concat(buckets.map(function (b) { return Math.max(b.day, b.night); })));
+    function toLine(arr) {
+      var last = Math.max(1, arr.length - 1);
+      return arr.map(function (v, j) { return (j === 0 ? 'M' : 'L') + Math.round(j / last * 640) + ' ' + Math.round(216 - v / top * 196); }).join(' ');
+    }
+    function toArea(arr) { return arr.length ? toLine(arr) + ' L640 220 L0 220 Z' : ''; }
+    var night = buckets.map(function (b) { return b.night; }), day = buckets.map(function (b) { return b.day; });
+    var ticks = [];
+    if (buckets.length) for (var i = 0; i < 5; i++) ticks.push(buckets[Math.round(i / 4 * (buckets.length - 1))].label);
+    var names = { '24h': '24 hours', '14d': '14 days', '30d': '30 days' };
+    var rangeLabel = !D ? 'Loading' : !D.sightings.window_end ? 'Not measured' : st.range === 'all'
+      ? D.sightings.sightings_in_window + ' sightings by month'
+      : D.sightings.sightings_in_window + ' sightings in the ' + names[st.range] + ' to ' + D.sightings.window_end.slice(0, 10) + ', the newest photo';
+
+    var spList = D ? D.species : [], spMax = spList.length ? spList[0].total : 1;
+    var species = spList.map(function (s) {
+      return { name: WW.capital(s.species), n: s.total, w: Math.round(s.total / spMax * 100) + '%',
+        dayW: Math.round(s.day / s.total * 100) + '%', nightW: Math.round(s.night / s.total * 100) + '%' };
+    });
+    var cams = (D ? D.cameras : []).map(function (c) {
+      var lv = WW.LV[c.top_risk || 'NONE'];
+      return { name: c.camera_id == null ? 'Uploads, no camera' : 'Cam ' + c.camera_id, village: c.village || 'No village', images: c.images, animals: c.animals, emptyW: Math.round(c.empty_pct) + '%',
+        top: c.top_species ? WW.capital(c.top_species) : 'None', risk: c.top_risk || 'NONE', bg: lv.bg, fg: lv.fg };
+    });
+    var T = S ? S.triage : { kept: 0, needs_review: 0, auto_discarded: 0 }, total = S ? S.bursts : 0;
+    var keptP = total ? T.kept / total * 100 : 0, reviewP = total ? T.needs_review / total * 100 : 0;
+    var donut = 'conic-gradient(#5FD39A 0 ' + keptP.toFixed(1) + '%, #F2A93B ' + keptP.toFixed(1) + '% ' + (keptP + reviewP).toFixed(1) + '%, #FF6B5B ' + (keptP + reviewP).toFixed(1) + '% 100%)';
+    return Object.assign({}, WW.scene(23, 30, 1700), WW.nav(S), { apiError: st.apiError, loading: !D || !S, loaded: !!D && !!S,
+      ranges: ranges, rangeLabel: rangeLabel, xTicks: ticks, lineNight: toLine(night), lineDay: toLine(day), areaNight: toArea(night), areaDay: toArea(day),
+      species: species, heat: (D ? D.hourly.slice(0, 8) : []).map(WW.heatRow), cams: cams,
+      kImages: S ? WW.fmt(S.images) : '', kKept: S ? WW.fmt(T.kept) : '', kBursts: S ? WW.fmt(S.bursts) : '',
+      kOthers: S ? WW.fmt(T.needs_review) + ' need review · ' + WW.fmt(T.auto_discarded) + ' auto-discarded' : '',
+      kNight: D ? WW.num(D.night_share_pct, 1, '%') : '', donut: donut, donutPct: total ? keptP.toFixed(1) + '%' : WW.NM,
+      donutText: S ? WW.fmt(T.kept) + ' kept (green), ' + WW.fmt(T.needs_review) + ' need review (amber), ' + WW.fmt(T.auto_discarded) + ' auto-discarded (red).' : '',
+      sampleNote: 'All sample · not natural behaviour', hourNote: D ? D.hourly_note : '' });
+  }
+}
+</script>
+</body>
+</html>

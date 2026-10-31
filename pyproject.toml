@@ -1,0 +1,11 @@
+[project]
+name = "wildwatch"
+version = "1.0.0"
+description = "AI-powered wildlife monitoring and village intrusion alerts from camera traps"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+license = {text = "MIT"}
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

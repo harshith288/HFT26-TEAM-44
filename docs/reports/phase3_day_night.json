@@ -1,0 +1,110 @@
+{
+ "command": "scripts\\eval_phase3.py",
+ "timestamp": "2026-10-31T00:27:52.541623",
+ "n_real_images": 403,
+ "hardware": "NVIDIA GeForce RTX 4050 Laptop GPU",
+ "split": "val only",
+ "source": "pipeline database",
+ "groups": {
+  "all": {
+   "filter": {
+    "n_images": 403,
+    "n_empty": 113,
+    "precision_empty": 0.639344262295082,
+    "recall_empty": 0.6902654867256637,
+    "f1_empty": 0.6638297872340425,
+    "precision_empty_vs_confirmed_animals": 0.975,
+    "pct_images_removed": 30.272952853598017,
+    "pct_animal_frames_discarded_all_labels": 15.172413793103448,
+    "n_boxed_frames": 227,
+    "n_boxed_frames_lost": 2
+   },
+   "species": {
+    "n_images": 274,
+    "n_classes": 12,
+    "top1_accuracy": 73.72262773722628,
+    "macro_f1": 80.05479173477808
+   },
+   "count": {
+    "n_bursts": 67,
+    "mae_max_rule": 0.08955223880597014,
+    "pct_exact": 91.04477611940298
+   }
+  },
+  "day": {
+   "filter": {
+    "n_images": 139,
+    "n_empty": 62,
+    "precision_empty": 0.94,
+    "recall_empty": 0.7580645161290323,
+    "f1_empty": 0.8392857142857143,
+    "precision_empty_vs_confirmed_animals": 1.0,
+    "pct_images_removed": 35.97122302158273,
+    "pct_animal_frames_discarded_all_labels": 3.896103896103896,
+    "n_boxed_frames": 67,
+    "n_boxed_frames_lost": 0
+   },
+   "species": {
+    "n_images": 64,
+    "n_classes": 6,
+    "top1_accuracy": 85.9375,
+    "macro_f1": 90.26436526436527
+   },
+   "count": {
+    "n_bursts": 21,
+    "mae_max_rule": 0.047619047619047616,
+    "pct_exact": 95.23809523809523
+   }
+  },
+  "ir_night": {
+   "filter": {
+    "n_images": 262,
+    "n_empty": 51,
+    "precision_empty": 0.4305555555555556,
+    "recall_empty": 0.6078431372549019,
+    "f1_empty": 0.5040650406504065,
+    "precision_empty_vs_confirmed_animals": 0.9393939393939394,
+    "pct_images_removed": 27.480916030534353,
+    "pct_animal_frames_discarded_all_labels": 19.431279620853083,
+    "n_boxed_frames": 158,
+    "n_boxed_frames_lost": 2
+   },
+   "species": {
+    "n_images": 208,
+    "n_classes": 10,
+    "top1_accuracy": 69.71153846153845,
+    "macro_f1": 75.44165897320863
+   },
+   "count": {
+    "n_bursts": 44,
+    "mae_max_rule": 0.11363636363636363,
+    "pct_exact": 88.63636363636364
+   }
+  },
+  "color_night": {
+   "filter": {
+    "n_images": 2,
+    "n_empty": 0,
+    "precision_empty": null,
+    "recall_empty": null,
+    "f1_empty": null,
+    "precision_empty_vs_confirmed_animals": null,
+    "pct_images_removed": 0.0,
+    "pct_animal_frames_discarded_all_labels": 0.0,
+    "n_boxed_frames": 2,
+    "n_boxed_frames_lost": 0
+   },
+   "species": {
+    "n_images": 2,
+    "n_classes": 2,
+    "top1_accuracy": 100.0,
+    "macro_f1": 100.0
+   },
+   "count": {
+    "n_bursts": 2,
+    "mae_max_rule": 0.0,
+    "pct_exact": 100.0
+   }
+  }
+ }
+}

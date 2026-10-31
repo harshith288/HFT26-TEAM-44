@@ -1,0 +1,112 @@
+{
+ "command": "scripts\\test_llm.py",
+ "timestamp": "2026-10-31T00:58:15.691459",
+ "n_real_images": 5,
+ "hardware": "Featherless API",
+ "model": "Qwen/Qwen2.5-7B-Instruct",
+ "alerts": [
+  {
+   "alert": {
+    "species": "person",
+    "level": "CRITICAL",
+    "village": "Larkmere",
+    "min_observed_count": 2
+   },
+   "raw_output": "Alert: CRITICAL. Possible poacher (species: person) minimum observed count 2 at Larkmere (camera 120). Send 4 rangers and vehicle immediately.",
+   "passed_facts_check": true,
+   "tokens": {
+    "time": "2026-10-31T00:57:43",
+    "purpose": "alert",
+    "input_tokens": 110,
+    "output_tokens": 38,
+    "estimated_usd": 2.63e-05,
+    "seconds": 2.41
+   }
+  },
+  {
+   "alert": {
+    "species": "dog",
+    "level": "CRITICAL",
+    "village": "Fernhollow",
+    "min_observed_count": 3
+   },
+   "raw_output": "At Fernhollow (camera 88), a critical risk level is observed with 3 dogs present. Please send 4 rangers and a vehicle immediately.",
+   "passed_facts_check": true,
+   "tokens": {
+    "time": "2026-10-31T00:57:56",
+    "purpose": "alert",
+    "input_tokens": 105,
+    "output_tokens": 33,
+    "estimated_usd": 2.45e-05,
+    "seconds": 13.49
+   }
+  },
+  {
+   "alert": {
+    "species": "bobcat",
+    "level": "HIGH",
+    "village": "Ambernook",
+    "min_observed_count": 1
+   },
+   "raw_output": "Alert: One bobcat (minimum observed count: 1) at Ambernook (camera 38), risk level HIGH. Rangers, please send 2 units with vehicle.",
+   "passed_facts_check": true,
+   "tokens": {
+    "time": "2026-10-31T00:57:58",
+    "purpose": "alert",
+    "input_tokens": 105,
+    "output_tokens": 37,
+    "estimated_usd": 2.53e-05,
+    "seconds": 1.68
+   }
+  },
+  {
+   "alert": {
+    "species": "coyote",
+    "level": "HIGH",
+    "village": "Ambernook",
+    "min_observed_count": 1
+   },
+   "raw_output": "Coyote, minimum observed count of 1, high risk level. Alert all rangers, send 2 rangers with vehicle to Ambernook (camera 33).",
+   "passed_facts_check": true,
+   "tokens": {
+    "time": "2026-10-31T00:58:10",
+    "purpose": "alert",
+    "input_tokens": 105,
+    "output_tokens": 37,
+    "estimated_usd": 2.53e-05,
+    "seconds": 11.53
+   }
+  },
+  {
+   "alert": {
+    "species": "deer",
+    "level": "MEDIUM",
+    "village": "Ambernook",
+    "min_observed_count": 1
+   },
+   "raw_output": "Deer, minimum observed count 1, medium risk level at Ambernook (camera 33). Send 1 ranger to the location if possible, vehicle not required.",
+   "passed_facts_check": true,
+   "tokens": {
+    "time": "2026-10-31T00:58:13",
+    "purpose": "alert",
+    "input_tokens": 105,
+    "output_tokens": 36,
+    "estimated_usd": 2.5e-05,
+    "seconds": 2.94
+   }
+  }
+ ],
+ "api_errors": [],
+ "summary": {
+  "date": "2011-12-07",
+  "raw_output": "Daily Ranger Report for 2011-12-07\n\n- **Total Alerts:** 8\n  - **High Priority:** 1\n  - **Medium Priority:** 3\n  - **Low Priority:** 4\n\n- **Species Involved:** Bobcat, Cat, Dog, Raccoon\n\n- **Locations:** Ambernook, Fernhollow, Larkmere\n\nEnd of Report",
+  "tokens": {
+   "time": "2026-10-31T00:58:15",
+   "purpose": "daily_summary",
+   "input_tokens": 110,
+   "output_tokens": 87,
+   "estimated_usd": 3.61e-05,
+   "seconds": 2.45
+  }
+ }
+}

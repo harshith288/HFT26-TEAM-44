@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>WildWatch home</title>
+<script src="wildwatch-api.js"></script>
+<script src="wildwatch-runtime.js"></script>
+</head>
+<body>
+<template data-dc><x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#07110D}
+a{color:#F2A93B}a:hover{color:#FFC56B}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,107,91,.6)}70%{box-shadow:0 0 0 14px rgba(255,107,91,0)}100%{box-shadow:0 0 0 0 rgba(255,107,91,0)}}
+@keyframes live{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes slide{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes blink{0%,100%{transform:scale(1)}50%{transform:scale(1.4)}}
+button{transition:transform .15s ease,box-shadow .15s ease,filter .15s ease}
+button:hover{transform:translateY(-2px);filter:brightness(1.1);box-shadow:0 8px 18px rgba(0,0,0,.4)}
+button:active{transform:translateY(0) scale(.96)}
+button:focus-visible,a:focus-visible{outline:2px solid #F2A93B;outline-offset:2px}
+nav a{transition:background .2s ease,color .2s ease,padding-left .2s ease}
+nav a:hover{background:#1A2B25;color:#E8EFEA;padding-left:18px}
+main section{transition:border-color .25s ease}
+main section:hover{border-color:#3A564B}
+.rare{transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+.rare:hover{transform:translateY(-4px);border-color:#F2A93B;box-shadow:0 10px 24px rgba(0,0,0,.35)}
+@keyframes drift{0%{transform:translate(0,0);opacity:0}15%{opacity:.95}50%{transform:translate(26px,-38px);opacity:.45}85%{opacity:.9}100%{transform:translate(-14px,-76px);opacity:0}}
+@keyframes aurora{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(140px,50px) scale(1.2)}}
+@keyframes sweep{to{transform:rotate(360deg)}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes stripe{to{background-position:56px 0}}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@keyframes moon{0%,100%{box-shadow:0 0 50px 14px rgba(244,239,216,.22)}50%{box-shadow:0 0 80px 26px rgba(244,239,216,.32)}}
+.fly{position:absolute;border-radius:50%;background:#F7E27A;box-shadow:0 0 10px 3px rgba(247,226,122,.55);opacity:.75}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.3}
+.lift{transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+.lift:hover{transform:translateY(-5px);border-color:#3F6B5A;box-shadow:0 14px 30px rgba(0,0,0,.5)}
+.tick{display:flex;gap:44px;width:max-content}
+.tickwrap:hover .tick{animation-play-state:paused}
+.shine{background:linear-gradient(90deg,#E8EFEA 40%,#FFD58A 50%,#E8EFEA 60%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
+@media (prefers-reduced-motion:no-preference){
+.fly{animation:drift var(--d,9s) ease-in-out infinite}
+.blob{animation:aurora 20s ease-in-out infinite}
+.radar{animation:sweep 4s linear infinite}
+.tick{animation:marquee 38s linear infinite}
+.stripe{animation:stripe 1s linear infinite}
+.shine{animation:shimmer 7s linear infinite}
+.moon{animation:moon 5s ease-in-out infinite}
+.pulse{animation:pulse 1.8s ease-out infinite}
+.live{animation:live 1.6s ease-in-out infinite}
+.grow{transform-origin:left center;animation:grow 1s cubic-bezier(.2,.8,.2,1) both}
+.fade{animation:fade .9s ease both}
+.slide{animation:slide .6s ease both}
+.rise{animation:rise .7s ease both}
+.blink{animation:blink 1.2s ease-in-out infinite}
+}
+.skel{background:linear-gradient(90deg,#1F332B 25%,#2C463B 50%,#1F332B 75%);background-size:200% 100%;animation:shimmer 1.4s linear infinite}
+</style>
+</helmet>
+<div style="position: relative; overflow: hidden; min-height: 100vh; background: #07110D; color: #E8EFEA; font-family: Inter, system-ui, sans-serif; display: flex; flex-wrap: wrap; align-items: stretch">
+
+<div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden">
+<div style="position: absolute; left: 0; top: 0; width: 100%; height: 300px; background: linear-gradient(180deg, #14302A 0%, #0C1F19 60%, #07110D 100%)"></div>
+<div class="blob" style="left: 10%; top: -120px; width: 520px; height: 320px; background: #2BB48A"></div>
+<div class="blob" style="left: 55%; top: -80px; width: 460px; height: 280px; background: #5B6CFF; animation-delay: -8s"></div>
+<div class="blob" style="left: 30%; top: 900px; width: 600px; height: 400px; background: #1E7A5C; animation-delay: -4s"></div>
+<div class="moon" style="position: absolute; right: 8%; top: 46px; width: 64px; height: 64px; border-radius: 50%; background: #F4EFD8; box-shadow: 0 0 60px 18px rgba(244,239,216,.25)"></div>
+<svg viewBox="0 0 1440 300" preserveAspectRatio="none" style="position: absolute; left: 0; top: 0; width: 100%; height: 300px">
+<path d="{{treesFar}}" fill="#0E241C"></path>
+<path d="{{treesNear}}" fill="#07110D"></path>
+</svg>
+<sc-for list="{{flies}}" as="f" hint-placeholder-count="0">
+<div class="fly" style="left: {{f.x}}; top: {{f.y}}; width: {{f.s}}; height: {{f.s}}; --d: {{f.d}}; animation-delay: {{f.delay}}"></div>
+</sc-for>
+</div>
+
+<nav aria-label="Main" style="position: relative; z-index: 1; flex: 1 1 220px; max-width: 100%; background: rgba(8,19,15,0.72); backdrop-filter: blur(12px); border-right: 1px solid #22342D; padding: 24px 16px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; align-items: center; gap: 10px; padding: 0 8px">
+<div style="width: 36px; height: 36px; border-radius: 10px; background: #F2A93B; display: flex; align-items: center; justify-content: center">
+<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E1814" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"></path></svg>
+</div>
+<div style="display: flex; flex-direction: column">
+<span style="font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 600; letter-spacing: -0.01em">WildWatch</span>
+<span style="font-size: 12px; color: #9DB0A6">Forest division console</span>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<a href="Main.dc.html" aria-current="page" style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 8px; background: #1D2F28; color: #E8EFEA; text-decoration: none; font-size: 14px; font-weight: 500">Home</a>
+<a href="Upload.dc.html" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #B9C8C0; text-decoration: none; font-size: 14px">Upload</a>
+<a href="Alerts.dc.html" style="display: flex; align-items: center; justify-content: space-between; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #B9C8C0; text-decoration: none; font-size: 14px">Alerts <span style="background: #FF6B5B; color: #2A0D09; font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 10px">{{openCount}}</span></a>
+<a href="Analytics.dc.html" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #B9C8C0; text-decoration: none; font-size: 14px">Analytics</a>
+<a href="Accuracy.dc.html" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #B9C8C0; text-decoration: none; font-size: 14px">Ranger's Brief</a>
+</div>
+<div style="margin-top: auto; background: #172822; border: 1px solid #22342D; border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; color: #9DB0A6">Pipeline</span>
+<span style="display: flex; align-items: center; gap: 8px; font-size: 13px"><span class="live" style="width: 8px; height: 8px; border-radius: 4px; background: {{pipeDot}}"></span>{{pipeText}}</span>
+<span style="font-size: 12px; color: #9DB0A6">{{lastImage}}</span>
+</div>
+</nav>
+
+<main style="position: relative; z-index: 1; flex: 999 1 560px; min-width: 0; padding: 28px 32px 48px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
+<sc-if value="{{apiError}}"><div role="alert" style="background: rgba(52,18,14,0.9); border: 1px solid #7A3329; border-radius: 12px; padding: 14px 18px; font-size: 14px; color: #FBE3DE">{{apiError}}</div></sc-if>
+
+<header style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #B9C8C0">
+<span style="display: flex; align-items: center; gap: 6px; background: rgba(255,107,91,0.15); border: 1px solid #7A3329; color: #FF9A8D; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; padding: 3px 8px; border-radius: 20px"><span class="live" style="width: 7px; height: 7px; border-radius: 4px; background: #FF6B5B"></span>LIVE</span>
+{{today}}</span>
+<h1 class="shine" style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 40px; font-weight: 600; letter-spacing: -0.02em">{{greeting}}</h1>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<button type="button" onClick="{{toggleDaily}}" style="min-height: 44px; padding: 0 16px; border-radius: 8px; border: 1px solid #2E453C; background: transparent; color: #E8EFEA; font: 500 14px Inter, sans-serif; cursor: pointer">Daily report</button>
+<a href="Upload.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 8px; background: #F2A93B; color: #1E1405; font: 600 14px Inter, sans-serif; text-decoration: none">Upload photo</a>
+</div>
+</header>
+
+<sc-if value="{{showDaily}}">
+<section aria-label="Daily report" style="background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 16px 20px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; color: #9DB0A6">{{dailyLabel}}</span>
+<p style="margin: 0; font-size: 14px; line-height: 1.6; white-space: pre-line; color: #D7E2DC">{{dailyText}}</p>
+</section>
+</sc-if>
+
+<div class="tickwrap" aria-label="Latest detections" style="overflow: hidden; border-top: 1px solid #1E3129; border-bottom: 1px solid #1E3129; padding: 10px 0; background: rgba(8,19,15,0.5)">
+<div class="tick">
+<sc-for list="{{ticker}}" as="t" hint-placeholder-count="8">
+<span style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #C9D6CF; white-space: nowrap"><span style="width: 6px; height: 6px; border-radius: 3px; background: {{t.c}}"></span><span style="font-family: 'JetBrains Mono', monospace; color: #8A9E94">{{t.time}}</span>{{t.text}}</span>
+</sc-for>
+</div>
+</div>
+
+<sc-if value="{{noTop}}">
+<section aria-label="Live alert" style="background: rgba(20,38,31,0.7); border: 1px solid #24392F; border-radius: 16px; padding: 20px 24px; font-size: 14px; color: #9DB0A6">{{noTopText}}</section>
+</sc-if>
+<sc-if value="{{top}}">
+<section class="slide" aria-label="Live alert" style="position: relative; overflow: hidden; background: rgba(52,18,14,0.82); backdrop-filter: blur(10px); border: 1px solid #7A3329; border-radius: 16px; padding: 24px 24px 20px; display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-between">
+<div class="stripe" aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 100%; height: 4px; background: repeating-linear-gradient(45deg, #FF6B5B 0 14px, #2A0D09 14px 28px); background-size: 56px 4px"></div>
+<div style="display: flex; gap: 16px; align-items: flex-start; flex: 1 1 420px; min-width: 0">
+<div class="pulse" style="flex: none; min-width: 64px; height: 64px; padding: 0 8px; box-sizing: border-box; border-radius: 12px; background: #FF6B5B; color: #2A0D09; display: flex; flex-direction: column; align-items: center; justify-content: center">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 500; line-height: 1">{{top.count}}</span>
+<span style="font-size: 11px; font-weight: 600">{{top.name}}</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; min-width: 0">
+<div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center">
+<span style="background: #FF6B5B; color: #2A0D09; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 6px">{{top.levelLabel}}</span>
+<span style="font-size: 13px; color: #F3B8AE">{{top.where}}</span>
+</div>
+<p style="margin: 0; font-size: 16px; line-height: 1.5; color: #FBE3DE">{{top.message}}</p>
+<span style="font-size: 12px; color: #D9978B">{{top.note}}</span>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<button type="button" onClick="{{dispatchTop}}" style="min-height: 44px; padding: 0 16px; border-radius: 8px; border: none; background: #FF6B5B; color: #2A0D09; font: 600 14px Inter, sans-serif; cursor: pointer">Dispatch team</button>
+<button type="button" onClick="{{falseTop}}" style="min-height: 44px; padding: 0 16px; border-radius: 8px; border: 1px solid #8A3E33; background: transparent; color: #FBE3DE; font: 500 14px Inter, sans-serif; cursor: pointer">False alarm</button>
+</div>
+</section>
+</sc-if>
+
+<section class="rise" aria-label="Summary" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px">
+<div class="lift" style="background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; color: #9DB0A6">Images processed</span>
+<sc-if value="{{loading}}"><div class="skel" style="height: 34px; width: 60%; border-radius: 6px"></div></sc-if>
+<sc-if value="{{loaded}}"><span style="font-family: 'JetBrains Mono', monospace; font-size: 30px; font-weight: 500">{{kImages}}</span></sc-if>
+<span style="font-size: 12px; color: #9DB0A6">{{kBursts}}</span>
+</div>
+<div class="lift" style="background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; color: #9DB0A6">3-tier triage, bursts</span>
+<sc-if value="{{loading}}"><div class="skel" style="height: 34px; width: 60%; border-radius: 6px"></div></sc-if>
+<sc-if value="{{loaded}}"><span style="font-family: 'JetBrains Mono', monospace; font-size: 30px; font-weight: 500; color: #5FD39A">{{kKept}}</span></sc-if>
+<span style="font-size: 12px; color: #9DB0A6">Kept · {{kReview}} needs review · {{kDiscard}} auto-discarded</span>
+</div>
+<div class="lift" style="background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; color: #9DB0A6">Species identified</span>
+<sc-if value="{{loading}}"><div class="skel" style="height: 34px; width: 60%; border-radius: 6px"></div></sc-if>
+<sc-if value="{{loaded}}"><span style="font-family: 'JetBrains Mono', monospace; font-size: 30px; font-weight: 500">{{kSpecies}}</span></sc-if>
+<span style="font-size: 12px; color: #9DB0A6">Found by the pipeline in this sample</span>
+</div>
+<div class="lift" style="background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; color: #9DB0A6">Open alerts</span>
+<sc-if value="{{loading}}"><div class="skel" style="height: 34px; width: 60%; border-radius: 6px"></div></sc-if>
+<sc-if value="{{loaded}}"><span style="font-family: 'JetBrains Mono', monospace; font-size: 30px; font-weight: 500">{{kOpen}}</span></sc-if>
+<span style="font-size: 12px; color: #9DB0A6">MEDIUM or above, awaiting action</span>
+</div>
+</section>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+
+<section aria-label="Recent alerts" style="flex: 1 1 380px; min-width: 0; background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; align-items: center">
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600">Recent alerts</h2>
+<span style="font-size: 12px; color: #9DB0A6">Open, newest uploads first</span>
+</div>
+<sc-if value="{{loading}}"><div class="skel" style="height: 56px; width: 100%; border-radius: 6px"></div></sc-if>
+<sc-for list="{{alerts}}" as="a" hint-placeholder-count="4">
+<div style="display: flex; gap: 12px; align-items: center; padding: 12px; border-radius: 10px; background: #1A2B25">
+<span style="flex: none; width: 78px; text-align: center; font-size: 11px; font-weight: 600; padding: 4px 0; border-radius: 6px; background: {{a.bg}}; color: {{a.fg}}">{{a.level}}</span>
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1">
+<span style="font-size: 14px; font-weight: 500">{{a.title}}</span>
+<span style="font-size: 12px; color: #9DB0A6">{{a.where}}</span>
+</div>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #9DB0A6">{{a.time}}</span>
+</div>
+</sc-for>
+</section>
+
+<section aria-label="Camera map" style="flex: 1 1 380px; min-width: 0; background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; align-items: center">
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600">Cameras and villages</h2>
+<span style="font-size: 12px; color: #9DB0A6">Fictional layout</span>
+</div>
+<div style="position: relative; height: 260px; border-radius: 10px; background: #13221C; border: 1px solid #22342D; overflow: hidden">
+<div style="position: absolute; left: 0; top: 0; width: 46%; height: 100%; background: #173126"></div>
+<span style="position: absolute; left: 12px; top: 10px; font-size: 12px; color: #8FBFA6">Forest reserve</span>
+<span style="position: absolute; right: 12px; top: 10px; font-size: 12px; color: #9DB0A6">Farmland</span>
+<div aria-hidden="true" style="position: absolute; left: 50%; top: 50%; width: 0; height: 0">
+<div class="radar" style="position: absolute; left: -380px; top: -380px; width: 760px; height: 760px; border-radius: 50%; background: conic-gradient(from 0deg, rgba(95,211,154,0.32), rgba(95,211,154,0) 55deg, rgba(95,211,154,0) 360deg)"></div>
+</div>
+<div aria-hidden="true" style="position: absolute; left: 50%; top: 50%; width: 180px; height: 180px; margin: -90px 0 0 -90px; border-radius: 50%; border: 1px dashed rgba(95,211,154,0.25)"></div>
+<div aria-hidden="true" style="position: absolute; left: 50%; top: 50%; width: 360px; height: 360px; margin: -180px 0 0 -180px; border-radius: 50%; border: 1px dashed rgba(95,211,154,0.18)"></div>
+<sc-for list="{{villages}}" as="v" hint-placeholder-count="3">
+<div style="position: absolute; left: {{v.x}}; top: {{v.y}}; display: flex; align-items: center; gap: 6px">
+<span style="width: 12px; height: 12px; border-radius: 3px; background: #C9D6CF"></span>
+<span style="font-size: 12px; color: #C9D6CF">{{v.name}}</span>
+</div>
+</sc-for>
+<sc-for list="{{cams}}" as="c" hint-placeholder-count="6">
+<div style="position: absolute; left: {{c.x}}; top: {{c.y}}; display: flex; align-items: center; gap: 4px">
+<span class="{{c.anim}}" style="width: 14px; height: 14px; border-radius: 7px; background: {{c.color}}; border: 2px solid #0E1814"></span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #E8EFEA">{{c.id}}</span>
+</div>
+</sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; font-size: 12px; color: #9DB0A6">
+<span style="display: flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 5px; background: #FF6B5B"></span>Active alert</span>
+<span style="display: flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 5px; background: #F2A93B"></span>Animal seen</span>
+<span style="display: flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 5px; background: #4E6B5F"></span>Quiet</span>
+</div>
+</section>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+
+<section aria-label="Species distribution" style="flex: 1 1 380px; min-width: 0; background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; align-items: center">
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600">Species seen</h2>
+<span style="font-size: 12px; color: #9DB0A6">Bursts in this sample</span>
+</div>
+<sc-if value="{{loading}}"><div class="skel" style="height: 120px; width: 100%; border-radius: 6px"></div></sc-if>
+<sc-for list="{{species}}" as="s" hint-placeholder-count="6">
+<div style="display: grid; grid-template-columns: 96px minmax(0, 1fr) 44px; gap: 12px; align-items: center">
+<span style="font-size: 14px">{{s.name}}</span>
+<div style="height: 10px; border-radius: 5px; background: #1F332B">
+<div class="grow" style="height: 10px; border-radius: 5px; width: {{s.w}}; background: {{s.color}}"></div>
+</div>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; text-align: right; color: #C9D6CF">{{s.n}}</span>
+</div>
+</sc-for>
+</section>
+
+<section aria-label="Activity by hour" style="flex: 1 1 380px; min-width: 0; background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; align-items: center">
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600">Activity by hour</h2>
+<span style="font-size: 12px; color: #9DB0A6">Sample balanced by day and night</span>
+</div>
+<sc-if value="{{loading}}"><div class="skel" style="height: 120px; width: 100%; border-radius: 6px"></div></sc-if>
+<sc-for list="{{heat}}" as="row" hint-placeholder-count="4">
+<div style="display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 10px; align-items: center">
+<span style="font-size: 13px">{{row.name}}</span>
+<div style="display: grid; grid-template-columns: repeat(24, minmax(0, 1fr)); gap: 2px">
+<sc-for list="{{row.cells}}" as="cell" hint-placeholder-count="24">
+<div class="fade" style="height: 22px; border-radius: 3px; background: {{cell.color}}"></div>
+</sc-for>
+</div>
+</div>
+</sc-for>
+<div style="display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 10px">
+<span></span>
+<div style="display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9DB0A6"><span>00</span><span>06</span><span>12</span><span>18</span><span>23</span></div>
+</div>
+<div style="display: flex; gap: 16px; font-size: 12px; color: #9DB0A6">
+<span style="display: flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 2px; background: #8C9CFF"></span>Night sightings</span>
+<span style="display: flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 2px; background: #F2A93B"></span>Day sightings</span>
+</div>
+</section>
+</div>
+
+<section class="rise" aria-label="Rare species watch" style="background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 8px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600">Rare species watch</h2>
+<span style="font-size: 13px; color: #9DB0A6">How many are left in the wild in India, from official census reports</span>
+</div>
+<span style="font-size: 12px; color: #9DB0A6">{{rareNote}}</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px">
+<sc-for list="{{rare}}" as="r" hint-placeholder-count="3">
+<div class="rare" style="background: #1A2B25; border: 1px solid #22342D; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 8px">
+<span style="font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 600">{{r.name}}</span>
+<span style="font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 6px; background: {{r.sbg}}; color: {{r.sfg}}">{{r.status}}</span>
+</div>
+<span style="font-size: 12px; font-style: italic; color: #9DB0A6">{{r.sci}}</span>
+<div style="display: flex; align-items: baseline; gap: 8px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 34px; font-weight: 500">{{r.count}}</span>
+<span style="font-size: 12px; color: #9DB0A6">left</span>
+</div>
+<span style="font-size: 13px; color: {{r.tc}}">{{r.trend}}</span>
+<div style="height: 1px; background: #2A3F37"></div>
+<div style="display: flex; justify-content: space-between; font-size: 12px; color: #9DB0A6">
+<span>Our cameras, all time</span>
+<span style="font-family: 'JetBrains Mono', monospace; color: #E8EFEA">{{r.seen}}</span>
+</div>
+<span style="font-size: 11px; color: #8A9E94">{{r.source}}</span>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section aria-label="Model health" style="background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 20px; display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between">
+<div style="display: flex; flex-direction: column; gap: 4px; flex: 1 1 260px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600">Model health</h2>
+<span style="font-size: 13px; color: #9DB0A6">From the saved reports. Nothing is estimated.</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<div style="background: #1A2B25; border-radius: 10px; padding: 10px 14px; display: flex; flex-direction: column; gap: 2px; min-width: 120px"><span style="font-size: 12px; color: #9DB0A6">Detector</span><span style="font-size: 14px; font-weight: 500">MegaDetector v6</span></div>
+<div style="background: #1A2B25; border-radius: 10px; padding: 10px 14px; display: flex; flex-direction: column; gap: 2px; min-width: 120px"><span style="font-size: 12px; color: #9DB0A6">Classifier</span><span style="font-size: 14px; font-weight: 500">{{mClassifier}}</span></div>
+<div style="background: #1A2B25; border-radius: 10px; padding: 10px 14px; display: flex; flex-direction: column; gap: 2px; min-width: 120px"><span style="font-size: 12px; color: #9DB0A6">New-location gap</span><span style="font-size: 14px; font-weight: 500">{{mGap}}</span></div>
+<div style="background: #1A2B25; border-radius: 10px; padding: 10px 14px; display: flex; flex-direction: column; gap: 2px; min-width: 120px"><span style="font-size: 12px; color: #9DB0A6">Speed / image</span><span style="font-size: 14px; font-weight: 500">{{mSpeed}}</span></div>
+</div>
+</section>
+
+</main>
+</div>
+</x-dc></template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1600}}'>
+var VILLAGE_SPOTS = [{ x: 20, y: 28 }, { x: 18, y: 74 }, { x: 62, y: 26 }, { x: 56, y: 74 }, { x: 84, y: 54 }];
+class Component extends DCLogic {
+  componentDidMount() {
+    var self = this;
+    WW.keepLoaded(this, function () {
+      return Promise.all([WW.get('/api/summary'), WW.get('/api/alerts'), WW.get('/api/ticker')]).then(function (r) {
+        return { summary: r[0], alerts: r[1].alerts, ticker: r[2].detections };
+      });
+    }, 10000);
+    Promise.all([WW.get('/api/analytics?range=all'), WW.get('/api/accuracy'), WW.get('/api/rare')]).then(function (r) {
+      self.setState({ analytics: r[0], accuracy: r[1], rare: r[2] });
+      var start = Date.now();
+      self.timer = setInterval(function () {
+        var p = Math.min(1, (Date.now() - start) / 1600);
+        self.setState({ p: p });
+        if (p >= 1) clearInterval(self.timer);
+      }, 30);
+    }).catch(function (e) { self.setState({ apiError: WW.problem(e) }); });
+  }
+  componentWillUnmount() { clearInterval(this.timer); clearInterval(this.poll); }
+  act(alert, status) {
+    var self = this;
+    WW.post('/api/alerts/' + alert.alert_id + '/status', { status: status }).then(function () { return self.reload(); })
+      .catch(function (e) { self.setState({ apiError: WW.problem(e) }); });
+  }
+  renderVals() {
+    var self = this, st = this.state || {};
+    var p = typeof st.p === 'number' ? st.p : 0;
+    var e = 1 - Math.pow(1 - p, 3);
+    var fmt = WW.fmt, S = st.summary, A = st.accuracy, AN = st.analytics;
+    var loading = !S;
+    var now = new Date(), hour = now.getHours();
+    var part = hour < 5 || hour >= 21 ? 'Night shift' : hour < 12 ? 'Morning shift' : hour < 17 ? 'Day shift' : 'Evening shift';
+    var today = now.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short' }).replace(',', ',') + ' · ' + part;
+    var greeting = 'Good ' + (hour < 12 ? 'morning' : hour < 17 ? 'afternoon' : 'evening') + ', Ranger';
+
+    var list = st.alerts || [];
+    var open = list.filter(function (a) { return a.status === 'new' && a.level !== 'LOW'; });
+    function where(a) { return WW.camera(a.camera_id) + (a.village ? ' · ' + a.village : ''); }
+    var t = open[0], top = null;
+    if (t) {
+      top = { count: t.min_observed_count, name: WW.plural(t.species, t.min_observed_count), levelLabel: t.possible_poacher ? 'POACHER CHECK' : t.level + ' RISK',
+        where: where(t) + ' · ' + WW.clock(t.start_time, t.hour) + ' · ' + t.light, message: t.message,
+        note: WW.namedBy(t.species, t.label_confidence, t.identified_by) + ' · Minimum observed count · Message from ' + (t.message_source === 'llm' ? 'the LLM' : 'the template') };
+    }
+    var recent = open.slice(0, 4).map(function (a) {
+      var key = a.possible_poacher ? 'POACHER' : a.level;
+      return { level: key, bg: WW.LV[key].bg, fg: WW.LV[key].fg, title: WW.title(a), where: where(a), time: WW.clock(a.start_time, a.hour) };
+    });
+
+    var tk = (st.ticker || []).map(function (d) {
+      var key = d.species === 'person' ? 'POACHER' : d.level;
+      var color = key ? WW.LV[key].bg : '#5FD39A';
+      var text = WW.camera(d.camera_id) + ' · ' + d.count + ' ' + WW.plural(d.species, d.count) + (d.level ? ' · ' + d.level : '');
+      return { time: WW.clock(d.captured_at, d.hour), text: text, c: color };
+    });
+
+    var spList = (AN ? AN.species : []).slice(0, 6), spMax = spList.length ? spList[0].total : 1;
+    var species = spList.map(function (x) {
+      return { name: WW.capital(x.species), n: x.total, color: '#F2A93B', w: Math.round(x.total / spMax * 100) + '%' };
+    });
+    var heat = (AN ? AN.hourly : []).slice(0, 4).map(WW.heatRow);
+
+    var names = [], cams = [], byVillage = {};
+    (AN ? AN.cameras : []).forEach(function (c) { if (c.camera_id == null) return; var v = c.village || 'Unmapped'; (byVillage[v] = byVillage[v] || []).push(c); });
+    var villages = Object.keys(byVillage).sort().map(function (v, i) {
+      var spot = VILLAGE_SPOTS[i % VILLAGE_SPOTS.length];
+      byVillage[v].forEach(function (c, j) {
+        var angle = (0.4 + 1.2 * (j + 0.5) / byVillage[v].length) * Math.PI;  /* left of the name, so dots never cover it */
+        var color = c.open_alerts ? '#FF6B5B' : c.animals ? '#F2A93B' : '#4E6B5F';
+        cams.push({ id: c.camera_id, x: Math.round(spot.x + Math.cos(angle) * 11) + '%', y: Math.round(spot.y + Math.sin(angle) * 19) + '%', color: color, anim: c.open_alerts ? 'blink' : '' });
+      });
+      return { name: v, x: spot.x - 3 + '%', y: spot.y - 3 + '%' };
+    });
+
+    var rare = (st.rare ? st.rare.species : []).map(function (r) {
+      var endangered = r.status === 'ENDANGERED';
+      return { name: r.name, sci: r.scientific, count: fmt(r.count * e), trend: r.trend, tc: r.trend_up ? '#5FD39A' : '#FF8A7A', source: r.source,
+        status: r.status, sbg: endangered ? '#FF6B5B' : '#F2A93B', sfg: endangered ? '#2A0D09' : '#1E1405', seen: r.camera_sightings };
+    });
+
+    var winner = A ? A.models.filter(function (m) { return m.winner; })[0] : null;
+    var showDaily = !!st.showDaily, daily = S && S.daily_summary;
+    return Object.assign({}, WW.scene(7, 34, 1500), WW.nav(S), {
+      loading: loading, loaded: !loading, apiError: st.apiError, today: today, greeting: greeting,
+      alerts: recent, species: species, heat: heat, villages: villages, cams: cams, rare: rare, ticker: tk.concat(tk), top: top,
+      noTop: !loading && !top, noTopText: 'No open alerts at MEDIUM or above.',
+      kImages: S ? fmt(S.images) : '', kBursts: S ? 'From ' + fmt(S.bursts) + ' camera bursts' : '',
+      kKept: S ? fmt(S.triage.kept) : '', kReview: S ? fmt(S.triage.needs_review) : '', kDiscard: S ? fmt(S.triage.auto_discarded) : '',
+      kSpecies: S ? S.species_count : '', kOpen: S ? S.open_alerts : '',
+      rareNote: st.rare ? st.rare.note : '', mClassifier: winner ? winner.name : WW.NM,
+      mGap: A && A.generalization.gap_points != null ? A.generalization.gap_points.toFixed(1) + ' points' : WW.NM,
+      mSpeed: A && A.speed.detection_ms != null ? A.speed.detection_ms + ' ms, GPU' : WW.NM,
+      showDaily: showDaily, dailyText: daily ? daily.summary : 'No daily report has been written yet.',
+      dailyLabel: daily ? 'Latest daily report · ' + daily.summary_date + ' · from ' + (daily.summary_source === 'llm' ? 'the LLM' : 'the template') : 'Daily report',
+      toggleDaily: function () { self.setState({ showDaily: !st.showDaily }); },
+      dispatchTop: function () { if (t) self.act(t, 'dispatched'); },
+      falseTop: function () { if (t) self.act(t, 'false_alarm'); }
+    });
+  }
+}
+</script>
+</body>
+</html>

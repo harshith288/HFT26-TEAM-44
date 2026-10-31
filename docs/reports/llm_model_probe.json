@@ -1,0 +1,43 @@
+{
+ "command": "scripts\\probe_models.py",
+ "timestamp": "2026-10-31T00:56:52.944100",
+ "n_real_images": 1,
+ "hardware": "Featherless API",
+ "results": [
+  {
+   "model": "Qwen/Qwen2.5-7B-Instruct",
+   "raw_output": "A potential poacher (2 individuals) at Larkmere (camera 120) poses a CRITICAL risk. Sending 4 rangers with vehicle required.",
+   "passed_facts_check": false,
+   "error": null,
+   "tokens": {
+    "time": "2026-10-31T00:56:21",
+    "purpose": "model_probe:Qwen/Qwen2.5-7B-Instruct",
+    "input_tokens": 110,
+    "output_tokens": 34,
+    "estimated_usd": 2.55e-05,
+    "seconds": 2.78
+   }
+  },
+  {
+   "model": "mistralai/Mistral-Nemo-Instruct-2407",
+   "raw_output": null,
+   "passed_facts_check": false,
+   "error": "APITimeoutError",
+   "tokens": null
+  },
+  {
+   "model": "NousResearch/Hermes-3-Llama-3.1-8B",
+   "raw_output": "CRITICAL ALERT: 2 person (possible poachers) detected in Larkmere. Rangers: 4. Vehicle required. Camera 120.<|im_end|>",
+   "passed_facts_check": true,
+   "error": null,
+   "tokens": {
+    "time": "2026-10-31T00:56:52",
+    "purpose": "model_probe:NousResearch/Hermes-3-Llama-3.1-8B",
+    "input_tokens": 99,
+    "output_tokens": 35,
+    "estimated_usd": 3.1e-05,
+    "seconds": 11.57
+   }
+  }
+ ]
+}

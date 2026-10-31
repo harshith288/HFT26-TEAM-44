@@ -1,0 +1,5 @@
+# CUDA 12.6 PyTorch. Installed first, from its own index, because uv stops at the
+# first index holding a package and this index has outdated copies of others.
+--index-url https://download.pytorch.org/whl/cu126
+torch==2.14.1+cu126
+torchvision==0.29.1+cu126

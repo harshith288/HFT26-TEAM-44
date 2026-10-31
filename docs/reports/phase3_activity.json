@@ -1,0 +1,185 @@
+{
+ "command": "scripts\\eval_phase3.py",
+ "timestamp": "2026-10-31T00:27:52.547289",
+ "n_real_images": 1004,
+ "hardware": "NVIDIA GeForce RTX 4050 Laptop GPU",
+ "splits": "train + val",
+ "warning": "The sample was stratified by day/night, so these ratios show the sample, not natural behaviour.",
+ "bursts_by_true_species": {
+  "badger": {
+   "night": 6
+  },
+  "bird": {
+   "night": 12,
+   "day": 13
+  },
+  "bobcat": {
+   "night": 23,
+   "day": 14
+  },
+  "cat": {
+   "night": 24,
+   "day": 7
+  },
+  "coyote": {
+   "night": 26,
+   "day": 6
+  },
+  "deer": {
+   "night": 12,
+   "day": 8
+  },
+  "dog": {
+   "night": 18,
+   "day": 12
+  },
+  "fox": {
+   "night": 5
+  },
+  "opossum": {
+   "night": 28,
+   "day": 1
+  },
+  "rabbit": {
+   "night": 18,
+   "day": 12
+  },
+  "raccoon": {
+   "night": 28
+  },
+  "rodent": {
+   "night": 22
+  },
+  "skunk": {
+   "night": 28
+  },
+  "squirrel": {
+   "day": 11,
+   "night": 3
+  }
+ },
+ "bursts_by_predicted_species": {
+  "badger": {
+   "night": 5
+  },
+  "bird": {
+   "day": 14,
+   "night": 10
+  },
+  "bobcat": {
+   "night": 25,
+   "day": 15
+  },
+  "cat": {
+   "day": 7,
+   "night": 23
+  },
+  "coyote": {
+   "night": 25,
+   "day": 6
+  },
+  "deer": {
+   "night": 17,
+   "day": 9
+  },
+  "dog": {
+   "night": 16,
+   "day": 12
+  },
+  "fox": {
+   "night": 5
+  },
+  "opossum": {
+   "night": 29,
+   "day": 1
+  },
+  "person": {
+   "day": 4
+  },
+  "rabbit": {
+   "night": 16,
+   "day": 9
+  },
+  "raccoon": {
+   "night": 30
+  },
+  "rodent": {
+   "night": 18
+  },
+  "skunk": {
+   "night": 27
+  },
+  "squirrel": {
+   "night": 3,
+   "day": 11
+  },
+  "unknown": {
+   "night": 1
+  },
+  "vehicle": {
+   "day": 24
+  }
+ },
+ "images_by_hour_excluding_camera_120": {
+  "0": 141,
+  "1": 36,
+  "2": 60,
+  "3": 36,
+  "4": 45,
+  "5": 60,
+  "6": 54,
+  "7": 45,
+  "8": 51,
+  "9": 36,
+  "10": 15,
+  "11": 15,
+  "12": 27,
+  "13": 33,
+  "14": 18,
+  "15": 27,
+  "16": 12,
+  "17": 18,
+  "18": 36,
+  "19": 42,
+  "20": 24,
+  "21": 42,
+  "22": 30,
+  "23": 18
+ },
+ "night_images_with_a_daytime_clock": 106,
+ "alerts_by_level": {
+  "LOW": 223,
+  "MEDIUM": 62,
+  "HIGH": 50,
+  "CRITICAL": 3
+ },
+ "alerts_by_species_level": {
+  "badger/MEDIUM": 5,
+  "bird/LOW": 23,
+  "bird/MEDIUM": 1,
+  "bobcat/HIGH": 35,
+  "bobcat/MEDIUM": 5,
+  "cat/LOW": 29,
+  "cat/MEDIUM": 1,
+  "coyote/HIGH": 12,
+  "coyote/MEDIUM": 19,
+  "deer/LOW": 20,
+  "deer/MEDIUM": 6,
+  "dog/CRITICAL": 2,
+  "dog/LOW": 10,
+  "dog/MEDIUM": 16,
+  "fox/MEDIUM": 5,
+  "opossum/LOW": 30,
+  "person/CRITICAL": 1,
+  "person/HIGH": 3,
+  "rabbit/LOW": 25,
+  "raccoon/LOW": 27,
+  "raccoon/MEDIUM": 3,
+  "rodent/LOW": 18,
+  "skunk/LOW": 27,
+  "squirrel/LOW": 14,
+  "unknown/MEDIUM": 1
+ },
+ "n_alerts": 338,
+ "n_bursts": 390
+}

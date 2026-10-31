@@ -1,0 +1,103 @@
+{
+ "command": "scripts\\verify_models.py",
+ "timestamp": "2026-10-30T22:19:53.888720",
+ "hardware": "NVIDIA GeForce RTX 4050 Laptop GPU",
+ "image": {
+  "file_name": "59cb3a0c-23d2-11e8-a6a3-ec086b02610b.jpg",
+  "labels": "bobcat",
+  "split": "train"
+ },
+ "n_timing_images": 16,
+ "megadetector": {
+  "MDV6-yolov9-c.pt": {
+   "classes": {
+    "0": "animal",
+    "1": "person",
+    "2": "vehicle"
+   },
+   "detections": [
+    [
+     "animal",
+     0.937
+    ]
+   ],
+   "batch": {
+    "1": {
+     "ms_per_image": 130.7,
+     "peak_vram_gb": 0.39
+    },
+    "2": {
+     "ms_per_image": 155.5,
+     "peak_vram_gb": 0.88
+    },
+    "4": {
+     "ms_per_image": 163.7,
+     "peak_vram_gb": 1.65
+    },
+    "8": {
+     "ms_per_image": 193.5,
+     "peak_vram_gb": 3.2
+    }
+   }
+  },
+  "MDV6-yolov9-e-1280.pt": {
+   "classes": {
+    "0": "animal",
+    "1": "person",
+    "2": "vehicle"
+   },
+   "detections": [
+    [
+     "animal",
+     0.932
+    ]
+   ],
+   "batch": {
+    "1": {
+     "ms_per_image": 234.1,
+     "peak_vram_gb": 1.7
+    },
+    "2": {
+     "ms_per_image": 264.3,
+     "peak_vram_gb": 4.12
+    },
+    "4": {
+     "ms_per_image": 588.1,
+     "peak_vram_gb": 8.01
+    }
+   }
+  }
+ },
+ "bioclip": [
+  [
+   "a photo of a raccoon",
+   0.83
+  ],
+  [
+   "a photo of an opossum",
+   0.093
+  ],
+  [
+   "a photo of a coyote",
+   0.04
+  ],
+  [
+   "a photo of a domestic cat",
+   0.025
+  ],
+  [
+   "a photo of a deer",
+   0.011
+  ],
+  [
+   "a photo of a bobcat",
+   0.0
+  ]
+ ],
+ "dinov2": {
+  "shape": [
+   384
+  ],
+  "norm": 46.637
+ }
+}

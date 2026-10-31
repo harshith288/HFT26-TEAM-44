@@ -1,0 +1,1828 @@
+{
+ "command": "scripts\\global_tune.py",
+ "timestamp": "2026-10-31T06:14:16.678094",
+ "n_real_images": 132,
+ "hardware": "local GPU",
+ "rule": "most right labels with wrong labels at or under 10% of photos; ties go to higher thresholds",
+ "photos": "iNaturalist research grade, not CCT, not the 20 test photos",
+ "chosen": {
+  "speciesnet_min_score": 0.95,
+  "bioclip_min_score": 0.7,
+  "right": 58,
+  "wrong": 13,
+  "unknown": 56,
+  "no_detection": 5,
+  "by_model_right_wrong": {
+   "SpeciesNet": [
+    31,
+    3
+   ],
+   "BioCLIP": [
+    27,
+    10
+   ]
+  }
+ },
+ "sweep": [
+  {
+   "speciesnet_min_score": 0.1,
+   "bioclip_min_score": 0.1,
+   "right": 73,
+   "wrong": 54,
+   "unknown": 0,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     67,
+     40
+    ],
+    "BioCLIP": [
+     6,
+     14
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.1,
+   "bioclip_min_score": 0.2,
+   "right": 73,
+   "wrong": 53,
+   "unknown": 1,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     67,
+     40
+    ],
+    "BioCLIP": [
+     6,
+     13
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.1,
+   "bioclip_min_score": 0.3,
+   "right": 72,
+   "wrong": 51,
+   "unknown": 4,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     67,
+     40
+    ],
+    "BioCLIP": [
+     5,
+     11
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.1,
+   "bioclip_min_score": 0.4,
+   "right": 70,
+   "wrong": 49,
+   "unknown": 8,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     67,
+     40
+    ],
+    "BioCLIP": [
+     3,
+     9
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.1,
+   "bioclip_min_score": 0.5,
+   "right": 70,
+   "wrong": 46,
+   "unknown": 11,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     67,
+     40
+    ],
+    "BioCLIP": [
+     3,
+     6
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.1,
+   "bioclip_min_score": 0.6,
+   "right": 70,
+   "wrong": 42,
+   "unknown": 15,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     67,
+     40
+    ],
+    "BioCLIP": [
+     3,
+     2
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.1,
+   "bioclip_min_score": 0.7,
+   "right": 69,
+   "wrong": 40,
+   "unknown": 18,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     67,
+     40
+    ],
+    "BioCLIP": [
+     2,
+     0
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.1,
+   "bioclip_min_score": 0.8,
+   "right": 68,
+   "wrong": 40,
+   "unknown": 19,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     67,
+     40
+    ],
+    "BioCLIP": [
+     1,
+     0
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.1,
+   "bioclip_min_score": 0.9,
+   "right": 68,
+   "wrong": 40,
+   "unknown": 19,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     67,
+     40
+    ],
+    "BioCLIP": [
+     1,
+     0
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.1,
+   "bioclip_min_score": 0.95,
+   "right": 67,
+   "wrong": 40,
+   "unknown": 20,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     67,
+     40
+    ],
+    "BioCLIP": [
+     0,
+     0
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.2,
+   "bioclip_min_score": 0.1,
+   "right": 75,
+   "wrong": 52,
+   "unknown": 0,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     67,
+     34
+    ],
+    "BioCLIP": [
+     8,
+     18
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.2,
+   "bioclip_min_score": 0.2,
+   "right": 75,
+   "wrong": 51,
+   "unknown": 1,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     67,
+     34
+    ],
+    "BioCLIP": [
+     8,
+     17
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.2,
+   "bioclip_min_score": 0.3,
+   "right": 74,
+   "wrong": 48,
+   "unknown": 5,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     67,
+     34
+    ],
+    "BioCLIP": [
+     7,
+     14
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.2,
+   "bioclip_min_score": 0.4,
+   "right": 72,
+   "wrong": 46,
+   "unknown": 9,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     67,
+     34
+    ],
+    "BioCLIP": [
+     5,
+     12
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.2,
+   "bioclip_min_score": 0.5,
+   "right": 72,
+   "wrong": 43,
+   "unknown": 12,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     67,
+     34
+    ],
+    "BioCLIP": [
+     5,
+     9
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.2,
+   "bioclip_min_score": 0.6,
+   "right": 72,
+   "wrong": 37,
+   "unknown": 18,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     67,
+     34
+    ],
+    "BioCLIP": [
+     5,
+     3
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.2,
+   "bioclip_min_score": 0.7,
+   "right": 71,
+   "wrong": 35,
+   "unknown": 21,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     67,
+     34
+    ],
+    "BioCLIP": [
+     4,
+     1
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.2,
+   "bioclip_min_score": 0.8,
+   "right": 70,
+   "wrong": 35,
+   "unknown": 22,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     67,
+     34
+    ],
+    "BioCLIP": [
+     3,
+     1
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.2,
+   "bioclip_min_score": 0.9,
+   "right": 70,
+   "wrong": 34,
+   "unknown": 23,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     67,
+     34
+    ],
+    "BioCLIP": [
+     3,
+     0
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.2,
+   "bioclip_min_score": 0.95,
+   "right": 69,
+   "wrong": 34,
+   "unknown": 24,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     67,
+     34
+    ],
+    "BioCLIP": [
+     2,
+     0
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.3,
+   "bioclip_min_score": 0.1,
+   "right": 74,
+   "wrong": 53,
+   "unknown": 0,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     64,
+     31
+    ],
+    "BioCLIP": [
+     10,
+     22
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.3,
+   "bioclip_min_score": 0.2,
+   "right": 74,
+   "wrong": 52,
+   "unknown": 1,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     64,
+     31
+    ],
+    "BioCLIP": [
+     10,
+     21
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.3,
+   "bioclip_min_score": 0.3,
+   "right": 73,
+   "wrong": 49,
+   "unknown": 5,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     64,
+     31
+    ],
+    "BioCLIP": [
+     9,
+     18
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.3,
+   "bioclip_min_score": 0.4,
+   "right": 71,
+   "wrong": 46,
+   "unknown": 10,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     64,
+     31
+    ],
+    "BioCLIP": [
+     7,
+     15
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.3,
+   "bioclip_min_score": 0.5,
+   "right": 71,
+   "wrong": 41,
+   "unknown": 15,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     64,
+     31
+    ],
+    "BioCLIP": [
+     7,
+     10
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.3,
+   "bioclip_min_score": 0.6,
+   "right": 70,
+   "wrong": 34,
+   "unknown": 23,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     64,
+     31
+    ],
+    "BioCLIP": [
+     6,
+     3
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.3,
+   "bioclip_min_score": 0.7,
+   "right": 69,
+   "wrong": 32,
+   "unknown": 26,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     64,
+     31
+    ],
+    "BioCLIP": [
+     5,
+     1
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.3,
+   "bioclip_min_score": 0.8,
+   "right": 68,
+   "wrong": 32,
+   "unknown": 27,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     64,
+     31
+    ],
+    "BioCLIP": [
+     4,
+     1
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.3,
+   "bioclip_min_score": 0.9,
+   "right": 68,
+   "wrong": 31,
+   "unknown": 28,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     64,
+     31
+    ],
+    "BioCLIP": [
+     4,
+     0
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.3,
+   "bioclip_min_score": 0.95,
+   "right": 67,
+   "wrong": 31,
+   "unknown": 29,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     64,
+     31
+    ],
+    "BioCLIP": [
+     3,
+     0
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.4,
+   "bioclip_min_score": 0.1,
+   "right": 78,
+   "wrong": 49,
+   "unknown": 0,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     64,
+     23
+    ],
+    "BioCLIP": [
+     14,
+     26
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.4,
+   "bioclip_min_score": 0.2,
+   "right": 78,
+   "wrong": 48,
+   "unknown": 1,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     64,
+     23
+    ],
+    "BioCLIP": [
+     14,
+     25
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.4,
+   "bioclip_min_score": 0.3,
+   "right": 77,
+   "wrong": 44,
+   "unknown": 6,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     64,
+     23
+    ],
+    "BioCLIP": [
+     13,
+     21
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.4,
+   "bioclip_min_score": 0.4,
+   "right": 75,
+   "wrong": 41,
+   "unknown": 11,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     64,
+     23
+    ],
+    "BioCLIP": [
+     11,
+     18
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.4,
+   "bioclip_min_score": 0.5,
+   "right": 74,
+   "wrong": 36,
+   "unknown": 17,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     64,
+     23
+    ],
+    "BioCLIP": [
+     10,
+     13
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.4,
+   "bioclip_min_score": 0.6,
+   "right": 73,
+   "wrong": 29,
+   "unknown": 25,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     64,
+     23
+    ],
+    "BioCLIP": [
+     9,
+     6
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.4,
+   "bioclip_min_score": 0.7,
+   "right": 72,
+   "wrong": 26,
+   "unknown": 29,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     64,
+     23
+    ],
+    "BioCLIP": [
+     8,
+     3
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.4,
+   "bioclip_min_score": 0.8,
+   "right": 71,
+   "wrong": 26,
+   "unknown": 30,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     64,
+     23
+    ],
+    "BioCLIP": [
+     7,
+     3
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.4,
+   "bioclip_min_score": 0.9,
+   "right": 69,
+   "wrong": 25,
+   "unknown": 33,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     64,
+     23
+    ],
+    "BioCLIP": [
+     5,
+     2
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.4,
+   "bioclip_min_score": 0.95,
+   "right": 68,
+   "wrong": 24,
+   "unknown": 35,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     64,
+     23
+    ],
+    "BioCLIP": [
+     4,
+     1
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.5,
+   "bioclip_min_score": 0.1,
+   "right": 77,
+   "wrong": 50,
+   "unknown": 0,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     61,
+     22
+    ],
+    "BioCLIP": [
+     16,
+     28
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.5,
+   "bioclip_min_score": 0.2,
+   "right": 77,
+   "wrong": 48,
+   "unknown": 2,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     61,
+     22
+    ],
+    "BioCLIP": [
+     16,
+     26
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.5,
+   "bioclip_min_score": 0.3,
+   "right": 76,
+   "wrong": 44,
+   "unknown": 7,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     61,
+     22
+    ],
+    "BioCLIP": [
+     15,
+     22
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.5,
+   "bioclip_min_score": 0.4,
+   "right": 74,
+   "wrong": 41,
+   "unknown": 12,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     61,
+     22
+    ],
+    "BioCLIP": [
+     13,
+     19
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.5,
+   "bioclip_min_score": 0.5,
+   "right": 72,
+   "wrong": 36,
+   "unknown": 19,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     61,
+     22
+    ],
+    "BioCLIP": [
+     11,
+     14
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.5,
+   "bioclip_min_score": 0.6,
+   "right": 71,
+   "wrong": 28,
+   "unknown": 28,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     61,
+     22
+    ],
+    "BioCLIP": [
+     10,
+     6
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.5,
+   "bioclip_min_score": 0.7,
+   "right": 70,
+   "wrong": 25,
+   "unknown": 32,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     61,
+     22
+    ],
+    "BioCLIP": [
+     9,
+     3
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.5,
+   "bioclip_min_score": 0.8,
+   "right": 69,
+   "wrong": 25,
+   "unknown": 33,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     61,
+     22
+    ],
+    "BioCLIP": [
+     8,
+     3
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.5,
+   "bioclip_min_score": 0.9,
+   "right": 66,
+   "wrong": 24,
+   "unknown": 37,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     61,
+     22
+    ],
+    "BioCLIP": [
+     5,
+     2
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.5,
+   "bioclip_min_score": 0.95,
+   "right": 65,
+   "wrong": 23,
+   "unknown": 39,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     61,
+     22
+    ],
+    "BioCLIP": [
+     4,
+     1
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.6,
+   "bioclip_min_score": 0.1,
+   "right": 76,
+   "wrong": 51,
+   "unknown": 0,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     55,
+     17
+    ],
+    "BioCLIP": [
+     21,
+     34
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.6,
+   "bioclip_min_score": 0.2,
+   "right": 76,
+   "wrong": 49,
+   "unknown": 2,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     55,
+     17
+    ],
+    "BioCLIP": [
+     21,
+     32
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.6,
+   "bioclip_min_score": 0.3,
+   "right": 75,
+   "wrong": 44,
+   "unknown": 8,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     55,
+     17
+    ],
+    "BioCLIP": [
+     20,
+     27
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.6,
+   "bioclip_min_score": 0.4,
+   "right": 73,
+   "wrong": 39,
+   "unknown": 15,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     55,
+     17
+    ],
+    "BioCLIP": [
+     18,
+     22
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.6,
+   "bioclip_min_score": 0.5,
+   "right": 70,
+   "wrong": 33,
+   "unknown": 24,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     55,
+     17
+    ],
+    "BioCLIP": [
+     15,
+     16
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.6,
+   "bioclip_min_score": 0.6,
+   "right": 69,
+   "wrong": 23,
+   "unknown": 35,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     55,
+     17
+    ],
+    "BioCLIP": [
+     14,
+     6
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.6,
+   "bioclip_min_score": 0.7,
+   "right": 68,
+   "wrong": 20,
+   "unknown": 39,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     55,
+     17
+    ],
+    "BioCLIP": [
+     13,
+     3
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.6,
+   "bioclip_min_score": 0.8,
+   "right": 66,
+   "wrong": 20,
+   "unknown": 41,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     55,
+     17
+    ],
+    "BioCLIP": [
+     11,
+     3
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.6,
+   "bioclip_min_score": 0.9,
+   "right": 61,
+   "wrong": 19,
+   "unknown": 47,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     55,
+     17
+    ],
+    "BioCLIP": [
+     6,
+     2
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.6,
+   "bioclip_min_score": 0.95,
+   "right": 60,
+   "wrong": 18,
+   "unknown": 49,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     55,
+     17
+    ],
+    "BioCLIP": [
+     5,
+     1
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.7,
+   "bioclip_min_score": 0.1,
+   "right": 78,
+   "wrong": 49,
+   "unknown": 0,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     52,
+     13
+    ],
+    "BioCLIP": [
+     26,
+     36
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.7,
+   "bioclip_min_score": 0.2,
+   "right": 78,
+   "wrong": 47,
+   "unknown": 2,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     52,
+     13
+    ],
+    "BioCLIP": [
+     26,
+     34
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.7,
+   "bioclip_min_score": 0.3,
+   "right": 77,
+   "wrong": 42,
+   "unknown": 8,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     52,
+     13
+    ],
+    "BioCLIP": [
+     25,
+     29
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.7,
+   "bioclip_min_score": 0.4,
+   "right": 73,
+   "wrong": 37,
+   "unknown": 17,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     52,
+     13
+    ],
+    "BioCLIP": [
+     21,
+     24
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.7,
+   "bioclip_min_score": 0.5,
+   "right": 70,
+   "wrong": 31,
+   "unknown": 26,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     52,
+     13
+    ],
+    "BioCLIP": [
+     18,
+     18
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.7,
+   "bioclip_min_score": 0.6,
+   "right": 68,
+   "wrong": 21,
+   "unknown": 38,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     52,
+     13
+    ],
+    "BioCLIP": [
+     16,
+     8
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.7,
+   "bioclip_min_score": 0.7,
+   "right": 67,
+   "wrong": 18,
+   "unknown": 42,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     52,
+     13
+    ],
+    "BioCLIP": [
+     15,
+     5
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.7,
+   "bioclip_min_score": 0.8,
+   "right": 65,
+   "wrong": 18,
+   "unknown": 44,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     52,
+     13
+    ],
+    "BioCLIP": [
+     13,
+     5
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.7,
+   "bioclip_min_score": 0.9,
+   "right": 60,
+   "wrong": 17,
+   "unknown": 50,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     52,
+     13
+    ],
+    "BioCLIP": [
+     8,
+     4
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.7,
+   "bioclip_min_score": 0.95,
+   "right": 59,
+   "wrong": 16,
+   "unknown": 52,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     52,
+     13
+    ],
+    "BioCLIP": [
+     7,
+     3
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.8,
+   "bioclip_min_score": 0.1,
+   "right": 76,
+   "wrong": 51,
+   "unknown": 0,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     48,
+     11
+    ],
+    "BioCLIP": [
+     28,
+     40
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.8,
+   "bioclip_min_score": 0.2,
+   "right": 76,
+   "wrong": 48,
+   "unknown": 3,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     48,
+     11
+    ],
+    "BioCLIP": [
+     28,
+     37
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.8,
+   "bioclip_min_score": 0.3,
+   "right": 75,
+   "wrong": 43,
+   "unknown": 9,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     48,
+     11
+    ],
+    "BioCLIP": [
+     27,
+     32
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.8,
+   "bioclip_min_score": 0.4,
+   "right": 71,
+   "wrong": 38,
+   "unknown": 18,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     48,
+     11
+    ],
+    "BioCLIP": [
+     23,
+     27
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.8,
+   "bioclip_min_score": 0.5,
+   "right": 68,
+   "wrong": 32,
+   "unknown": 27,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     48,
+     11
+    ],
+    "BioCLIP": [
+     20,
+     21
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.8,
+   "bioclip_min_score": 0.6,
+   "right": 65,
+   "wrong": 21,
+   "unknown": 41,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     48,
+     11
+    ],
+    "BioCLIP": [
+     17,
+     10
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.8,
+   "bioclip_min_score": 0.7,
+   "right": 64,
+   "wrong": 18,
+   "unknown": 45,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     48,
+     11
+    ],
+    "BioCLIP": [
+     16,
+     7
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.8,
+   "bioclip_min_score": 0.8,
+   "right": 62,
+   "wrong": 17,
+   "unknown": 48,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     48,
+     11
+    ],
+    "BioCLIP": [
+     14,
+     6
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.8,
+   "bioclip_min_score": 0.9,
+   "right": 57,
+   "wrong": 16,
+   "unknown": 54,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     48,
+     11
+    ],
+    "BioCLIP": [
+     9,
+     5
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.8,
+   "bioclip_min_score": 0.95,
+   "right": 56,
+   "wrong": 14,
+   "unknown": 57,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     48,
+     11
+    ],
+    "BioCLIP": [
+     8,
+     3
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.9,
+   "bioclip_min_score": 0.1,
+   "right": 75,
+   "wrong": 52,
+   "unknown": 0,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     40,
+     9
+    ],
+    "BioCLIP": [
+     35,
+     43
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.9,
+   "bioclip_min_score": 0.2,
+   "right": 75,
+   "wrong": 49,
+   "unknown": 3,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     40,
+     9
+    ],
+    "BioCLIP": [
+     35,
+     40
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.9,
+   "bioclip_min_score": 0.3,
+   "right": 74,
+   "wrong": 44,
+   "unknown": 9,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     40,
+     9
+    ],
+    "BioCLIP": [
+     34,
+     35
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.9,
+   "bioclip_min_score": 0.4,
+   "right": 70,
+   "wrong": 38,
+   "unknown": 19,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     40,
+     9
+    ],
+    "BioCLIP": [
+     30,
+     29
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.9,
+   "bioclip_min_score": 0.5,
+   "right": 67,
+   "wrong": 32,
+   "unknown": 28,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     40,
+     9
+    ],
+    "BioCLIP": [
+     27,
+     23
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.9,
+   "bioclip_min_score": 0.6,
+   "right": 64,
+   "wrong": 21,
+   "unknown": 42,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     40,
+     9
+    ],
+    "BioCLIP": [
+     24,
+     12
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.9,
+   "bioclip_min_score": 0.7,
+   "right": 62,
+   "wrong": 18,
+   "unknown": 47,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     40,
+     9
+    ],
+    "BioCLIP": [
+     22,
+     9
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.9,
+   "bioclip_min_score": 0.8,
+   "right": 59,
+   "wrong": 16,
+   "unknown": 52,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     40,
+     9
+    ],
+    "BioCLIP": [
+     19,
+     7
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.9,
+   "bioclip_min_score": 0.9,
+   "right": 52,
+   "wrong": 14,
+   "unknown": 61,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     40,
+     9
+    ],
+    "BioCLIP": [
+     12,
+     5
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.9,
+   "bioclip_min_score": 0.95,
+   "right": 50,
+   "wrong": 12,
+   "unknown": 65,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     40,
+     9
+    ],
+    "BioCLIP": [
+     10,
+     3
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.95,
+   "bioclip_min_score": 0.1,
+   "right": 74,
+   "wrong": 53,
+   "unknown": 0,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     31,
+     3
+    ],
+    "BioCLIP": [
+     43,
+     50
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.95,
+   "bioclip_min_score": 0.2,
+   "right": 74,
+   "wrong": 50,
+   "unknown": 3,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     31,
+     3
+    ],
+    "BioCLIP": [
+     43,
+     47
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.95,
+   "bioclip_min_score": 0.3,
+   "right": 73,
+   "wrong": 43,
+   "unknown": 11,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     31,
+     3
+    ],
+    "BioCLIP": [
+     42,
+     40
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.95,
+   "bioclip_min_score": 0.4,
+   "right": 69,
+   "wrong": 36,
+   "unknown": 22,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     31,
+     3
+    ],
+    "BioCLIP": [
+     38,
+     33
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.95,
+   "bioclip_min_score": 0.5,
+   "right": 65,
+   "wrong": 28,
+   "unknown": 34,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     31,
+     3
+    ],
+    "BioCLIP": [
+     34,
+     25
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.95,
+   "bioclip_min_score": 0.6,
+   "right": 61,
+   "wrong": 17,
+   "unknown": 49,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     31,
+     3
+    ],
+    "BioCLIP": [
+     30,
+     14
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.95,
+   "bioclip_min_score": 0.7,
+   "right": 58,
+   "wrong": 13,
+   "unknown": 56,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     31,
+     3
+    ],
+    "BioCLIP": [
+     27,
+     10
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.95,
+   "bioclip_min_score": 0.8,
+   "right": 54,
+   "wrong": 11,
+   "unknown": 62,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     31,
+     3
+    ],
+    "BioCLIP": [
+     23,
+     8
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.95,
+   "bioclip_min_score": 0.9,
+   "right": 45,
+   "wrong": 8,
+   "unknown": 74,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     31,
+     3
+    ],
+    "BioCLIP": [
+     14,
+     5
+    ]
+   }
+  },
+  {
+   "speciesnet_min_score": 0.95,
+   "bioclip_min_score": 0.95,
+   "right": 43,
+   "wrong": 6,
+   "unknown": 78,
+   "no_detection": 5,
+   "by_model_right_wrong": {
+    "SpeciesNet": [
+     31,
+     3
+    ],
+    "BioCLIP": [
+     12,
+     3
+    ]
+   }
+  }
+ ]
+}

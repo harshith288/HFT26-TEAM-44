@@ -1,0 +1,179 @@
+{
+ "command": "scripts\\error_breakdown.py",
+ "timestamp": "2026-10-31T00:26:45.820227",
+ "hardware": "NVIDIA GeForce RTX 4050 Laptop GPU",
+ "n_real_images": 1905,
+ "rule": "burst vote, confidence >= 0.2",
+ "target": "species accuracy and macro precision both >= 90% on all single-species images",
+ "tuning_val": {
+  "n_real_images": 403,
+  "n_scored": 274,
+  "n_classes": 12,
+  "all": {
+   "n": 274,
+   "accuracy": 83.21167883211679,
+   "macro_precision": 97.42063492063492
+  },
+  "bursts_with_a_ground_truth_box": {
+   "n": 235,
+   "accuracy": 95.74468085106383,
+   "macro_precision": 98.05194805194807
+  },
+  "bursts_with_no_ground_truth_box": {
+   "n": 39,
+   "accuracy": 7.6923076923076925,
+   "macro_precision": 11.11111111111111
+  },
+  "day": {
+   "n": 64,
+   "accuracy": 89.0625,
+   "macro_precision": 97.61904761904762
+  },
+  "ir_night": {
+   "n": 208,
+   "accuracy": 81.25,
+   "macro_precision": 98.00000000000001
+  },
+  "color_night": {
+   "n": 2,
+   "accuracy": 100.0,
+   "macro_precision": 100.0
+  },
+  "cis_val": {
+   "n": 126,
+   "accuracy": 71.42857142857143,
+   "macro_precision": 98.33333333333334
+  },
+  "trans_val": {
+   "n": 148,
+   "accuracy": 93.24324324324324,
+   "macro_precision": 98.41269841269842
+  },
+  "missed_images": 36,
+  "missed_with_a_ground_truth_box": 2,
+  "missed_by_class": {
+   "rodent": 9,
+   "coyote": 6,
+   "skunk": 6,
+   "bobcat": 3,
+   "rabbit": 3,
+   "raccoon": 3,
+   "bird": 3,
+   "opossum": 3
+  },
+  "wrong_species": {
+   "dog->cat": 6,
+   "cat->deer": 3,
+   "bird->squirrel": 1
+  },
+  "filter_burst_at_filter_threshold": {
+   "threshold": 0.05,
+   "n_bursts": 139,
+   "empty_kept": 18,
+   "animal_bursts_lost": 10,
+   "precision_empty": 0.6551724137931034,
+   "recall_empty": 0.5135135135135135,
+   "pct_bursts_removed": 20.863309352517987,
+   "pct_animal_bursts_lost": 9.803921568627452
+  },
+  "filter_burst_at_vote_gate": {
+   "threshold": 0.2,
+   "n_bursts": 139,
+   "empty_kept": 9,
+   "animal_bursts_lost": 12,
+   "precision_empty": 0.7,
+   "recall_empty": 0.7567567567567568,
+   "pct_bursts_removed": 28.776978417266186,
+   "pct_animal_bursts_lost": 11.764705882352942
+  }
+ },
+ "fresh_val": {
+  "n_real_images": 1502,
+  "n_scored": 1173,
+  "n_classes": 11,
+  "all": {
+   "n": 1173,
+   "accuracy": 89.08780903665814,
+   "macro_precision": 98.47692353413179
+  },
+  "bursts_with_a_ground_truth_box": {
+   "n": 1028,
+   "accuracy": 97.85992217898833,
+   "macro_precision": 99.32659932659932
+  },
+  "bursts_with_no_ground_truth_box": {
+   "n": 145,
+   "accuracy": 26.89655172413793,
+   "macro_precision": 50.0
+  },
+  "day": {
+   "n": 417,
+   "accuracy": 91.12709832134293,
+   "macro_precision": 99.16666666666667
+  },
+  "ir_night": {
+   "n": 751,
+   "accuracy": 87.88282290279628,
+   "macro_precision": 98.43314191960623
+  },
+  "color_night": {
+   "n": 5,
+   "accuracy": 100.0,
+   "macro_precision": 100.0
+  },
+  "cis_val": {
+   "n": 695,
+   "accuracy": 82.44604316546763,
+   "macro_precision": 98.45895731063196
+  },
+  "trans_val": {
+   "n": 478,
+   "accuracy": 98.74476987447699,
+   "macro_precision": 97.91666666666667
+  },
+  "missed_images": 97,
+  "missed_with_a_ground_truth_box": 2,
+  "missed_by_class": {
+   "opossum": 24,
+   "rabbit": 21,
+   "squirrel": 13,
+   "rodent": 12,
+   "bobcat": 9,
+   "coyote": 9,
+   "dog": 3,
+   "cat": 3,
+   "raccoon": 3
+  },
+  "wrong_species": {
+   "rabbit->deer": 6,
+   "bobcat->deer": 6,
+   "bobcat->coyote": 3,
+   "rabbit->squirrel": 3,
+   "cat->deer": 3,
+   "bobcat->raccoon": 3,
+   "cat->coyote": 3,
+   "coyote->deer": 3,
+   "coyote->fox": 1
+  },
+  "filter_burst_at_filter_threshold": {
+   "threshold": 0.05,
+   "n_bursts": 528,
+   "empty_kept": 59,
+   "animal_bursts_lost": 24,
+   "precision_empty": 0.6571428571428571,
+   "recall_empty": 0.4380952380952381,
+   "pct_bursts_removed": 13.257575757575758,
+   "pct_animal_bursts_lost": 5.673758865248227
+  },
+  "filter_burst_at_vote_gate": {
+   "threshold": 0.2,
+   "n_bursts": 528,
+   "empty_kept": 32,
+   "animal_bursts_lost": 33,
+   "precision_empty": 0.6886792452830188,
+   "recall_empty": 0.6952380952380952,
+   "pct_bursts_removed": 20.075757575757574,
+   "pct_animal_bursts_lost": 7.801418439716312
+  }
+ }
+}

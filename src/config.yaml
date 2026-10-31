@@ -1,0 +1,132 @@
+# WildWatch configuration. Everything here is editable without code changes.
+seed: 42
+
+detection:
+  weights: models/MDV6-yolov9-e-1280.pt   # extra model; chosen in Step 0 from measured VRAM/speed
+  image_size: 1280
+  batch_size: 1                           # batch 1 was fastest; batch 4 exceeded the 6 GB VRAM
+  nms_iou: 0.45
+  raw_confidence: 0.001                   # keep weak boxes so thresholds can be tuned without re-running
+  confidence_threshold: 0.05              # empty filter; tuned on val, see docs/reports/phase2_detection.json
+  count_threshold: 0.3                    # boxes counted per frame; tuned on val separately
+
+# Each burst gets one decision from its highest detector score.
+triage:
+  keep_min: 0.2                           # at or above: keep
+  discard_below: 0.005                    # below: discard; between the two: needs review. See docs/reports/discard_tuning.json
+
+classification:
+  method: speciesnet_top_mapped           # best val macro-F1, see docs/reports/phase2_species.json
+  burst_vote_min_confidence: 0.2          # chosen on val, confirmed on fresh images, see docs/reports/improvement.json
+
+activity:
+  ir_channel_tolerance: 2.0               # mean |R-G|, |G-B| below this = IR/grayscale image
+  dark_pixel_level: 40                    # brightness 0-255 counted as near-black
+  dark_share_min: 0.85                    # this share of the top half near-black = night scene
+
+# Uploads identify any animal worldwide. CCT images always use the CCT rule, so the
+# Phase 5 results do not change. Set to cct to send uploads through the CCT rule.
+upload_mode: global
+global_identification:
+  speciesnet_min_score: 0.95              # tuned on real non-CCT photos, see docs/reports/global_tuning.json
+  show_best_guess: true                   # below both thresholds, show a labeled guess instead of unknown
+  bioclip_min_score: 0.7                  # tuned on real non-CCT photos, see docs/reports/global_tuning.json
+
+# YOUR CHOICES: danger weight per group, used for labels outside species_weights. Edit freely.
+# taxa match taxonomy in src/species_list.csv: a class, order, family, genus or "genus species".
+# The first matching group wins, so domestic animals come before their wild relatives.
+danger_groups:
+  livestock_and_pets:
+    weight: 0.1
+    taxa: [bos taurus, bos indicus, bos grunniens, bubalus bubalis, capra hircus, capra aegagrus hircus, ovis aries, equus caballus, equus ferus caballus, equus asinus, equus africanus asinus, canis familiaris, canis lupus familiaris, felis catus, sus scrofa domesticus, sus scrofa scrofa, sus domesticus, camelus dromedarius, camelus bactrianus, lama glama, vicugna pacos, gallus gallus domesticus, anas platyrhynchos domesticus, anser anser domesticus, meleagris gallopavo domesticus]
+  big_cats:             # lion, tiger, leopard (all genus Panthera, so also jaguar and snow leopard)
+    weight: 0.9
+    taxa: [panthera]
+  elephants:
+    weight: 0.9
+    taxa: [elephantidae]
+  bears:
+    weight: 0.8
+    taxa: [ursidae]
+  wild_boar_wolf_hyena:
+    weight: 0.7
+    taxa: [sus scrofa, canis lupus, hyaenidae]
+  snakes:
+    weight: 0.6
+    taxa: [elapidae, viperidae, pythonidae, colubridae, boidae, natricidae, lamprophiidae, crotalidae]
+  deer_and_antelope:
+    weight: 0.3
+    taxa: [cervidae, moschidae, tragulidae, antilope, gazella, tetracerus, boselaphus, tragelaphus, kobus, aepyceros, alcelaphus, connochaetes, oryx, hippotragus, damaliscus, cephalophus, sylvicapra, raphicerus, madoqua, redunca, oreotragus]
+  monkeys:
+    weight: 0.3
+    taxa: [primates]
+  birds:
+    weight: 0.1
+    taxa: [aves]
+
+# Danger score = species_weight x count x night_factor x zone_factor
+species_weights:
+  bobcat: 0.7
+  coyote: 0.6
+  mountain_lion: 0.9
+  cat: 0.2            # CCT 'cat' is a domestic cat, so it is kept apart from mountain_lion (user-approved)
+  deer: 0.3
+  raccoon: 0.2
+  opossum: 0.1
+  skunk: 0.2
+  rabbit: 0.1
+  squirrel: 0.1
+  rodent: 0.1
+  bird: 0.1
+  dog: 0.4
+  person: 1.0         # poacher check
+  vehicle: 0.0        # not in the original brief: a car alone raises no danger score
+  unknown: 0.5        # safe default; also covers classes not listed, e.g. badger, fox
+
+night_factor: 1.5     # applied to night images; day is always 1.0
+default_zone_factor: 1.0   # cameras with no village
+
+# Score upper bounds. A score at or above critical_min is CRITICAL.
+risk_levels:
+  medium_min: 0.5
+  high_min: 1.0
+  critical_min: 2.0
+person_min_level: HIGH   # a person is always a possible poacher alert, at least this level
+
+response:
+  LOW:      {rangers: 0, vehicle: false, action: "Log only; no dispatch"}
+  MEDIUM:   {rangers: 1, vehicle: false, action: "Notify the local ranger; check the camera area"}
+  HIGH:     {rangers: 2, vehicle: true,  action: "Dispatch a patrol; warn the village"}
+  CRITICAL: {rangers: 4, vehicle: true,  action: "Dispatch a full team; alert the village immediately"}
+
+# Fictional villages. camera id = CCT location id as text.
+villages:
+  Ambernook: {cameras: ["33", "38", "43", "51"], zone_factor: 1.5}
+  Fernhollow: {cameras: ["61", "88", "90", "108"], zone_factor: 1.2}
+  Larkmere: {cameras: ["115", "120", "125"], zone_factor: 1.0}
+  Mosswick: {cameras: ["0", "7", "28", "40", "46"], zone_factor: 1.0}
+  Thornby Vale: {cameras: ["78", "100", "105", "130"], zone_factor: 0.8}
+
+llm:
+  base_url: https://api.featherless.ai/v1
+  model: Qwen/Qwen2.5-7B-Instruct         # the first model tried returned gibberish, see docs/reports/llm_model_probe.json
+  api_key_env: FEATHERLESS_API_KEY
+  timeout_seconds: 20
+  max_tokens: 200
+  usd_per_million_input_tokens: 0.17      # Featherless public model list, 2026-10-31
+  usd_per_million_output_tokens: 0.2
+  budget_stop_usd: 15.0                   # no more LLM calls past this estimated spend
+
+# Wild population figures for India. status is the IUCN Red List category. sightings_species
+# lists the labels counted as this animal in our own camera data.
+rare_species:
+  - {name: Bengal tiger, scientific: Panthera tigris, count: 3682, status: ENDANGERED, trend: "Up from 1,411 in 2006", trend_up: true, source: "All India Tiger Estimation, 2022", sightings_species: [tiger, bengal tiger, siberian tiger]}
+  - {name: Asian elephant, scientific: Elephas maximus, count: 22446, status: ENDANGERED, trend: "Lower than earlier counts", trend_up: false, source: "First DNA-based elephant census, 2025", sightings_species: [asian elephant, indian elephant]}
+  - {name: Indian leopard, scientific: Panthera pardus fusca, count: 13874, status: VULNERABLE, trend: "Up from 12,852 in 2018", trend_up: true, source: "Status of Leopards in India, 2022", sightings_species: [leopard, indian leopard, amur leopard]}
+
+paths:
+  database: data/wildwatch.db
+  incoming: data/incoming
+  golden: data/golden
+  manifest: data/sample/manifest.csv
+  images: data/sample/images

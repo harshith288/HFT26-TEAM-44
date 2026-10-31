@@ -1,0 +1,25 @@
+{
+ "command": "scripts\\global_guess_tune.py",
+ "timestamp": "2026-10-31T06:27:21.630010",
+ "n_real_images": 132,
+ "hardware": "not applicable (cached scores)",
+ "scope": "tuning photos that were unknown under the thresholds",
+ "methods": {
+  "speciesnet_first": {
+   "right": 23,
+   "wrong": 33,
+   "pct_right": 41.1
+  },
+  "bioclip_first": {
+   "right": 16,
+   "wrong": 40,
+   "pct_right": 28.6
+  },
+  "higher_score": {
+   "right": 21,
+   "wrong": 35,
+   "pct_right": 37.5
+  }
+ },
+ "chosen": "speciesnet_first"
+}

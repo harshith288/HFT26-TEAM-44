@@ -1,0 +1,58 @@
+{
+ "command": "scripts\\verify_speciesnet.py",
+ "timestamp": "2026-10-30T22:22:41.970343",
+ "n_real_images": 1,
+ "hardware": "NVIDIA GeForce RTX 4050 Laptop GPU",
+ "model": "kaggle:google/speciesnet/pyTorch/v4.0.3a/1",
+ "ground_truth": "bobcat",
+ "prediction": null,
+ "prediction_score": null,
+ "prediction_source": null,
+ "top3_classes": [],
+ "top3_scores": [],
+ "detections": [
+  {
+   "category": "1",
+   "label": "animal",
+   "conf": 0.8940192461013794,
+   "bbox": [
+    0.51025390625,
+    0.6800535619258881,
+    0.1728515625,
+    0.31860774755477905
+   ],
+   "raw_classifications": {
+    "classes": [
+     "ba76d46e-25de-45e2-90a8-bd279b650f7c;mammalia;carnivora;felidae;lynx;rufus;bobcat",
+     "11eaadc0-e38e-473f-be82-b97f0c0fc571;mammalia;carnivora;felidae;lynx;canadensis;canada lynx"
+    ],
+    "scores": [
+     0.8921854496002197,
+     0.06403116881847382
+    ]
+   },
+   "processed_classification": {
+    "class": "ba76d46e-25de-45e2-90a8-bd279b650f7c;mammalia;carnivora;felidae;lynx;rufus;bobcat",
+    "score": 0.8921854496002197,
+    "source": "classifier"
+   }
+  },
+  {
+   "category": "1",
+   "label": "animal",
+   "conf": 0.07167183607816696,
+   "bbox": [
+    0.9658203125,
+    0.020749665796756744,
+    0.033203125,
+    0.16867469251155853
+   ]
+  }
+ ],
+ "failures": null,
+ "ms_per_call": [
+  1248.8,
+  312.7,
+  306.5
+ ]
+}

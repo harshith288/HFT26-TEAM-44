@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>WildWatch Ranger's Brief</title>
+<script src="wildwatch-api.js"></script>
+<script src="wildwatch-runtime.js"></script>
+</head>
+<body>
+<template data-dc><x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#07110D}
+a{color:#F2A93B}a:hover{color:#FFC56B}
+@keyframes live{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes skel{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@keyframes drift{0%{transform:translate(0,0);opacity:0}15%{opacity:.95}50%{transform:translate(26px,-38px);opacity:.45}85%{opacity:.9}100%{transform:translate(-14px,-76px);opacity:0}}
+@keyframes aurora{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(140px,50px) scale(1.2)}}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@keyframes moon{0%,100%{box-shadow:0 0 50px 14px rgba(244,239,216,.22)}50%{box-shadow:0 0 80px 26px rgba(244,239,216,.32)}}
+@keyframes pop{0%{transform:scale(.4);opacity:0}100%{transform:scale(1);opacity:1}}
+button:focus-visible,a:focus-visible{outline:2px solid #F2A93B;outline-offset:2px}
+nav a{transition:background .2s ease,color .2s ease,padding-left .2s ease}
+nav a:hover{background:#1A2B25;color:#E8EFEA;padding-left:18px}
+main section{transition:border-color .25s ease}
+main section:hover{border-color:#3A564B}
+.lift{transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+.lift:hover{transform:translateY(-5px);border-color:#3F6B5A;box-shadow:0 14px 30px rgba(0,0,0,.5)}
+.fly{position:absolute;border-radius:50%;background:#F7E27A;box-shadow:0 0 10px 3px rgba(247,226,122,.55);opacity:.75}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.3}
+.shine{background:linear-gradient(90deg,#E8EFEA 40%,#FFD58A 50%,#E8EFEA 60%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
+.skel{background:linear-gradient(90deg,#1C2E27 25%,#2A4239 50%,#1C2E27 75%);background-size:200% 100%}
+@media (prefers-reduced-motion:no-preference){
+.fly{animation:drift var(--d,9s) ease-in-out infinite}
+.blob{animation:aurora 20s ease-in-out infinite}
+.shine{animation:shimmer 7s linear infinite}
+.moon{animation:moon 5s ease-in-out infinite}
+.live{animation:live 1.6s ease-in-out infinite}
+.rise{animation:rise .6s ease both}
+.skel{animation:skel 1.6s linear infinite}
+.pop{animation:pop .5s cubic-bezier(.2,.8,.2,1.3) both}
+}
+</style>
+</helmet>
+<div style="position: relative; overflow: hidden; min-height: 100vh; background: #07110D; color: #E8EFEA; font-family: Inter, system-ui, sans-serif; display: flex; flex-wrap: wrap; align-items: stretch">
+
+<div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden">
+<div style="position: absolute; left: 0; top: 0; width: 100%; height: 300px; background: linear-gradient(180deg, #14302A 0%, #0C1F19 60%, #07110D 100%)"></div>
+<div class="blob" style="left: 10%; top: -120px; width: 520px; height: 320px; background: #2BB48A"></div>
+<div class="blob" style="left: 55%; top: -80px; width: 460px; height: 280px; background: #5B6CFF; animation-delay: -8s"></div>
+<div class="blob" style="left: 30%; top: 900px; width: 600px; height: 400px; background: #1E7A5C; animation-delay: -4s"></div>
+<div class="moon" style="position: absolute; right: 8%; top: 46px; width: 64px; height: 64px; border-radius: 50%; background: #F4EFD8; box-shadow: 0 0 60px 18px rgba(244,239,216,.25)"></div>
+<svg viewBox="0 0 1440 300" preserveAspectRatio="none" style="position: absolute; left: 0; top: 0; width: 100%; height: 300px">
+<path d="{{treesFar}}" fill="#0E241C"></path>
+<path d="{{treesNear}}" fill="#07110D"></path>
+</svg>
+<sc-for list="{{flies}}" as="f" hint-placeholder-count="0">
+<div class="fly" style="left: {{f.x}}; top: {{f.y}}; width: {{f.s}}; height: {{f.s}}; --d: {{f.d}}; animation-delay: {{f.delay}}"></div>
+</sc-for>
+</div>
+
+<nav aria-label="Main" style="position: relative; z-index: 1; flex: 1 1 220px; max-width: 100%; background: rgba(8,19,15,0.72); backdrop-filter: blur(12px); border-right: 1px solid #22342D; padding: 24px 16px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; align-items: center; gap: 10px; padding: 0 8px">
+<div style="width: 36px; height: 36px; border-radius: 10px; background: #F2A93B; display: flex; align-items: center; justify-content: center">
+<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E1814" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"></path></svg>
+</div>
+<div style="display: flex; flex-direction: column">
+<span style="font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 600; letter-spacing: -0.01em">WildWatch</span>
+<span style="font-size: 12px; color: #9DB0A6">Forest division console</span>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<a href="Main.dc.html" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #B9C8C0; text-decoration: none; font-size: 14px">Home</a>
+<a href="Upload.dc.html" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #B9C8C0; text-decoration: none; font-size: 14px">Upload</a>
+<a href="Alerts.dc.html" style="display: flex; align-items: center; justify-content: space-between; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #B9C8C0; text-decoration: none; font-size: 14px">Alerts <span style="background: #FF6B5B; color: #2A0D09; font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 10px">{{openCount}}</span></a>
+<a href="Analytics.dc.html" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #B9C8C0; text-decoration: none; font-size: 14px">Analytics</a>
+<a href="Accuracy.dc.html" aria-current="page" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 8px; background: #1D2F28; color: #E8EFEA; text-decoration: none; font-size: 14px; font-weight: 500">Ranger's Brief</a>
+</div>
+<div style="margin-top: auto; background: #172822; border: 1px solid #22342D; border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; color: #9DB0A6">Pipeline</span>
+<span style="display: flex; align-items: center; gap: 8px; font-size: 13px"><span class="live" style="width: 8px; height: 8px; border-radius: 4px; background: {{pipeDot}}"></span>{{pipeText}}</span>
+<span style="font-size: 12px; color: #9DB0A6">{{lastImage}}</span>
+</div>
+</nav>
+
+<main style="position: relative; z-index: 1; flex: 999 1 560px; min-width: 0; padding: 28px 32px 48px; box-sizing: border-box; display: flex; flex-direction: column; gap: 22px">
+<sc-if value="{{apiError}}"><div role="alert" style="background: rgba(52,18,14,0.9); border: 1px solid #7A3329; border-radius: 12px; padding: 14px 18px; font-size: 14px; color: #FBE3DE">{{apiError}}</div></sc-if>
+
+<header style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 13px; color: #B9C8C0">AI field report, updated with every upload</span>
+<h1 class="shine" style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 40px; font-weight: 600; letter-spacing: -0.02em"><span style="color: #E8EFEA">🦉</span> Ranger's Brief</h1>
+</header>
+
+<section class="rise" aria-label="Overall brief" style="background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 8px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600">Overall brief</h2>
+<span style="font-size: 12px; color: #9DB0A6">{{briefUpdated}}</span>
+</div>
+<p style="margin: 0; font-size: 14px; line-height: 1.6; color: #C9D6CF">{{briefText}}</p>
+<span style="font-size: 12px; color: #9DB0A6">{{briefSource}}</span>
+</section>
+
+<section class="rise" aria-label="Species notes" style="background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600">Species notes</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px">
+<sc-for list="{{speciesNotes}}" as="n" hint-placeholder-count="3">
+<div class="lift" style="background: #1A2B25; border: 1px solid #24392F; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 8px">
+<span style="font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 600">{{n.name}}</span>
+<span style="font-size: 11px; color: #9DB0A6">{{n.kind}}</span>
+</div>
+<span style="font-size: 13px; line-height: 1.5; color: #C9D6CF">{{n.note}}</span>
+</div>
+</sc-for>
+</div>
+</section>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<section class="rise" aria-label="Explain a detection" style="flex: 1 1 360px; min-width: 0; background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600">Explain a detection</h2>
+<x-select aria-label="Pick a detection" onChange="{{onPick}}" style="min-height: 44px; padding: 0 12px; border-radius: 8px; border: 1px solid #2E453C; background: #13221C; color: #E8EFEA; font: 14px Inter, sans-serif">
+<sc-for list="{{detections}}" as="d" hint-placeholder-count="0"><x-option value="{{d.detection_id}}">{{d.label}}</x-option></sc-for>
+</x-select>
+<sc-if value="{{pickedImage}}"><img x-src="{{pickedImage}}" alt="Camera photo" style="width: 100%; max-height: 240px; object-fit: cover; border-radius: 10px"></sc-if>
+<button type="button" onClick="{{explain}}" style="align-self: flex-start; min-height: 44px; padding: 0 16px; border-radius: 8px; border: 1px solid #2E453C; background: transparent; color: #E8EFEA; font: 500 14px Inter, sans-serif; cursor: pointer">Explain this detection</button>
+<sc-if value="{{explanation}}"><p style="margin: 0; font-size: 14px; line-height: 1.6; color: #C9D6CF">{{explanation}}</p></sc-if>
+<sc-if value="{{explanationSource}}"><span style="font-size: 12px; color: #9DB0A6">{{explanationSource}}</span></sc-if>
+</section>
+
+<section class="rise" aria-label="Ask the data" style="flex: 1 1 360px; min-width: 0; background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600">Ask the data</h2>
+<span style="font-size: 12px; color: #9DB0A6">Answers come only from our numbers.</span>
+<input aria-label="Your question" type="text" maxlength="300" onInput="{{onQuestion}}" style="min-height: 44px; padding: 0 12px; border-radius: 8px; border: 1px solid #2E453C; background: #13221C; color: #E8EFEA; font: 14px Inter, sans-serif">
+<button type="button" onClick="{{ask}}" style="align-self: flex-start; min-height: 44px; padding: 0 16px; border-radius: 8px; border: 1px solid #2E453C; background: transparent; color: #E8EFEA; font: 500 14px Inter, sans-serif; cursor: pointer">Ask</button>
+<sc-if value="{{answer}}"><p style="margin: 0; font-size: 14px; line-height: 1.6; color: #C9D6CF">{{answer}}</p></sc-if>
+<sc-if value="{{answerSource}}"><span style="font-size: 12px; color: #9DB0A6">{{answerSource}}</span></sc-if>
+</section>
+</div>
+
+<section class="rise" aria-label="Evaluation status" style="background: rgba(44,36,14,0.8); backdrop-filter: blur(10px); border: 1px solid #6B5320; border-radius: 14px; padding: 16px 20px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between">
+<span style="display: flex; align-items: center; gap: 10px; font-size: 14px; color: #FCE2B4"><span class="live" style="width: 10px; height: 10px; border-radius: 5px; background: #F2A93B"></span>{{bannerText}}</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #FCE2B4">{{bannerRight}}</span>
+</section>
+
+<sc-if value="{{loading}}"><div class="skel" style="height: 90px; width: 100%; border-radius: 6px"></div></sc-if>
+<section class="rise" aria-label="Classifier comparison" style="background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 8px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600">Species classifier race</h2>
+<span style="font-size: 13px; color: #9DB0A6">The winner is picked on the validation set by macro-F1</span>
+</div>
+<span style="font-size: 12px; color: #9DB0A6">Chosen on val only, never on test</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px">
+<sc-for list="{{models}}" as="m" hint-placeholder-count="3">
+<div class="lift" style="background: #1A2B25; border: 1px solid #24392F; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 8px">
+<span style="font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 600">{{m.name}}</span>
+<span style="font-size: 11px; color: #9DB0A6">{{m.kind}}</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; color: #9DB0A6">Macro-F1 (val)</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 500">{{m.f1}}</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px; background: #13221C; border-radius: 8px; padding: 10px 12px">
+<span style="font-size: 12px; color: #9DB0A6">Val accuracy</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px">{{m.check}}</span>
+<span class="pop" style="align-self: flex-start; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 6px; background: {{m.cbg}}; color: {{m.cfg}}">{{m.verdict}}</span>
+</div>
+</div>
+</sc-for>
+</div>
+</section>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<section class="rise" aria-label="Empty frame filtering" style="flex: 1 1 360px; min-width: 0; background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600">3-tier triage on test (MegaDetector v6)</h2>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<sc-for list="{{emptyMetrics}}" as="k" hint-placeholder-count="4">
+<div style="background: #1A2B25; border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 12px; color: #9DB0A6">{{k.k}}</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 500">{{k.v}}</span>
+</div>
+</sc-for>
+</div>
+<span style="font-size: 12px; color: #9DB0A6">Missing an animal is worse than a false alarm, so few bursts are discarded and doubtful ones go to review. {{freshNote}}</span>
+</section>
+
+<section class="rise" aria-label="Day versus night" style="flex: 1 1 360px; min-width: 0; background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600">Day vs IR night</h2>
+<sc-for list="{{dn}}" as="d" hint-placeholder-count="3">
+<div style="display: grid; grid-template-columns: 170px minmax(0, 1fr) minmax(0, 1fr); gap: 10px; align-items: center">
+<span style="font-size: 13px">{{d.metric}}</span>
+<div style="display: flex; align-items: center; gap: 6px"><span style="width: 8px; height: 8px; border-radius: 4px; background: #F2A93B"></span><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px">{{d.day}}</span></div>
+<div style="display: flex; align-items: center; gap: 6px"><span style="width: 8px; height: 8px; border-radius: 4px; background: #8C9CFF"></span><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px">{{d.night}}</span></div>
+</div>
+</sc-for>
+<span style="font-size: 12px; color: #9DB0A6">{{nightNote}}</span>
+</section>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<section class="rise" aria-label="Confusion matrix" style="flex: 1 1 420px; min-width: 0; background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; align-items: center">
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600">Confusion matrix</h2>
+<span style="font-size: 12px; color: #9DB0A6">{{matrixLabel}}</span>
+</div>
+<div style="display: grid; grid-template-columns: 62px repeat({{nCols}}, minmax(0, 1fr)); gap: 3px; align-items: center">
+<span></span>
+<sc-for list="{{labels}}" as="l" hint-placeholder-count="8"><span title="{{l}}" style="font-size: 9px; color: #9DB0A6; text-align: center; overflow: hidden; text-overflow: ellipsis">{{l}}</span></sc-for>
+<sc-for list="{{matrix}}" as="row" hint-placeholder-count="8">
+<span style="font-size: 11px; color: #9DB0A6">{{row.name}}</span>
+<sc-for list="{{row.cells}}" as="c" hint-placeholder-count="8">
+<div title="{{c.tip}}" style="height: 26px; border-radius: 3px; background: {{c.bg}}; color: {{c.fg}}; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 10px">{{c.n}}</div>
+</sc-for>
+</sc-for>
+</div>
+<span style="font-size: 12px; color: #9DB0A6">Rows are true species, columns are predicted. A bright diagonal means correct.</span>
+</section>
+
+<section class="rise" aria-label="Generalisation and speed" style="flex: 1 1 320px; min-width: 0; background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600">New village test and speed</h2>
+<sc-for list="{{gen}}" as="g" hint-placeholder-count="4">
+<div style="background: #1A2B25; border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 12px; color: #9DB0A6">{{g.k}}</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 500">{{g.v}}</span>
+</div>
+</sc-for>
+<span style="font-size: 12px; color: #9DB0A6">Seen vs unseen camera locations show whether it still works at a new village.</span>
+</section>
+</div>
+
+<section class="rise" aria-label="Data integrity" style="background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 8px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600">Data integrity</h2>
+<span style="font-size: 13px; color: #9DB0A6">Real counts from the database</span>
+</div>
+<span style="font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 6px; background: #5FD39A; color: #08291B">LEAK FIXED</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px">
+<sc-for list="{{splits}}" as="s" hint-placeholder-count="5">
+<div class="lift" style="background: #1A2B25; border: 1px solid #24392F; border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; color: #9DB0A6">{{s.name}}</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 500">{{s.n}}</span>
+<div style="height: 4px; border-radius: 2px; background: #1F332B"><div style="height: 4px; border-radius: 2px; width: {{s.w}}; background: #5FD39A"></div></div>
+</div>
+</sc-for>
+</div>
+<p style="margin: 0; font-size: 14px; line-height: 1.6; color: #C9D6CF">Tests found 224 camera sequences with frames in both train and validation, which would have inflated accuracy. The sample was rebuilt so every burst sits in one split only: {{integrityText}}.</p>
+</section>
+
+</main>
+</div>
+</x-dc></template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1560}}'>
+class Component extends DCLogic {
+  componentDidMount() {
+    WW.keepLoaded(this, function () {
+      return Promise.all([WW.get('/api/accuracy'), WW.get('/api/summary'), WW.get('/api/brief').catch(function () { return null; })]).then(function (r) { return { A: r[0], summary: r[1], B: r[2] }; });
+    }, 10000);
+  }
+  componentWillUnmount() { clearInterval(this.poll); }
+  sourceText(source) { return source === 'llm' ? 'Written by the Featherless LLM and checked against our numbers.' : 'Template built from our numbers.'; }
+  explain() {
+    var self = this, B = this.state.B, id = this.state.pick || (B && B.detections.length ? B.detections[0].detection_id : null);
+    if (id == null) return;
+    this.setState({ explanation: 'Writing the explanation.', explanationSource: '' });
+    WW.post('/api/brief/explain', { detection_id: Number(id) }).then(function (r) { self.setState({ explanation: r.text, explanationSource: self.sourceText(r.source) }); })
+      .catch(function (e) { self.setState({ explanation: WW.problem(e), explanationSource: '' }); });
+  }
+  ask() {
+    var self = this;
+    if (!this.question || !this.question.trim()) return;
+    this.setState({ answer: 'Checking the numbers.', answerSource: '' });
+    WW.post('/api/brief/ask', { question: this.question }).then(function (r) { self.setState({ answer: r.text, answerSource: self.sourceText(r.source) }); })
+      .catch(function (e) { self.setState({ answer: WW.problem(e), answerSource: '' }); });
+  }
+  renderVals() {
+    var st = this.state, A = st.A, N = WW.num, H = A ? A.headline : {}, T = A ? A.triage_test : null, self = this, B = st.B;
+    var picked = B ? B.detections.filter(function (d) { return String(d.detection_id) === String(st.pick); })[0] || B.detections[0] : null;
+    var briefVals = { briefText: B ? B.brief : 'Loading the brief.', briefUpdated: B ? B.updated : '', briefSource: B ? (B.source === 'llm' ? 'Written by the Featherless LLM from our numbers.' : 'Template built from our numbers, because the AI text was unavailable or could not be verified.') : '',
+      speciesNotes: (B ? B.notes : []).map(function (n) { return { name: WW.capital(n.species), note: n.note, kind: n.source === 'llm' ? 'AI note' : 'Template note' }; }),
+      detections: B ? B.detections : [], pickedImage: picked ? '/api/images/' + picked.image_id : '', explanation: st.explanation, explanationSource: st.explanationSource, answer: st.answer, answerSource: st.answerSource,
+      onPick: function (e) { self.setState({ pick: e.target.value, explanation: '', explanationSource: '' }); }, onQuestion: function (e) { self.question = e.target.value; },
+      explain: function () { self.explain(); }, ask: function () { self.ask(); } };
+    var bannerText = 'Loading results.', bannerRight = '';
+    if (A && !A.evaluated) { bannerText = 'Test splits: Not measured.'; }
+    if (A && A.evaluated) {
+      bannerText = 'Test-set accuracy on Caltech species: ' + N(H.accuracy, 1, '%') + ' (95% range ' + N(H.accuracy_95_range[0], 1) + ' to ' + N(H.accuracy_95_range[1], 1) + '), ' + N(H.macro_precision, 1, '%') + ' macro precision. ' +
+        (A.target.accuracy_reached ? 'The ' + A.target.percent + '% accuracy target was reached.' : 'The ' + A.target.percent + '% accuracy target was missed. It does not apply to other animals in uploads. All ' + H.missed_images + ' missed images have no ground-truth box in their burst, so they may be label noise, but that is not proven.');
+      bannerRight = 'Frozen at ' + A.frozen_at_commit;
+    }
+    var models = (A ? A.models : []).map(function (m) {
+      var look = m.winner ? { verdict: 'WINNER', cbg: '#5FD39A', cfg: '#08291B' } : m.overfit ? { verdict: 'OVERFIT, ' + m.train_val_gap.toFixed(0) + ' POINT GAP', cbg: '#FF6B5B', cfg: '#2A0D09' } : { verdict: 'NOT CHOSEN', cbg: '#3E5A4F', cfg: '#E8EFEA' };
+      return Object.assign({ name: m.name, kind: m.kind, f1: N(m.macro_f1, 1, '%'), check: N(m.accuracy, 1, '%') }, look);
+    });
+    var emptyMetrics = [
+      { k: 'Auto-discarded', v: T ? T.auto_discarded + ' (' + N(T.pct_auto_discarded, 1, '%') + ')' : WW.NM },
+      { k: 'Needs review', v: T ? T.needs_review + ' (' + N(T.pct_needs_review, 1, '%') + ')' : WW.NM },
+      { k: 'Kept', v: T ? T.kept + ' (' + N(T.pct_kept, 1, '%') + ')' : WW.NM },
+      { k: 'Animal bursts lost', v: T ? T.animal_bursts_lost + ' of ' + T.n_animal_bursts + ' (' + N(T.pct_animal_bursts_lost, 2, '%') + ')' : WW.NM },
+      { k: 'Discard precision', v: T ? N(T.discard_precision, 2) : WW.NM },
+      { k: 'Empty bursts discarded', v: T ? N(T.pct_empty_bursts_discarded, 1, '%') : WW.NM }
+    ];
+    var FRESH = A ? A.discard_fresh_val : null;
+    var dn = (A ? A.day_vs_ir_night : []).map(function (d) {
+      var digits = d.metric.indexOf('%') >= 0 ? 1 : d.metric.indexOf('MAE') >= 0 ? 3 : 3;
+      return { metric: d.metric, day: N(d.day, digits), night: N(d.night, digits) };
+    });
+    var precision = A ? A.day_vs_ir_night[1] : null;
+    var nightNote = precision && precision.night != null ? 'A known failure: empty precision on val falls from ' + precision.day.toFixed(2) + ' by day to ' + precision.night.toFixed(2) + ' at night. Yellow is day, blue is IR night.' : 'Yellow is day, blue is IR night.';
+    var C = A ? A.confusion : null, labels = [], matrix = [];
+    if (C) {
+      labels = C.columns.map(function (c) { return c === 'no_detection' ? 'none' : c; });
+      matrix = C.rows.map(function (name, r) {
+        var line = C.matrix[r], total = line.reduce(function (a, b) { return a + b; }, 0) || 1;
+        return { name: name, cells: line.map(function (n, c) {
+          var right = C.columns[c] === name, alpha = n ? (0.2 + 0.8 * n / total).toFixed(2) : 0;
+          return { n: n || '', tip: name + ' predicted as ' + C.columns[c] + ': ' + n, fg: '#E8EFEA',
+            bg: !n ? '#18281F' : right ? 'rgba(46,150,105,' + alpha + ')' : 'rgba(255,107,91,' + alpha + ')' };
+        }) };
+      });
+    }
+    var G = A ? A.generalization : {}, SP = A ? A.speed : {};
+    var gen = [
+      { k: 'Seen locations (cis) macro-F1', v: N(G.seen_macro_f1, 1, '%') }, { k: 'New locations (trans) macro-F1', v: N(G.new_macro_f1, 1, '%') },
+      { k: 'Seen minus new accuracy', v: N(G.gap_points, 1, ' points') }, { k: 'Detection speed per image', v: N(SP.detection_ms, 1, ' ms') },
+      { k: 'Classification speed per crop', v: N(SP.classification_ms, 1, ' ms') }
+    ];
+    var I = A ? A.integrity : null, most = I ? Math.max.apply(null, I.splits.map(function (s) { return s.n; })) : 1;
+    var names = { train: 'Train', cis_val: 'Cis val', trans_val: 'Trans val', cis_test: 'Cis test', trans_test: 'Trans test' };
+    var splits = (I ? I.splits : []).map(function (s) { return { name: names[s.split], n: s.n, w: Math.round(s.n / most * 100) + '%' }; });
+    return Object.assign({}, WW.scene(31, 28, 1500), WW.nav(st.summary), briefVals, { apiError: st.apiError, loading: !A, bannerText: bannerText, bannerRight: bannerRight,
+      models: models, emptyMetrics: emptyMetrics, dn: dn, gen: gen, labels: labels, matrix: matrix, nCols: labels.length || 1, splits: splits, nightNote: nightNote,
+      freshNote: FRESH ? 'On fresh val, ' + FRESH.animal_bursts_lost + ' of ' + FRESH.n_animal_bursts + ' animal bursts were lost (' + N(FRESH.pct_animal_bursts_lost, 2, '%') + '), above the 1% target.' : '',
+      matrixLabel: C ? 'Test set, burst vote' : WW.NM,
+      integrityText: I ? WW.fmt(I.images) + ' images, ' + WW.fmt(I.bursts) + ' bursts, ' + WW.fmt(I.with_boxes) + ' with boxes' : 'Not measured' });
+  }
+}
+</script>
+</body>
+</html>

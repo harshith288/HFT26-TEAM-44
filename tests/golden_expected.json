@@ -1,0 +1,395 @@
+[
+ {
+  "image_id": "58767eec-23d2-11e8-a6a3-ec086b02610b",
+  "file_name": "58767eec-23d2-11e8-a6a3-ec086b02610b.jpg",
+  "split": "cis_val",
+  "camera_id": "115",
+  "captured_at": "2012-05-05 12:19:27",
+  "labels": [
+   "coyote"
+  ],
+  "n_boxes": 2,
+  "is_empty": false,
+  "expect_person": false
+ },
+ {
+  "image_id": "585f4e22-23d2-11e8-a6a3-ec086b02610b",
+  "file_name": "585f4e22-23d2-11e8-a6a3-ec086b02610b.jpg",
+  "split": "trans_val",
+  "camera_id": "125",
+  "captured_at": "2011-07-17 18:49:10",
+  "labels": [
+   "bobcat",
+   "rabbit"
+  ],
+  "n_boxes": 2,
+  "is_empty": false,
+  "expect_person": false
+ },
+ {
+  "image_id": "588c140f-23d2-11e8-a6a3-ec086b02610b",
+  "file_name": "588c140f-23d2-11e8-a6a3-ec086b02610b.jpg",
+  "split": "trans_val",
+  "camera_id": "125",
+  "captured_at": "2011-09-10 17:31:29",
+  "labels": [
+   "bobcat",
+   "rabbit"
+  ],
+  "n_boxes": 2,
+  "is_empty": false,
+  "expect_person": false
+ },
+ {
+  "image_id": "5871845f-23d2-11e8-a6a3-ec086b02610b",
+  "file_name": "5871845f-23d2-11e8-a6a3-ec086b02610b.jpg",
+  "split": "trans_val",
+  "camera_id": "125",
+  "captured_at": "2011-07-23 18:23:13",
+  "labels": [
+   "bobcat",
+   "rabbit"
+  ],
+  "n_boxes": 2,
+  "is_empty": false,
+  "expect_person": false
+ },
+ {
+  "image_id": "59279e35-23d2-11e8-a6a3-ec086b02610b",
+  "file_name": "59279e35-23d2-11e8-a6a3-ec086b02610b.jpg",
+  "split": "cis_val",
+  "camera_id": "120",
+  "captured_at": "2011-12-16 05:57:00",
+  "labels": [
+   "car"
+  ],
+  "n_boxes": 1,
+  "is_empty": false,
+  "expect_person": false
+ },
+ {
+  "image_id": "5922ec44-23d2-11e8-a6a3-ec086b02610b",
+  "file_name": "5922ec44-23d2-11e8-a6a3-ec086b02610b.jpg",
+  "split": "cis_val",
+  "camera_id": "120",
+  "captured_at": "2011-07-14 10:17:00",
+  "labels": [
+   "car"
+  ],
+  "n_boxes": 1,
+  "is_empty": false,
+  "expect_person": false
+ },
+ {
+  "image_id": "5a2af612-23d2-11e8-a6a3-ec086b02610b",
+  "file_name": "5a2af612-23d2-11e8-a6a3-ec086b02610b.jpg",
+  "split": "cis_val",
+  "camera_id": "33",
+  "captured_at": "2011-12-13 09:18:11",
+  "labels": [
+   "empty"
+  ],
+  "n_boxes": 0,
+  "is_empty": true,
+  "expect_person": false
+ },
+ {
+  "image_id": "5946b7e9-23d2-11e8-a6a3-ec086b02610b",
+  "file_name": "5946b7e9-23d2-11e8-a6a3-ec086b02610b.jpg",
+  "split": "cis_val",
+  "camera_id": "90",
+  "captured_at": "2011-11-02 21:52:19",
+  "labels": [
+   "empty"
+  ],
+  "n_boxes": 0,
+  "is_empty": true,
+  "expect_person": false
+ },
+ {
+  "image_id": "5938c37b-23d2-11e8-a6a3-ec086b02610b",
+  "file_name": "5938c37b-23d2-11e8-a6a3-ec086b02610b.jpg",
+  "split": "trans_val",
+  "camera_id": "125",
+  "captured_at": "2011-12-28 12:37:35",
+  "labels": [
+   "empty"
+  ],
+  "n_boxes": 0,
+  "is_empty": true,
+  "expect_person": false
+ },
+ {
+  "image_id": "5a1fe6d7-23d2-11e8-a6a3-ec086b02610b",
+  "file_name": "5a1fe6d7-23d2-11e8-a6a3-ec086b02610b.jpg",
+  "split": "cis_val",
+  "camera_id": "33",
+  "captured_at": "2011-12-19 15:19:17",
+  "labels": [
+   "empty"
+  ],
+  "n_boxes": 0,
+  "is_empty": true,
+  "expect_person": false
+ },
+ {
+  "image_id": "5903cd40-23d2-11e8-a6a3-ec086b02610b",
+  "file_name": "5903cd40-23d2-11e8-a6a3-ec086b02610b.jpg",
+  "split": "trans_val",
+  "camera_id": "125",
+  "captured_at": "2012-05-03 12:24:21",
+  "labels": [
+   "empty"
+  ],
+  "n_boxes": 0,
+  "is_empty": true,
+  "expect_person": false
+ },
+ {
+  "image_id": "59ac6bda-23d2-11e8-a6a3-ec086b02610b",
+  "file_name": "59ac6bda-23d2-11e8-a6a3-ec086b02610b.jpg",
+  "split": "cis_val",
+  "camera_id": "33",
+  "captured_at": "2012-01-06 01:55:13",
+  "labels": [
+   "empty"
+  ],
+  "n_boxes": 0,
+  "is_empty": true,
+  "expect_person": false
+ },
+ {
+  "image_id": "58d7a235-23d2-11e8-a6a3-ec086b02610b",
+  "file_name": "58d7a235-23d2-11e8-a6a3-ec086b02610b.jpg",
+  "split": "cis_val",
+  "camera_id": "120",
+  "captured_at": "2011-08-28 01:14:00",
+  "labels": [
+   "badger"
+  ],
+  "n_boxes": 1,
+  "is_empty": false,
+  "expect_person": false
+ },
+ {
+  "image_id": "58cca524-23d2-11e8-a6a3-ec086b02610b",
+  "file_name": "58cca524-23d2-11e8-a6a3-ec086b02610b.jpg",
+  "split": "cis_val",
+  "camera_id": "108",
+  "captured_at": "2012-06-01 20:09:39",
+  "labels": [
+   "bird"
+  ],
+  "n_boxes": 1,
+  "is_empty": false,
+  "expect_person": false
+ },
+ {
+  "image_id": "588f6901-23d2-11e8-a6a3-ec086b02610b",
+  "file_name": "588f6901-23d2-11e8-a6a3-ec086b02610b.jpg",
+  "split": "trans_val",
+  "camera_id": "125",
+  "captured_at": "2011-06-25 14:49:18",
+  "labels": [
+   "bobcat"
+  ],
+  "n_boxes": 1,
+  "is_empty": false,
+  "expect_person": false
+ },
+ {
+  "image_id": "58a8a3d2-23d2-11e8-a6a3-ec086b02610b",
+  "file_name": "58a8a3d2-23d2-11e8-a6a3-ec086b02610b.jpg",
+  "split": "trans_val",
+  "camera_id": "125",
+  "captured_at": "2011-07-31 06:58:04",
+  "labels": [
+   "cat"
+  ],
+  "n_boxes": 1,
+  "is_empty": false,
+  "expect_person": false
+ },
+ {
+  "image_id": "58a6e96b-23d2-11e8-a6a3-ec086b02610b",
+  "file_name": "58a6e96b-23d2-11e8-a6a3-ec086b02610b.jpg",
+  "split": "trans_val",
+  "camera_id": "125",
+  "captured_at": "2012-02-10 06:18:04",
+  "labels": [
+   "coyote"
+  ],
+  "n_boxes": 1,
+  "is_empty": false,
+  "expect_person": false
+ },
+ {
+  "image_id": "586437ca-23d2-11e8-a6a3-ec086b02610b",
+  "file_name": "586437ca-23d2-11e8-a6a3-ec086b02610b.jpg",
+  "split": "cis_val",
+  "camera_id": "90",
+  "captured_at": "2012-01-06 17:27:00",
+  "labels": [
+   "dog"
+  ],
+  "n_boxes": 1,
+  "is_empty": false,
+  "expect_person": false
+ },
+ {
+  "image_id": "5892b3e3-23d2-11e8-a6a3-ec086b02610b",
+  "file_name": "5892b3e3-23d2-11e8-a6a3-ec086b02610b.jpg",
+  "split": "trans_val",
+  "camera_id": "125",
+  "captured_at": "2012-04-23 22:50:21",
+  "labels": [
+   "opossum"
+  ],
+  "n_boxes": 1,
+  "is_empty": false,
+  "expect_person": false
+ },
+ {
+  "image_id": "58ac0ef5-23d2-11e8-a6a3-ec086b02610b",
+  "file_name": "58ac0ef5-23d2-11e8-a6a3-ec086b02610b.jpg",
+  "split": "trans_val",
+  "camera_id": "125",
+  "captured_at": "2012-04-27 08:30:58",
+  "labels": [
+   "rabbit"
+  ],
+  "n_boxes": 1,
+  "is_empty": false,
+  "expect_person": false
+ },
+ {
+  "image_id": "59fc7d6a-23d2-11e8-a6a3-ec086b02610b",
+  "file_name": "59fc7d6a-23d2-11e8-a6a3-ec086b02610b.jpg",
+  "split": "cis_val",
+  "camera_id": "33",
+  "captured_at": "2012-02-26 03:22:29",
+  "labels": [
+   "raccoon"
+  ],
+  "n_boxes": 1,
+  "is_empty": false,
+  "expect_person": false
+ },
+ {
+  "image_id": "59e91bf2-23d2-11e8-a6a3-ec086b02610b",
+  "file_name": "59e91bf2-23d2-11e8-a6a3-ec086b02610b.jpg",
+  "split": "cis_val",
+  "camera_id": "51",
+  "captured_at": "2011-07-25 12:33:19",
+  "labels": [
+   "rodent"
+  ],
+  "n_boxes": 1,
+  "is_empty": false,
+  "expect_person": false
+ },
+ {
+  "image_id": "58a0211b-23d2-11e8-a6a3-ec086b02610b",
+  "file_name": "58a0211b-23d2-11e8-a6a3-ec086b02610b.jpg",
+  "split": "trans_val",
+  "camera_id": "125",
+  "captured_at": "2012-01-20 03:11:13",
+  "labels": [
+   "skunk"
+  ],
+  "n_boxes": 1,
+  "is_empty": false,
+  "expect_person": false
+ },
+ {
+  "image_id": "58678cef-23d2-11e8-a6a3-ec086b02610b",
+  "file_name": "58678cef-23d2-11e8-a6a3-ec086b02610b.jpg",
+  "split": "cis_val",
+  "camera_id": "90",
+  "captured_at": "2011-11-25 09:56:44",
+  "labels": [
+   "squirrel"
+  ],
+  "n_boxes": 1,
+  "is_empty": false,
+  "expect_person": false
+ },
+ {
+  "image_id": "5906efe5-23d2-11e8-a6a3-ec086b02610b",
+  "file_name": "5906efe5-23d2-11e8-a6a3-ec086b02610b.jpg",
+  "split": "trans_val",
+  "camera_id": "125",
+  "captured_at": "2012-04-28 13:11:37",
+  "labels": [
+   "bird"
+  ],
+  "n_boxes": 1,
+  "is_empty": false,
+  "expect_person": false
+ },
+ {
+  "image_id": "58ff0d38-23d2-11e8-a6a3-ec086b02610b",
+  "file_name": "58ff0d38-23d2-11e8-a6a3-ec086b02610b.jpg",
+  "split": "cis_val",
+  "camera_id": "115",
+  "captured_at": "2012-01-23 18:56:34",
+  "labels": [
+   "bobcat"
+  ],
+  "n_boxes": 1,
+  "is_empty": false,
+  "expect_person": false
+ },
+ {
+  "image_id": "58767f03-23d2-11e8-a6a3-ec086b02610b",
+  "file_name": "58767f03-23d2-11e8-a6a3-ec086b02610b.jpg",
+  "split": "trans_val",
+  "camera_id": "125",
+  "captured_at": "2012-03-24 05:27:30",
+  "labels": [
+   "cat"
+  ],
+  "n_boxes": 1,
+  "is_empty": false,
+  "expect_person": false
+ },
+ {
+  "image_id": "59328c12-23d2-11e8-a6a3-ec086b02610b",
+  "file_name": "59328c12-23d2-11e8-a6a3-ec086b02610b.jpg",
+  "split": "trans_val",
+  "camera_id": "125",
+  "captured_at": "2012-05-07 21:51:21",
+  "labels": [
+   "coyote"
+  ],
+  "n_boxes": 1,
+  "is_empty": false,
+  "expect_person": false
+ },
+ {
+  "image_id": "593bdb40-23d2-11e8-a6a3-ec086b02610b",
+  "file_name": "593bdb40-23d2-11e8-a6a3-ec086b02610b.jpg",
+  "split": "trans_val",
+  "camera_id": "125",
+  "captured_at": "2011-08-10 09:08:39",
+  "labels": [
+   "dog"
+  ],
+  "n_boxes": 1,
+  "is_empty": false,
+  "expect_person": false
+ },
+ {
+  "image_id": "58b6673d-23d2-11e8-a6a3-ec086b02610b",
+  "file_name": "58b6673d-23d2-11e8-a6a3-ec086b02610b.jpg",
+  "split": "train",
+  "camera_id": "120",
+  "captured_at": "2012-10-20 11:31:04",
+  "labels": [
+   "dog"
+  ],
+  "n_boxes": 1,
+  "is_empty": false,
+  "expect_person": true
+ }
+]

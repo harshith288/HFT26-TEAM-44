@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>WildWatch upload</title>
+<script src="wildwatch-api.js"></script>
+<script src="wildwatch-runtime.js"></script>
+</head>
+<body>
+<template data-dc><x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#07110D}
+a{color:#F2A93B}a:hover{color:#FFC56B}
+@keyframes live{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes ants{to{background-position:40px 0,-40px 100%,0 -40px,100% 40px}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(242,169,59,.6)}70%{box-shadow:0 0 0 10px rgba(242,169,59,0)}100%{box-shadow:0 0 0 0 rgba(242,169,59,0)}}
+@keyframes pop{0%{transform:scale(.6);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes drift{0%{transform:translate(0,0);opacity:0}15%{opacity:.95}50%{transform:translate(26px,-38px);opacity:.45}85%{opacity:.9}100%{transform:translate(-14px,-76px);opacity:0}}
+@keyframes aurora{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(140px,50px) scale(1.2)}}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@keyframes moon{0%,100%{box-shadow:0 0 50px 14px rgba(244,239,216,.22)}50%{box-shadow:0 0 80px 26px rgba(244,239,216,.32)}}
+button,.btn{transition:transform .15s ease,box-shadow .15s ease,filter .15s ease}
+button:hover,.btn:hover{transform:translateY(-2px);filter:brightness(1.1);box-shadow:0 8px 18px rgba(0,0,0,.4)}
+button:active,.btn:active{transform:translateY(0) scale(.96)}
+button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid #F2A93B;outline-offset:2px}
+nav a{transition:background .2s ease,color .2s ease,padding-left .2s ease}
+nav a:hover{background:#1A2B25;color:#E8EFEA;padding-left:18px}
+.drop{transition:background .2s ease,transform .2s ease;background-image:linear-gradient(90deg,#F2A93B 50%,transparent 50%),linear-gradient(90deg,#F2A93B 50%,transparent 50%),linear-gradient(0deg,#F2A93B 50%,transparent 50%),linear-gradient(0deg,#F2A93B 50%,transparent 50%);background-repeat:repeat-x,repeat-x,repeat-y,repeat-y;background-size:20px 2px,20px 2px,2px 20px,2px 20px;background-position:0 0,0 100%,0 0,100% 0}
+.drop:hover{transform:scale(1.01)}
+.drop:focus-within{outline:2px solid #F2A93B;outline-offset:3px}
+.fly{position:absolute;border-radius:50%;background:#F7E27A;box-shadow:0 0 10px 3px rgba(247,226,122,.55);opacity:.75}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.3}
+.shine{background:linear-gradient(90deg,#E8EFEA 40%,#FFD58A 50%,#E8EFEA 60%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
+@media (prefers-reduced-motion:no-preference){
+.fly{animation:drift var(--d,9s) ease-in-out infinite}
+.blob{animation:aurora 20s ease-in-out infinite}
+.shine{animation:shimmer 7s linear infinite}
+.moon{animation:moon 5s ease-in-out infinite}
+.live{animation:live 1.6s ease-in-out infinite}
+.rise{animation:rise .5s ease both}
+.drop{animation:ants 1.2s linear infinite}
+.bob{animation:bob 2.4s ease-in-out infinite}
+.active{animation:pulse 1.2s ease-out infinite}
+.pop{animation:pop .45s cubic-bezier(.2,.8,.2,1.3) both}
+}
+.skel{background:linear-gradient(90deg,#1F332B 25%,#2C463B 50%,#1F332B 75%);background-size:200% 100%;animation:shimmer 1.4s linear infinite}
+</style>
+</helmet>
+<div style="position: relative; overflow: hidden; min-height: 100vh; background: #07110D; color: #E8EFEA; font-family: Inter, system-ui, sans-serif; display: flex; flex-wrap: wrap; align-items: stretch">
+
+<div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden">
+<div style="position: absolute; left: 0; top: 0; width: 100%; height: 300px; background: linear-gradient(180deg, #14302A 0%, #0C1F19 60%, #07110D 100%)"></div>
+<div class="blob" style="left: 10%; top: -120px; width: 520px; height: 320px; background: #2BB48A"></div>
+<div class="blob" style="left: 55%; top: -80px; width: 460px; height: 280px; background: #5B6CFF; animation-delay: -8s"></div>
+<div class="moon" style="position: absolute; right: 8%; top: 46px; width: 64px; height: 64px; border-radius: 50%; background: #F4EFD8; box-shadow: 0 0 60px 18px rgba(244,239,216,.25)"></div>
+<svg viewBox="0 0 1440 300" preserveAspectRatio="none" style="position: absolute; left: 0; top: 0; width: 100%; height: 300px">
+<path d="{{treesFar}}" fill="#0E241C"></path>
+<path d="{{treesNear}}" fill="#07110D"></path>
+</svg>
+<sc-for list="{{flies}}" as="f" hint-placeholder-count="0">
+<div class="fly" style="left: {{f.x}}; top: {{f.y}}; width: {{f.s}}; height: {{f.s}}; --d: {{f.d}}; animation-delay: {{f.delay}}"></div>
+</sc-for>
+</div>
+
+<nav aria-label="Main" style="position: relative; z-index: 1; flex: 1 1 220px; max-width: 100%; background: rgba(8,19,15,0.72); backdrop-filter: blur(12px); border-right: 1px solid #22342D; padding: 24px 16px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; align-items: center; gap: 10px; padding: 0 8px">
+<div style="width: 36px; height: 36px; border-radius: 10px; background: #F2A93B; display: flex; align-items: center; justify-content: center">
+<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E1814" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"></path></svg>
+</div>
+<div style="display: flex; flex-direction: column">
+<span style="font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 600; letter-spacing: -0.01em">WildWatch</span>
+<span style="font-size: 12px; color: #9DB0A6">Forest division console</span>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<a href="Main.dc.html" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #B9C8C0; text-decoration: none; font-size: 14px">Home</a>
+<a href="Upload.dc.html" aria-current="page" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 8px; background: #1D2F28; color: #E8EFEA; text-decoration: none; font-size: 14px; font-weight: 500">Upload</a>
+<a href="Alerts.dc.html" style="display: flex; align-items: center; justify-content: space-between; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #B9C8C0; text-decoration: none; font-size: 14px">Alerts <span style="background: #FF6B5B; color: #2A0D09; font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 10px">{{openCount}}</span></a>
+<a href="Analytics.dc.html" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #B9C8C0; text-decoration: none; font-size: 14px">Analytics</a>
+<a href="Accuracy.dc.html" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #B9C8C0; text-decoration: none; font-size: 14px">Ranger's Brief</a>
+</div>
+<div style="margin-top: auto; background: #172822; border: 1px solid #22342D; border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; color: #9DB0A6">Pipeline</span>
+<span style="display: flex; align-items: center; gap: 8px; font-size: 13px"><span class="live" style="width: 8px; height: 8px; border-radius: 4px; background: {{pipeDot}}"></span>{{pipeText}}</span>
+<span style="font-size: 12px; color: #9DB0A6">{{lastImage}}</span>
+</div>
+</nav>
+
+<main style="position: relative; z-index: 1; flex: 999 1 560px; min-width: 0; padding: 28px 32px 48px; box-sizing: border-box; display: flex; flex-direction: column; gap: 22px">
+<sc-if value="{{apiError}}"><div role="alert" style="background: rgba(52,18,14,0.9); border: 1px solid #7A3329; border-radius: 12px; padding: 14px 18px; font-size: 14px; color: #FBE3DE">{{apiError}}</div></sc-if>
+
+<header style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 13px; color: #B9C8C0">Add new camera-trap photos</span>
+<h1 class="shine" style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 40px; font-weight: 600; letter-spacing: -0.02em">Upload photos</h1>
+</header>
+
+<div style="display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-start">
+
+<section class="rise" aria-label="Upload form" style="flex: 1 1 400px; min-width: 0; background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 18px">
+
+<label class="drop" onDragOver="{{over}}" onDragLeave="{{leave}}" onDrop="{{drop}}" style="position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; min-height: 240px; padding: 24px; border-radius: 14px; background-color: {{dropBg}}; cursor: pointer; text-align: center">
+<input type="file" multiple onChange="{{onFiles}}" style="position: absolute; width: 1px; height: 1px; opacity: 0">
+<div class="bob" style="width: 64px; height: 64px; border-radius: 16px; background: #F2A93B; display: flex; align-items: center; justify-content: center">
+<svg aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#1E1405" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"></path><path d="M6 10l6-6 6 6"></path><path d="M4 20h16"></path></svg>
+</div>
+<span style="font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 600">{{dropTitle}}</span>
+<span style="font-size: 14px; color: #B9C8C0">or click to choose files · JPG or PNG · many at once</span>
+</label>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="cam" style="font-size: 13px; color: #B9C8C0">Camera</label>
+<x-select id="cam" onChange="{{onCamera}}" style="min-height: 44px; padding: 0 12px; border-radius: 8px; border: 1px solid #2E453C; background: #13221C; color: #E8EFEA; font: 14px Inter, sans-serif">
+<sc-for list="{{cameras}}" as="c" hint-placeholder-count="6"><x-option value="{{c.value}}">{{c.label}}</x-option></sc-for>
+</x-select>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="when" style="font-size: 13px; color: #B9C8C0">Capture time</label>
+<input id="when" type="datetime-local" onChange="{{onTime}}" style="min-height: 44px; padding: 0 12px; border-radius: 8px; border: 1px solid #2E453C; background: #13221C; color: #E8EFEA; font: 14px Inter, sans-serif; color-scheme: dark">
+</div>
+</div>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 14px; color: #C9D6CF; cursor: pointer">
+<input type="checkbox" checked onChange="{{onExif}}" style="width: 18px; height: 18px; accent-color: #F2A93B">
+Use the time stored in the photo when it has one
+</label>
+
+<div style="display: flex; gap: 12px; align-items: flex-start; background: #13221C; border: 1px solid #24392F; border-radius: 10px; padding: 12px 14px">
+<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8FBFA6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex: none; margin-top: 2px"><path d="M3 7h6l2 2h10v10H3z"></path></svg>
+<span style="font-size: 13px; line-height: 1.5; color: #B9C8C0">Cameras can also save straight into the <span style="font-family: 'JetBrains Mono', monospace; color: #E8EFEA">data/incoming/</span> folder. {{watchText}}</span>
+</div>
+</section>
+
+<section class="rise" aria-label="Processing queue" style="flex: 1 1 460px; min-width: 0; background: rgba(20,38,31,0.7); backdrop-filter: blur(10px); border: 1px solid #24392F; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600">Processing queue</h2>
+<span style="font-size: 12px; color: #9DB0A6">{{queueLabel}}</span>
+</div>
+
+<sc-if value="{{noItems}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 40px 16px; text-align: center">
+<span style="font-size: 15px; color: #C9D6CF">Nothing uploaded yet</span>
+<span style="font-size: 13px; color: #9DB0A6">Photos you add appear here and move through each step.</span>
+<button type="button" onClick="{{demo}}" style="min-height: 44px; padding: 0 16px; border-radius: 8px; border: 1px solid #2E453C; background: transparent; color: #E8EFEA; font: 500 14px Inter, sans-serif; cursor: pointer">Try a demo photo</button>
+</div>
+</sc-if>
+
+<sc-for list="{{items}}" as="it" hint-placeholder-count="0">
+<div class="rise" style="background: #1A2B25; border: 1px solid #24392F; border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; gap: 12px; align-items: center">
+<sc-if value="{{it.hasUrl}}" hint-placeholder-val="{{ false }}">
+<img x-src="{{it.url}}" alt="{{it.name}}" style="width: 72px; height: 54px; object-fit: cover; border-radius: 8px; flex: none">
+</sc-if>
+<sc-if value="{{it.noUrl}}" hint-placeholder-val="{{ true }}">
+<div style="width: 72px; height: 54px; border-radius: 8px; background: #0B1612; border: 1px solid #24392F; display: flex; align-items: center; justify-content: center; flex: none; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #6F8A7E">IR</div>
+</sc-if>
+<div style="display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1">
+<span style="font-size: 14px; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{it.name}}</span>
+<span style="font-size: 12px; color: #9DB0A6">{{it.sizeText}} · {{it.stepText}}</span>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px">
+<sc-for list="{{it.steps}}" as="s" hint-placeholder-count="5">
+<div class="{{s.cls}}" style="display: flex; align-items: center; justify-content: center; min-height: 30px; border-radius: 8px; font-size: 12px; font-weight: 500; background: {{s.bg}}; color: {{s.fg}}">{{s.label}}</div>
+</sc-for>
+</div>
+<sc-if value="{{it.done}}" hint-placeholder-val="{{ false }}">
+<div class="pop" style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; background: #13221C; border-radius: 10px; padding: 10px 12px">
+<span style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 14px">
+<span style="font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 6px; background: {{it.bg}}; color: {{it.fg}}">{{it.level}}</span>
+{{it.result}}
+</span>
+<sc-if value="{{it.alertHref}}"><a class="btn" href="{{it.alertHref}}" style="display: inline-flex; align-items: center; min-height: 36px; padding: 0 12px; border-radius: 8px; border: 1px solid #2E453C; color: #E8EFEA; text-decoration: none; font-size: 13px">View alert</a></sc-if>
+</div>
+<sc-if value="{{it.message}}"><p style="margin: 0; font-size: 13px; line-height: 1.5; color: #D7E2DC">{{it.message}}</p></sc-if>
+</sc-if>
+<sc-if value="{{it.failed}}"><div role="alert" class="pop" style="background: rgba(52,18,14,0.9); border: 1px solid #7A3329; border-radius: 10px; padding: 10px 12px; font-size: 13px; line-height: 1.5; color: #FBE3DE">{{it.error}}</div></sc-if>
+</div>
+</sc-for>
+</section>
+</div>
+</main>
+</div>
+</x-dc></template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1100}}'>
+var STAGES = ['upload', 'detect', 'species', 'count', 'risk'];
+var LABELS = ['Upload', 'Detect', 'Species', 'Count', 'Risk'];
+var STEP_TEXT = ['Uploading', 'Looking for animals', 'Identifying species', 'Counting the burst', 'Scoring risk', 'Done'];
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { items: [], dragging: false, camera: '', captured: '', preferExif: true };
+    this.nextId = 1;
+    this.jobs = {};
+  }
+  componentDidMount() {
+    var self = this;
+    WW.keepLoaded(this, function () { return WW.get('/api/summary').then(function (s) { return { summary: s }; }); }, 10000);
+    WW.get('/api/cameras').then(function (r) { self.setState({ cameraList: r.cameras }); })
+      .catch(function (e) { self.setState({ apiError: WW.problem(e) }); });
+    this.jobTimer = setInterval(function () { self.pollJobs(); }, 1000);
+  }
+  componentWillUnmount() { clearInterval(this.jobTimer); clearInterval(this.poll); }
+  patch(ids, change) {
+    this.setState({ items: this.state.items.map(function (it) { return ids.indexOf(it.id) >= 0 ? Object.assign({}, it, change(it)) : it; }) });
+  }
+  addFiles(list) {
+    if (!list.length) return;
+    var self = this, added = [], form = new FormData();
+    for (var i = 0; i < list.length; i++) {
+      var f = list[i], url = '';
+      if (f.type && f.type.indexOf('image/') === 0) { try { url = URL.createObjectURL(f); } catch (e) { url = ''; } }
+      added.push({ id: this.nextId++, name: f.name, size: f.size, url: url, stage: 'upload' });
+      form.append('files', f);
+    }
+    if (this.state.camera) form.append('camera_id', this.state.camera);
+    if (this.state.captured) form.append('captured_at', this.state.captured);
+    form.append('prefer_exif', this.state.preferExif ? 'true' : 'false');
+    this.setState({ items: added.concat(this.state.items), dragging: false });
+    this.track(added, WW.get('/api/upload', { method: 'POST', body: form }));
+  }
+  track(added, started) {
+    var self = this, ids = added.map(function (a) { return a.id; });
+    started.then(function (r) {
+      self.jobs[r.job_id] = ids;
+      self.setState({ apiError: null });
+    }).catch(function (e) {
+      self.patch(ids, function () { return { stage: 'error', error: WW.problem(e) }; });
+    });
+  }
+  pollJobs() {
+    var self = this;
+    Object.keys(this.jobs).forEach(function (id) {
+      WW.get('/api/jobs/' + id).then(function (job) {
+        var ids = self.jobs[id];
+        if (!ids) return;
+        if (job.state === 'failed') {
+          delete self.jobs[id];
+          self.patch(ids, function () { return { stage: 'error', error: job.error }; });
+        } else if (job.state === 'done') {
+          delete self.jobs[id];
+          self.patch(ids, function (it) {
+            var r = job.results.filter(function (x) { return x.file === it.name || x.file === it.name.replace(/[^\w.\- ]/g, '_'); })[0] || job.results[0];
+            return { stage: r.stage, result: r, name: r.file, error: r.error };
+          });
+          self.reload();
+        } else if (job.stage) {
+          self.patch(ids, function () { return { stage: job.stage }; });
+        }
+      }).catch(function () {});
+    });
+  }
+  renderVals() {
+    var self = this, st = this.state;
+    function sizeText(b) { return b >= 1048576 ? (b / 1048576).toFixed(1) + ' MB' : Math.max(1, Math.round(b / 1024)) + ' KB'; }
+    function outcome(r) {
+      if (r.alert) {
+        var key = r.alert.possible_poacher ? 'POACHER' : r.alert.level;
+        var box = r.detections.filter(function (d) { return (d.species || d.category) === r.alert.species; }).sort(function (a, b) { return b.confidence - a.confidence; })[0] || {};
+        return { level: key, bg: WW.LV[key].bg, fg: WW.LV[key].fg, message: r.alert.message, alertHref: 'Alerts.dc.html?alert=' + r.alert.alert_id,
+          text: WW.namedBy(r.alert.species, box.species_confidence, box.classifier) + ' · count ' + r.alert.min_observed_count + ' · ' + (r.alert.village || 'Unmapped camera') + ' · ' + r.alert.rangers + ' ranger(s)' };
+      }
+      var seen = r.detections.filter(function (d) { return d.category === 'animal'; }).sort(function (a, b) { return b.confidence - a.confidence; })[0];
+      var words = { keep: 'Kept, no alert', review: 'Sent to needs review', discard: 'Auto-discarded as empty' };
+      var note = r.duplicate_of ? ' · Already analysed, earlier result shown' : '';
+      return { level: (r.triage || 'none').toUpperCase(), bg: WW.LV.NONE.bg, fg: WW.LV.NONE.fg, message: '', alertHref: '', text: (seen ? WW.namedBy(seen.species, seen.species_confidence, seen.classifier) + ' · ' : '') + (words[r.triage] || 'No alert') + note };
+    }
+    var items = st.items.map(function (it) {
+      var at = STAGES.indexOf(it.stage), finished = it.stage === 'done', failed = it.stage === 'error';
+      var position = finished ? 5 : at < 0 ? 0 : at;
+      var steps = LABELS.map(function (l, j) {
+        var done = j < position, active = j === position && !failed;
+        return { label: l, cls: active ? 'active' : '', bg: done ? '#5FD39A' : active ? '#F2A93B' : failed && j === position ? '#FF6B5B' : '#13221C', fg: done ? '#08291B' : active ? '#1E1405' : failed && j === position ? '#2A0D09' : '#7F958A' };
+      });
+      var o = finished && it.result ? outcome(it.result) : {};
+      return Object.assign({}, it, o, { steps: steps, done: finished, failed: failed, hasUrl: !!it.url, noUrl: !it.url, result: o.text,
+        sizeText: it.size == null ? 'Real fresh val photo' : sizeText(it.size), stepText: failed ? 'Could not process' : STEP_TEXT[position],
+        error: it.error });
+    });
+    var doneCount = items.filter(function (x) { return x.done || x.failed; }).length;
+    var cams = [{ value: '', label: 'Unknown camera' }].concat((st.cameraList || []).map(function (c) { return { value: c.camera_id, label: 'Cam ' + c.camera_id + ' · ' + c.village }; }));
+    var S = st.summary;
+    return Object.assign({}, WW.scene(41, 24, 1000), WW.nav(S), { apiError: st.apiError, items: items, noItems: items.length === 0, cameras: cams,
+      queueLabel: items.length ? doneCount + ' of ' + items.length + ' done' : 'Empty',
+      dropBg: st.dragging ? 'rgba(242,169,59,0.12)' : 'rgba(11,22,18,0.6)',
+      dropTitle: st.dragging ? 'Let go to upload' : 'Drop camera photos here',
+      watchText: S && S.watcher.running ? 'WildWatch is picking new files up on its own.' : 'To pick them up on their own, start src/scripts/run.ps1 watch.',
+      onFiles: function (e) { self.addFiles(e.target.files || []); e.target.value = ''; },
+      onCamera: function (e) { self.setState({ camera: e.target.value }); },
+      onTime: function (e) { self.setState({ captured: e.target.value }); },
+      onExif: function (e) { self.setState({ preferExif: e.target.checked }); },
+      over: function (e) { e.preventDefault(); if (!self.state.dragging) self.setState({ dragging: true }); },
+      leave: function () { self.setState({ dragging: false }); },
+      drop: function (e) { e.preventDefault(); self.addFiles((e.dataTransfer && e.dataTransfer.files) || []); },
+      demo: function () {
+        var item = { id: self.nextId++, name: 'Real photo from fresh val', size: null, url: '', stage: 'upload' };
+        self.setState({ items: [item].concat(self.state.items) });
+        self.track([item], WW.post('/api/upload/demo'));
+      } });
+  }
+}
+</script>
+</body>
+</html>

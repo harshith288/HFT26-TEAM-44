@@ -1,0 +1,62 @@
+{
+ "command": "scripts\\e2e_upload.py",
+ "timestamp": "2026-10-31T01:31:16.053330",
+ "n_real_images": 4,
+ "hardware": "RTX 4050 pipeline, Edge browser",
+ "checks": {
+  "no_page_reload": true,
+  "four_files_stored": true,
+  "corrupted_marked_unreadable": true,
+  "corrupted_shown_to_user": true,
+  "two_alerts_expected_species": true,
+  "empty_image_raised_no_alert": true,
+  "alert_visible_in_upload_tab": true,
+  "alert_visible_in_live_panel": true
+ },
+ "seconds_until_result": 54.7,
+ "database_rows": [
+  {
+   "file": "58767eec-23d2-11e8-a6a3-ec086b02610b.jpg",
+   "status": "ok",
+   "error": "",
+   "triage": "keep"
+  },
+  {
+   "file": "588f6901-23d2-11e8-a6a3-ec086b02610b.jpg",
+   "status": "ok",
+   "error": "",
+   "triage": "keep"
+  },
+  {
+   "file": "5a2af612-23d2-11e8-a6a3-ec086b02610b.jpg",
+   "status": "ok",
+   "error": "",
+   "triage": "discard"
+  },
+  {
+   "file": "corrupted_photo.jpg",
+   "status": "unreadable",
+   "error": "OSError: image file is truncated (41 bytes not processed)",
+   "triage": null
+  }
+ ],
+ "alerts_in_database": 2,
+ "alert_species": [
+  "bobcat",
+  "coyote"
+ ],
+ "alert_messages": [
+  {
+   "species": "bobcat",
+   "level": "MEDIUM",
+   "source": "template",
+   "message": "MEDIUM alert: bobcat at an unknown location. Minimum observed count: 1. Send 1 ranger(s), no vehicle."
+  },
+  {
+   "species": "coyote",
+   "level": "HIGH",
+   "source": "llm",
+   "message": "Coyotes observed in an unknown location with a minimum count of 2; risk level HIGH. Dispatch two rangers with vehicle support immediately."
+  }
+ ]
+}
